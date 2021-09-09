@@ -1,0 +1,43 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css");
+
+.hi{
+    margin-left: 10ch;
+}
+.tooltip{
+    margin-left: 65ch;
+}
+.display_none{
+    display: none;
+}
+.Main{
+    margin-left: 10ch;
+}
+.guidelinesdiv{
+    margin-left: 3ch;
+    margin-right: 1ch;
+    margin-top: 2ch;
+    border-style: solid;
+    border-color: rgb(31, 31, 85);
+    background-color: rgb(176, 209, 223);
+}
+.maincontent{
+    margin-left: 2ch;
+    margin-right: 1ch;
+    color: rgb(31, 31, 85);
+}
+.subheading{
+    font-style:normal;
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.instructions{
+    margin-left: 3ch;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.sample{
+    color:rgb(168, 113, 60);
+    margin-left: 10ch;
+    height:150px;
+    width:200px;
+
+}

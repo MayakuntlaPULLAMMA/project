@@ -1,0 +1,52 @@
+.contactdiv{
+    width:auto;
+    background-color: rgb(222, 228, 235);
+    border-radius: 0.3;
+    margin-top: 2ch;
+    border-style:solid;
+    margin-right: 3ch;
+    border-color: rgb(25, 25, 73);
+    
+    
+}
+
+.cardimage{
+    width: 350px;
+}
+.prof{
+    display: flex;
+}
+.about{
+    margin-left: 2ch;
+}
+.boldtext{
+    font-size: 13px;
+    font-weight: bold;
+    color:rgb(14, 14, 82);
+}
+.side{
+    margin-top: 1ch;
+}
+.allcontacts{
+margin-left: 265px;
+}
+.allcontacts_expand{
+    margin-left: 7ch;
+}
+.contactname{
+    color: rgb(14, 14, 82);
+}
+.paragraph{
+    font-size: 12px;
+}
+.mail{
+    margin-top: 1ch;
+    display: flex;
+}
+.students{
+    margin-top: 3ch;
+    color: rgb(14, 14, 82);
+}
+.allstudents{
+    margin-top: 3ch;
+}

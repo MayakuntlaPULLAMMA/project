@@ -1,0 +1,249 @@
+.total_div{
+    margin-left:265px;
+    margin-right: 2ch;
+    margin-top: 1ch;
+    
+}
+.total_div_1{
+    margin-left:5ch;
+    margin-right: 2ch;
+    margin-top: 1ch;
+}
+.dataset_main_div{
+    margin-left:1ch;
+    margin-top: 1ch;
+    margin-right: 2ch;
+}
+.dataset{
+    margin-left: 3ch;
+    cursor: pointer;
+    background-color: rgb(130, 216, 130);
+    margin-top: 1ch;
+    margin-right: 3ch;
+    width: 230px;
+    
+    border-radius: 0.3ch;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: oblique;
+}
+.display_datasets{
+    margin-top: 1ch;
+    margin-left: 3ch;
+    margin-right: 3ch;
+
+}
+.disable_datasets{
+    display: none;
+}
+
+
+  .first_dataset{
+      overflow: scroll;
+      height: 550px;
+      position:absolute;
+      background-color:white;
+      
+  }
+  .image{
+      width: 100%;
+      height: 100%;
+      margin-left: 3ch;
+     
+    
+  }
+ .image:hover{
+     transform: scale(2,2);
+ }
+  .images{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 3px;
+    margin-right: 2ch;
+      /*display: flex;
+      overflow: scroll;
+      width:auto;
+      margin-left: 5ch;
+      margin-right: 5ch;
+      background-color: floralwhite;*/
+  }
+  .title_dataset{
+    margin-left: 5ch;
+    margin-top:1ch;
+    margin-right: 5ch;
+    background-color:mediumaquamarine;
+    width:92%;
+    display: flex;
+    border-radius: 0.3ch;
+    height:35px;
+  }
+  .title{
+      margin-top: 1ch;
+      margin-left: 2ch;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 16px;
+      font-style: italic;
+      
+  }
+  .minus{
+      float: left;
+      margin-left: 95ch;
+      margin-top: 1ch;
+
+  }
+  .display_none{
+      display: none;
+  }
+  .show_gids{
+    display: grid;
+    grid-template-columns: '1fr 1fr 1fr 1fr 1fr';
+    margin-left: 5ch;
+  }
+  .table{
+      background-color: rgba(243, 240, 237, 0.89);
+      border-width: 0ch;
+      border-bottom: darkblue;
+      border-left: hidden;
+      border-right: hidden;
+      
+  }
+  .table_head{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      color: white;
+      background-color: navy;
+      height: 3ch;
+  }
+  .data_name{
+      height: auto;
+      align-content: center;
+      font-family:cursive;
+      color: rgb(28, 28, 153);
+      cursor: pointer;
+      font-weight: 700;
+  }
+  .gids_display{
+    display: grid;
+    grid-template-columns: repeat(10, minmax(45px, 1fr));
+    grid-gap: 3px;
+  }
+  .gid{
+      color: rgb(112, 112, 189);
+      cursor:pointer;
+  }
+  .modal{
+   /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    overflow: scroll;
+  }
+  .modal-content{
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close{
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1ch;
+    margin-left: 1ch;
+    float: right;
+  }
+  .modal_image{
+      width: 600px;
+      height:600px;
+  }
+  .modal_head{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      color:oldlace;
+      font-variant: small-caps;
+      font-size: 2ch;
+      background-color:navy;
+
+  }
+  .odd_color{
+      background-color: rgb(216, 208, 208);
+      border-style: none;
+  }
+  .even_color{
+      background-color:rgb(216,208,208);
+      border-style: none;
+  }
+  tr{
+    border: 1px solid #dddddd;
+
+  }
+  td{
+      border-style: hidden;
+  }
+  th{
+      border: 1px solid #dddddd;
+
+  }
+  .radio{
+      display: flex;
+  }
+  .div_top{
+      display: flex;
+  }
+  .datafileupload{
+      background-color: darkblue;
+      color: white;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-style: italic;
+    
+  }
+  .button{
+      margin-left:0%;
+      color:navy;
+  }
+  .display_flex{
+      display: flex;
+  }
+  .datasetandmodelling{
+      background-color: lightsteelblue;
+      margin-left: 2ch;
+      margin-right: 3ch;
+      width: 650px;
+  }
+  .heading_datamodelling{
+      color:oldlace;
+      background-color:navy;
+      font-size: 15;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      align-self: center;
+      text-align: center;
+  }
+  .ins_description{
+    margin-top: 1ch;
+    color: darkblue;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 14px;
+    font-style: italic;
+    width: auto;
+    margin-left: 1ch;
+    margin-bottom: 1ch;
+  }
+  .graph_example{
+      margin-top: 3ch;
+      margin-left: 2ch;
+      align-items: center;
+  }
+  .graph_image{
+      align-self: center;
+      width:99.5%;
+  }
+  .display_flex{
+      display: flex;
+  }

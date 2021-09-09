@@ -1,0 +1,349 @@
+.main_card{
+    margin-left: 265px;
+    margin-top: 0ch;
+    margin-right: 1ch;
+    border-width: 1ch;
+    height: 635px;
+    width:1150px;
+    position: relative;
+    overflow-y: auto;
+   /* scrollbar-width: none;  Firefox 64 */
+    border-width: thick;
+    background-color: white;
+   
+
+   
+}
+.main_card_expand{
+    margin-left: 35px;
+    margin-top: 0ch;
+    margin-right: 1ch;
+    border-width: 1ch;
+    height: 635px;
+    width:1400px;
+    position: relative;
+    overflow-y: auto;
+   /* scrollbar-width: none;  Firefox 64 */
+    border-width: thick;
+    background-color: white;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+.inside_div{
+    margin-left: 1ch;
+    margin-right: 1ch;
+    margin-top: 0ch;
+    
+}
+.mincs{
+    margin-left: 3ch;
+    margin-right: 2ch;
+    background-color:white;
+    margin-top: 5ch;
+    margin-bottom: 2ch;
+   
+    
+
+}
+.side_heading{
+    font-weight: 700;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 12px;
+    margin-left:1ch;
+    color:navy;
+    
+}
+.content{
+margin-left: 1ch;
+margin-right: 2ch;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    font-size: 12px;
+    width: 100%;
+    background-color: blanchedalmond;
+  }
+  
+  td{
+    border: 1px solid;
+    text-align: center;
+    padding: 1px;
+    
+  }
+  th{
+    border: 1px solid;
+    padding: 1px;
+  }
+  
+  tr:nth-child(even) {
+  }
+  .table{
+      margin-left: 1ch;
+      margin-right: 2ch;
+  }
+  .subsubheading{
+    margin-left: 2ch;
+    color: navy;
+    font-weight: 700;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 15px;
+  }
+  .description{
+    margin-top: 1ch;
+  }
+  .subcontent{
+      margin-left: 4ch;
+      border-width:1px;
+      border-color: black;
+      border-style: solid;
+      margin-right: 2ch;
+      background-color:#fff;
+      margin-bottom: 2ch;
+  }
+  .image1{
+      margin-bottom: 1ch;
+      width: 150px;
+      height: 100%;
+  }
+  .minrf{
+    margin-left: 3ch;
+    margin-right: 2ch;
+    background-color:white;
+    margin-top: 1ch;
+    margin-bottom: 2ch;
+    
+  }
+  .maxor{
+    margin-left: 3ch;
+    margin-right: 2ch;
+    background-color:white;
+    margin-top: 1ch;
+    margin-bottom: 2ch; 
+  }
+  .sideheader{
+    color: navy;
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 700;
+    margin-left: 1ch;
+    font-size: 12px;
+  }
+  .cont{
+      margin-left: 4ch;
+      font-size: 11px;
+      font-family:Georgia, 'Times New Roman', Times, serif;
+      font-style: italic;
+
+  }
+  .tooltip {
+
+    background-color: thistle;
+  }
+  .setofpoints{
+      margin-left: 9ch;
+      color: navy;
+      font-size: 11px;
+      font-family:monospace;
+
+  }
+  .Example{
+      margin-left: 4ch;
+      font-size: 11px;
+      font-weight:bolder;
+      color: navy;
+  }
+  .example_cont{
+      margin-left: 10ch;
+      font-size: 11px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  .mainheading{
+      align-items: center;
+      margin-left: 23ch;
+      font-size: 50px;
+      color: rgb(34, 34, 58);
+  }
+  .mainheadingexpand{
+      align-items: center;
+    margin-left: 20ch;
+    font-size: 50px;
+    color: rgb(34,34,58);
+  }
+  
+
+.terms_main_div_shrink{
+  margin-left: 280px;
+}
+
+.terms_main_div{
+  margin-left: 75px;
+}
+
+.terms_heading{
+    color:rgb(26, 26, 87);
+    font-size: 1.8em;
+    font-style: normal;
+    font-family:'Linux Libertine','Georgia','Times',serif;
+    font-weight: normal;
+    align-items: center;
+    margin-left: 25ch;
+    margin-top: 1ch;
+}
+.terms_horizontal_line{
+  margin-top: 0.5ch;
+    /*margin-right: 25ch;
+    margin-left: 15ch;*/
+    margin-left: 34ch;
+    width: 47ch;
+    height: 4px;
+    background-color: navy;
+}
+
+.terms_content{
+  margin-left: 265px;
+  margin-top: 0ch;
+  border-width: 1ch;
+  height: 570px;
+  width:1275px;
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox 64 */
+  border-width: thick;
+  background-color: white;
+  margin-bottom: 15ch;
+ 
+
+}
+.terms_content_expand{
+  margin-left: 50px;
+  margin-top: 0ch;
+  margin-right: 1ch;
+  border-width: 1ch;
+  height: 635px;
+  width:1500px;
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox 64 */
+  border-width: thick;
+  background-color: white;
+}
+.terms_definition_heading{
+  color:rgb(26, 26, 87);
+  font-size: 1.3em;
+  font-style: normal;
+  font-family:'Linux Libertine','Georgia','Times',serif;
+  margin-top: 1ch;
+  font-weight: 500;
+  display: flex;
+
+}
+.terms_definition{
+  margin-top: 0.5ch;
+  color: black;
+  font-size: calc(1em * 1.1);
+  line-height: 1.6;
+  font-family: sans-serif;
+  display: flex;
+  margin-left: 0.3ch;
+  width:1250px;
+  background-color: rgb(222, 231, 233);
+  padding-left: 2ch;
+  padding-right:1ch;
+}
+.terms_list_of_contents{
+  margin-left: 2ch;
+    color: rgb(26, 26, 87);
+    font-size: 15px;
+}
+.terms_box1{
+  
+    background-color: rgb(205, 214, 230);
+    width:300px;
+    border: black;
+    border-radius: 0.3ch;
+    border-width: 1px;
+    border-style:ridge;
+    margin-left: 37ch;
+}
+.terms_example_image{
+  width:90%;
+    margin-left: 3ch;
+    border-style:double;
+    border-width: 0.2ch;
+    border-color: black;
+}
+.terms_image_name{
+  margin-top: 0.5ch;
+    color:rgb(26, 26, 87);
+    font-size: 15px;
+    line-height: 1.6;
+    font-family: sans-serif;
+    font-style: italic;
+    margin-left: 5ch;
+}
+.box2{
+  margin-left: 0.3ch;
+  width: 1250px;
+  height: 50px;
+  background-color:rgb(178, 201, 202);
+  margin-top: 1ch;
+  align-items: center;
+  display: flex;
+  border-radius: 0.2ch;
+  padding-left: 3ch;
+  font-size: 25px;
+  color:navy;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+
+}
+.box_heading{
+  color: navy;
+  font-size: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 1ch;
+  align-self: center;
+  padding-top: 0.8ch;
+  width:700px;
+  
+}
+.box2_icon{
+  font-size: 15px;
+  margin-left: 45ch;
+  margin-top: 1.8ch;
+  cursor: pointer;
+}
+.terms_example_image_small{
+  border-radius: 0.3ch;
+  border-width: 0.2ch;
+  border-style:solid;
+  width: 30%;
+}
+.para{
+  width:864px;
+  margin-top: 2ch;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+}
+.terms_example_definition{
+    color: black;
+    font-size: calc(1em * 1.1);
+    line-height: 1.6;
+    font-family: sans-serif;
+    background-color: rgb(222, 231, 233);
+    margin-left: 0.3ch;
+  width:1250px;
+  padding-left: 2ch;
+  padding-right:1ch;
+}
+.para_down_example{
+  width:1200px;
+  margin-top: 2ch;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+}
