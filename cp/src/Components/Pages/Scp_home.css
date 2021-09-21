@@ -107,7 +107,10 @@
     
 }
 .tab1{
-    tab-size: 32ch;
+    tab-size: 3ch;
+}
+.tab3{
+    tab-size:1ch ;
 }
 .text_and_image{
     display: flex;
@@ -138,4 +141,82 @@
     margin-left: 10ch;
     color: rgb(26, 26, 87);
     font-size: 15px;
+}
+.def_modal{
+    position: fixed; /* Stay in place */
+     z-index: 1; /* Sit on top */
+     padding-top: 100px; /* Location of the box */
+     left: 0;
+     top: 0;
+     width: 100%; /* Full width */
+     height: 100%; /* Full height */
+     background-color: rgb(0,0,0); /* Fallback color */
+     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+     overflow: scroll;
+     display: none;
+}
+.def_modal_content{
+    background-color: #fefefe;
+     margin-left: 235px;
+     border: 1px solid #888;
+     width: 80%;
+}
+.def{
+    color:navy;
+    cursor: pointer;
+}
+.box_def{
+  width: 1200px;
+  height: 50px;
+  background-color:rgb(178, 201, 202);
+  align-items: center;
+  display: flex;
+  border-radius: 0.2ch;
+  font-size: 25px;
+  color:navy;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  cursor: pointer;
+  margin-left: 1ch;
+  margin-top: 1ch;
+  padding-left: 0.3ch;
+}
+.box_heading_def{
+    color: navy;
+    font-size: 25px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items:flex-end;
+    width:inherit;
+    margin-left: 0%;
+    
+  }
+.terms_definition_def{
+    margin-top: 0.5ch;
+  color: black;
+  font-size: calc(1em * 1.1);
+  line-height: 1.6;
+  font-family: sans-serif;
+  display: flex;
+  width:1200px;
+  background-color: rgb(222, 231, 233);
+  margin-left: 1.2ch;
+  padding-left: 0.5ch;
+  padding-right: 1ch;
+}
+.terms_example_definition_def{
+color: black;
+    font-size: calc(1em * 1.1);
+    line-height: 1.6;
+    font-family: sans-serif;
+    background-color: rgb(222, 231, 233);
+    margin-left: 1.2ch;
+  width:1200px;
+  padding-left: 0.5ch;
+  padding-right:1ch;
+}
+.para_down_example_def{
+    width:1200px;
+  margin-top: 2ch;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+  padding-right: 1ch;
 }

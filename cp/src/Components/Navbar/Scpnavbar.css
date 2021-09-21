@@ -98,24 +98,45 @@
     height: 50px;
     width:150px;
 }
+.logo3{
+  margin-left: 30ch;
+  margin-top:0.3ch;
+  margin-bottom: 0.3ch;
+  height: 50px;
+  width:150px;
+}
   .div_with_logo1{
     display: flex;
     background-color:rgb(105, 91, 233);
+    
     height:60px;
     width: 1800px;
 
   }
+  
   .heading{
      /* margin-left: 28ch;*/
      margin-left: 17ch;
       height: 30px;
       margin-top:0.3ch;
-      color: cornsilk;
+      color: cornssilk;
       font-family:Georgia, 'Times New Roman', Times, serif;
       font-size: 25px;
       margin-bottom: 0.3ch;
       margin-top: 0%;
   }
+  .heading1{
+    /* margin-left: 28ch;*/
+    margin-left: 23.5ch;
+     height: 30px;
+     margin-top:0.3ch;
+     color:white;
+     font-family:Georgia, 'Times New Roman', Times, serif;
+     font-size: 25px;
+     margin-bottom: 0.3ch;
+     margin-top: 0.5ch;
+    
+ }
   .nav_on_active{
       margin-left: 250px;
       background-color: darkcyan;
@@ -134,6 +155,12 @@
     position:absolute;
     width: 35px;
   }
+  .inactive{
+    background-color:rgb(16, 19, 43); 
+  }
+  .active{
+    background-color:white;
+  }
   .short_side_bar_disable{
     width:0%;
     height:0%;
@@ -141,7 +168,7 @@
   .div_on_top_in_sidebar{
     background-color:rgb(226, 221, 151);
     position: absolute;
-    height:auto;
+    height:100px;
     width: 35px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     cursor:pointer;
@@ -177,9 +204,7 @@
    display: none;
  }
  
- .active{
-   background-color: rgb(204, 191, 186);
- }
+ 
  .display_none{
    display: none;
  }
@@ -198,5 +223,5 @@
    color: darkblue;
    font-family: Georgia, 'Times New Roman', Times, serif;
    font-size: 20px;
+   
  }
- 

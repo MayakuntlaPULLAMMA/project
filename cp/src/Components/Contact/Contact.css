@@ -1,5 +1,6 @@
 .contactdiv{
-    width:auto;
+    width:650px;
+    align-self: center;
     background-color: rgb(222, 228, 235);
     border-radius: 0.3;
     margin-top: 2ch;
@@ -28,7 +29,9 @@
     margin-top: 1ch;
 }
 .allcontacts{
-margin-left: 265px;
+margin-left: 550px;
+align-content: center;
+
 }
 .allcontacts_expand{
     margin-left: 7ch;
@@ -49,4 +52,5 @@ margin-left: 265px;
 }
 .allstudents{
     margin-top: 3ch;
+    
 }

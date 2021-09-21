@@ -6,12 +6,12 @@
     width: 95%;
     margin-top: 3ch;
 
+
 }
 .main_div_shrink{
     margin-left: 265px;
     margin-right: 3ch;
     position: fixed;
-    background-color:white;
     width: 81%;
     margin-top: 3ch;
 }
@@ -203,7 +203,7 @@ tr{
     color: white;
    background-color:navy;
    
-    height: 3ch;
+
    
 }
 .odd_color{
@@ -298,6 +298,7 @@ tr{
      margin-top: 1ch;
      margin-left: 1ch;
      float: right;
+     padding-right: 1ch;
    }
    .modal_image{
        width: 600px;

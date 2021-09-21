@@ -24,7 +24,7 @@ const Dataset=()=>{
 
 
             </div>
-            <div className="datasetandmodelling">
+            <div className="datasetandmodelling_example">
             <h5 className="heading_datamodelling">Example</h5>
 
             <img src={Image} className="graph_image"></img>

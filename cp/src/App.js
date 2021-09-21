@@ -13,8 +13,8 @@ import Contact from './Components/Contact/Contact';
 import Mainnavbar from './Components/Navbar/Mainnavbar';
 import Scp_home from './Components/Pages/Scp_home';
 import Coverage_home from './Components/Pages/Coverage_home';
-
-function App() {
+import Mincs from './Components/Defs/mincs';
+function App({history}) {
   const [sidebar,setSidebar]=useState(true);
   const [dataset_name,setdatasetname]=useState("");
   const show=()=>{
@@ -25,14 +25,20 @@ function App() {
   }
   console.log("datasetname");
   console.log(dataset_name);
+  
+ 
   const user_settings={
     side:sidebar,
     dataset:dataset_name,
+    
+   
     show,
     dataset_set,
     setdatasetname,
+   
 
   }
+  
   return (
     <div className="app">
       <AppContext.Provider value={user_settings}>
@@ -47,6 +53,7 @@ function App() {
           <Route path='/files' component={Files}/>
           <Route path='/contact' component={Contact}/>
           <Route path='/scp_patterns_home' component={Scp_home}/>
+          <Route path='/mincs' component={Mincs}/>
           <Route path='/coverage_patterns_home' component={Coverage_home}/>
         </Switch>
       </Router>

@@ -18,20 +18,20 @@ const Contact=()=>{
             <div className="prof">
             {/*<img src={Image} className="cardimage"></img>*/}
             <div className="about">
-                <h3 className="contactname">P.Krishna Reddy</h3>
+                <h3 className="contactname">P.{' '}Krishna Reddy</h3>
                 <div>
                 <div className="boldtext">Professor</div>
-                <div className="boldtext">Ph.D (JNU, New Delhi)</div>
+                <div className="boldtext">Ph.D ({' '}JNU{' '},{' '}New Delhi)</div>
                 </div>
                 <div className="side">
                     <div className="boldtext">Research Areas</div>
-                    <p className="paragraph">Data mining,data management, transaction models, distributed computing,performance evaluation,and information technology for agriculture</p>
+                    <p className="paragraph">Data mining,{' '}data management,{' '}transaction models,{' '}distributed computing,{' '}performance evaluation,{' '}and information technology for agriculture</p>
                 </div>
                 <div className="mail">
 
                     <IoIcons.IoIosMail/>
                     <div className="boldtext">Email:</div>
-                    <p className="paragraph">pkreddy@iiit.ac.in </p>
+                    <p className="paragraph">{' '}pkreddy@iiit.ac.in </p>
                 </div>
                 <div className="side">
                     <div className="boldtext">Address:</div>
@@ -43,7 +43,7 @@ const Contact=()=>{
                 </div>
                 <div className="side">
                     <div className="boldtext">Phone:</div>
-                    <p className="paragraph">(91) (40) 6653 1000 Ext: 1132</p>
+                    <p className="paragraph">{' '}(91) (40) 6653 1000 Ext: 1132</p>
                     
                 </div>
 
@@ -58,14 +58,14 @@ const Contact=()=>{
             <div className="prof">
                 <div className="about">
                     <h4 className="contactname">
-                        A.Srinivas Reddy
+                        A.{' '}Srinivas Reddy
                     </h4>
                     <div>
                         <div className="boldtext">Ph.D Student</div>
                         <div className="mail">
                             <IoIcons.IoIosMail/>
                             <div className="boldtext">Email:</div>
-                            <p className="paragraph">srinivas.annappalli@research.iiit.ac.in </p>
+                            <p className="paragraph">{' '}srinivas.annappalli@research.iiit.ac.in </p>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@ const Contact=()=>{
                         <div className="mail">
                             <IoIcons.IoIosMail/>
                             <div className="boldtext">Email:</div>
-                            <p className="paragraph">yashwanth.balivada@students.iiit.ac.in </p>
+                            <p className="paragraph">{' '}yashwanth.balivada@students.iiit.ac.in </p>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@ const Contact=()=>{
                         <div className="mail">
                             <IoIcons.IoIosMail/>
                             <div className="boldtext">Email:</div>
-                            <p className="paragraph">pullamma.mayakuntla@students.iiit.ac.in</p>
+                            <p className="paragraph">{' '}pullamma.mayakuntla@students.iiit.ac.in</p>
                         </div>
                     </div>
                 </div>

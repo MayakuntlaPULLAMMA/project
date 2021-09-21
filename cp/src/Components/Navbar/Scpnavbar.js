@@ -105,13 +105,14 @@ function Scpnavbar() {
   }
   return (
     <>
-      <IconContext.Provider value={{ color: '#fff' }}>
+      <IconContext.Provider value={{ color: '#fff'}}>
         <div className="div_with_logo1">
             <img className="logo1" src={Image}></img>
             <div className="headingdiv">
-              <h1 className="heading">Data Science And Analytics Center</h1>
+              <h1 className="heading1">Data Science And Analytics Center</h1>
+              
             </div>
-            <img className="logo2" src={Image_iiith}></img>
+            <img className="logo3" src={Image_iiith}></img>
         </div>
         <div>
           <div className={sidebar ? "short_side_bar_disable" : 'short_side_bar'}>
@@ -158,16 +159,19 @@ function Scpnavbar() {
                   );
                 }) : 
                 scp_patterns!=0 && coverage_patterns==0 ? 
+                
                 SidebarData.map((item, index) => 
                 {
                   return (
+                    
                     <li key={index} className="icons_in_sidebar">
                       <Link to={item.path}>
                         {item.icon}
                       </Link>
                     </li>
                   );
-                }) : 
+                }) 
+                : 
                 scp_patterns==0 && coverage_patterns!=0 ?
                 CpData.map((item, index) => 
                 {
@@ -187,7 +191,7 @@ function Scpnavbar() {
         </div>
         <div className={sidebar ? 'nav_on_active' : 'nav_normal'}>
           <MainSidebarLink to={'/'} className="menu-bars" >
-            <FaIcons.FaBars className="icon" onClick={()=>{setscppatterns(0);setcoveragepatterns(0)}}/>
+            <FaIcons.FaHome className="icon" onClick={()=>{setscppatterns(0);setcoveragepatterns(0)}}/>
           </MainSidebarLink>
           <nav className={sidebar ? 'nav-menu1 active' : 'nav-menu1'}>
             <ul className='nav-menu-items'>
@@ -195,23 +199,34 @@ function Scpnavbar() {
               {
                 return(
                   <>
-                    <SidebarLink to={item.path} onClick={()=>setpatterns(item.value)}>
-                      <SidebarLabel>
-                      {item.title}
-                      </SidebarLabel>
-                    </SidebarLink>
+                     <SubMenu item={item} sidebar={sidebar}  key={index} />
                   </>
                 );
               }) : 
               scp_patterns!=0 && coverage_patterns==0 ? 
+              
               (SidebarData.map((item, index) => 
               {
+                if(index!=SidebarData.length-1){
                 return(
                   <>
                     <SubMenu item={item} sidebar={sidebar} key={index}/>
                   </>
-                );
-              })): 
+                );}
+                else{
+                  return(
+                    <>
+                    <SubMenu item={item} sidebar={sidebar} key={index}/>
+                    <MainSidebarLink to='coverage_patterns_home' onClick={()=>{setscppatterns(0);setcoveragepatterns(1)}}>
+                     <div className="main_heading">
+                      Coverage Patterns
+                      </div>
+                    </MainSidebarLink>
+                  </>
+                  )
+                }
+              }))
+              : 
               scp_patterns==0 && coverage_patterns!=0 ?
               CpData.map((item, index) => 
               {

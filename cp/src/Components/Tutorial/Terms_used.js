@@ -218,7 +218,7 @@ function Terms_used(props) {
     
     {show_terms[0]==0 ?
     <div>
-      <Box className="box2">
+      <Box className="box2" onClick={()=>go_to_set(0)}>
          <div className="box_heading">Graph Transaction</div>
         <div className="box2_icon">
           <FaIcons.FaPlus onClick={()=>go_to_set(0)}/>
@@ -227,7 +227,7 @@ function Terms_used(props) {
       </Box>
     </div> :
     <>
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(0)}> 
     <div className="box_heading">
       Graph Transaction
     </div>
@@ -236,8 +236,8 @@ function Terms_used(props) {
         </div>
     </Box>
     <div className="terms_definition">
-    <p className="para">A graph transaction G = (V ,E,L,l) is a labeled,connected and undirected graph, where V is a set of
-vertices, E ⊆ V<sub>2</sub> is a set of edges, L is a set of labels and l : V ∪ E → L, where l is a function for assigning
+    <p className="para">A graph transaction <i>G = ({' '}V, E, L, l{' '})</i> is a labeled,{' '}connected and undirected graph,{' '}where <i>V is a set of
+vertices</i>,{' '}<i>E ⊆ V<sub>2</sub></i> is a set of edges, <i>L</i> is a set of labels and <i>l : V ∪ E → L</i>,{' '}where <i>l</i> is a function for assigning
 labels to vertices and edges.</p>
         <div className="scp_definition">
         <img className="terms_example_image" src={Image3}></img>
@@ -247,7 +247,7 @@ labels to vertices and edges.</p>
     </>
     }
     {show_terms[1]==0 ?
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(1)}>
     <div className="box_heading">Subgraph Pattern</div>
    <div className="box2_icon">
      <FaIcons.FaPlus onClick={()=>go_to_set(1)}/>
@@ -255,7 +255,7 @@ labels to vertices and edges.</p>
  
  </Box>:
     <>
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(1)}>
     <div className="box_heading">
       Subgraph Pattern
     </div>
@@ -264,14 +264,14 @@ labels to vertices and edges.</p>
         </div>
     </Box>
     <div className="terms_definition">
-    <p className="para">Given a Graph Transactional Dataset D and the set Ψ of all possible subgraphs over D, a subgraph pattern (SP ) is a set
-of subgraphs belonging to Ψ</p>
+    <p className="para">Given a Graph Transactional Dataset <i>D</i> and the set <i>Ψ</i> of all possible subgraphs over <i>D</i>, a subgraph pattern <i>(SP{' '})</i> is a set
+of subgraphs belonging to <i>Ψ</i></p>
         
     </div>
     </>
     }
     {show_terms[2]==0 ?
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(2)}>
     <div className="box_heading">Cover Set of a Subgraph</div>
    <div className="box2_icon">
      <FaIcons.FaPlus onClick={()=>go_to_set(2)}/>
@@ -279,7 +279,7 @@ of subgraphs belonging to Ψ</p>
  
  </Box>:
     <>
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(2)}>
     <div className="box_heading">
       Cover Set of a Subgraph
     </div>
@@ -289,10 +289,10 @@ of subgraphs belonging to Ψ</p>
     </Box>
     <div className="terms_definition">
       <div>
-    <p className="para">A subgraph S<sub>j</sub> is said to cover graph G<sub>i</sub> from Graph Transactional Dataset if S<sub>j</sub> exists in G<sub>i</sub>.</p>
-    <p className="para">The Cover Set of subgraph S<sub>j</sub> is defined as the set of all graph transactions covered by S<sub>j</sub>.It is denoted by CSet<sub>g</sub>(S<sub>j</sub> , D). Formally,
-CSet<sub>g</sub>(S<sub>j</sub> , D) = {"{G"}<sub>i</sub> |cover(S <sub>j</sub> , G<sub>i</sub> ) = 1 {"&"} G i ∈ D{"}"}.
-The Cover Set of SP (CSet<sub>g</sub> (SP, D)) is a set of all graph transactions covered by  atleast one Subgraph of SP .
+    <p className="para">A subgraph <i>S<sub>j</sub></i>{' '}is said to cover graph <i>G<sub>i</sub></i> from Graph Transactional Dataset if <i>S<sub>j</sub></i> exists in <i>G<sub>i</sub></i>.{' '}</p>
+    <p className="para">The Cover Set of subgraph <i>S<sub>j</sub></i> is defined as the set of all graph transactions covered by <i>S<sub>j</sub></i>.It is denoted by <i>CSet<sub>g</sub>(S<sub>j</sub>,{' '}D{' '})</i>.{' '}Formally,
+<i>CSet<sub>g</sub>(S<sub>j</sub>,{' '}D{' '}) = {"{ G"}<sub>i</sub> |cover(S <sub>j</sub>,{' '}G<sub>i</sub>{' '}) = 1 {"&"} G<sub>i</sub> ∈ D {"}"}</i>.
+{' '}The Cover Set of <i>SP (CSet<sub>g</sub>(SP,{' '}D{' '}))</i> is a set of all graph transactions covered by  atleast one Subgraph of <i>SP</i>.
 </p>
           <div className="scp_definition_heading" id="example">
               Example
@@ -311,15 +311,15 @@ The Cover Set of SP (CSet<sub>g</sub> (SP, D)) is a set of all graph transaction
       </div>
       <div className="terms_example_definition">
                     <img src={Image} className="example_image"></img>
-                    <div className="image_name">Fig. 1: (a) Sample of 10 graph transactions, (b) Candidate subgraphs with minRF g =0.2</div>
-                    <p className="para_down_example">Figure 1.a of above image is the Graph Transactional Dataset consisting of 10 graphs.In Figure 2(b), let SP be the set {"{S1, S2, S3}"}. The RF values of S1, S2, and S3 are 0.3, 0.3, and 0.2 respectively. The coverage set of SP , CSet(SP ,D)=
-                        {"{(G1 ,G4 ,G5 ,G6 ,G7 ,G8 ,G10 }"}.</p>
+                    <div className="image_name">Fig. 1: (a) Sample of 10 graph transactions, (b) Candidate subgraphs with <i>minRF<sub>g</sub></i>{' '}={' '}0.2</div>
+                    <p className="para_down_example">Figure 1.a of above image is the Graph Transactional Dataset consisting of 10 graphs.{' '}In Figure 2(b),{' '}let <i>SP</i> be the set {"{ S1, S2, S3 }"}. The RF values of <i>S1</i>,{' '}<i>S2</i>,{' '}and{' '}<i>S3</i> are 0.3, 0.3, and 0.2 respectively. The coverage set of <i>SP</i>,{' '}<i>CSet({' '}SP,D{' '}){' '}=
+                        {' '}{"{( G1, G4, G5, G6, G7, G8, G10 }"}</i>.</p>
                 </div>
     
     </>
     }
     {show_terms[3]==0 ?
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(3)}>
     <div className="box_heading">Relative Frequency of a Subgraph</div>
    <div className="box2_icon">
      <FaIcons.FaPlus onClick={()=>go_to_set(3)}/>
@@ -327,7 +327,7 @@ The Cover Set of SP (CSet<sub>g</sub> (SP, D)) is a set of all graph transaction
  
  </Box>:
     <>
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(3)}>
     <div className="box_heading">
       Relative Frequency of a Subgraph
     </div>
@@ -337,11 +337,11 @@ The Cover Set of SP (CSet<sub>g</sub> (SP, D)) is a set of all graph transaction
     </Box>
     <div className="terms_definition">
       <div>
-    <p className="para">Given Graph Transactional Data D and a subgraph S<sub>j</sub> , we denote the percentage of graph
-transactions in D covered by S<sub>j</sub> as Relative Frequency.
- Formula for computing Relative Frequency of Subgraph S<sub>j</sub> in D is shown in figure 1.</p>
-    <p className="para">Here, 0 ≤ RF<sub>g</sub> (S<sub>j</sub> ,D) ≤ 1. We can extract subgraphs of
-interest from D based on user-specified minRF<sub>g</sub> threshold.</p>
+    <p className="para">Given Graph Transactional Data <i>D</i> and a subgraph <i>S<sub>j</sub></i>{' '},{' '}we denote the percentage of graph
+transactions in <i>D</i> covered by <i>S<sub>j</sub></i> as Relative Frequency.
+ Formula for computing Relative Frequency of Subgraph <i>S<sub>j</sub></i> in <i>D</i> is shown in figure 1.</p>
+    <p className="para">Here,{' '}<i>0 ≤ RF<sub>g</sub>({' '}S<sub>j</sub>,{' '}D{' '}) ≤ 1</i>.{' '}We can extract subgraphs of
+interest from <i>D</i> based on user-specified <i>minRF<sub>g</sub></i> threshold.</p>
           <div className="scp_definition_heading" id="example">
               Example
           </div>
@@ -361,28 +361,28 @@ S<sub>3</sub> are 0.3 and 0.2 respectively</p>
         </div>
         <div className="scp_definition">
         <img className="terms_example_image" src={Image5}></img>
-        <div className="terms_image_name">Fig. 1: Formula for Relative Frequency of Subgraph S<sub>j</sub> in D </div>
+        <div className="terms_image_name">Fig. 1: Formula for Relative Frequency of Subgraph <i>S<sub>j</sub></i> in <i>D</i> </div>
         </div>
       </div>
       <div className="terms_example_definition">
                     <img src={Image} className="example_image"></img>
-                    <div className="image_name">Fig. 2: (a) Sample of 10 graph transactions, (b) Candidate subgraphs with minRF g =0.2</div>
-                    <p className="para_down_example">Consider graph transactional dataset D comprising of 10 graph transactions G<sub>1</sub> to
-G<sub>10</sub> , shown in Figure 2(a). Three subgraphs S<sub>1</sub> , S<sub>2</sub> and
-S<sub>3</sub> are shown in Figure 2(b). Here, S<sub>1</sub> is a subgraph of
-G<sub>1</sub>, G<sub>6</sub> and G<sub>10</sub> ; S<sub>2</sub> is a subgraph of G<sub>5</sub> , G<sub>7</sub> and G<sub>8</sub> ; and
-S<sub>3</sub> is a subgraph of G<sub>4</sub> and G<sub>7</sub> . The subgraph S<sub>1</sub> is said
-to cover G<sub>1</sub> since S<sub>1</sub> ⊆ G<sub>1</sub> . Hence, cover(S<sub>1</sub> , G<sub>1</sub> )=1.
-Moreover, CSet(S<sub>1</sub> , D) = {"{G"}<sub>1</sub> ,G <sub>6</sub> ,G <sub>10</sub> and RF<sub>g</sub> (S<sub>1</sub> , D) = |Cset(S<sub>1</sub>)|/D = 3/10 = 0.3.
- Similarly RF values of S<sub>2</sub> ,
-S<sub>3</sub> are 0.3 and 0.2 respectively</p>
+                    <div className="image_name">Fig. 2: (a) Sample of 10 graph transactions, (b) Candidate subgraphs with <i>minRF<sub>g</sub>{' '}={' '}0.2</i></div>
+                    <p className="para_down_example">Consider graph transactional dataset <i>D</i> comprising of 10 graph transactions <i>G<sub>1</sub></i> to
+<i>G<sub>10</sub></i>{' '},{' '}shown in Figure 2(a).{' '}Three subgraphs <i>S<sub>1</sub></i>,{' '}<i>S<sub>2</sub></i> and
+{' '}<i>S<sub>3</sub></i> are shown in Figure 2(b). Here,{' '}<i>S<sub>1</sub></i> is a subgraph of
+{' '}<i>G<sub>1</sub></i>{' '},{' '}<i>G<sub>6</sub></i> and <i>G<sub>10</sub></i>{' '};{' '}<i>S<sub>2</sub></i> is a subgraph of <i>G<sub>5</sub></i>{' '},{' '}<i>G<sub>7</sub></i> and{' '}<i>G<sub>8</sub></i>{' '};{' '}and
+{' '}<i>S<sub>3</sub></i> is a subgraph of <i>G<sub>4</sub></i> and <i>G<sub>7</sub></i>.{' '}The subgraph <i>S<sub>1</sub></i> is said
+to cover <i>G<sub>1</sub></i> since <i>S<sub>1</sub> ⊆ G<sub>1</sub></i>.{' '}Hence,{' '}<i>cover({' '}S<sub>1</sub>,{' '}G<sub>1</sub>{' '}) = 1</i>.
+{' '}Moreover,{' '}<i>CSet({' '}S<sub>1</sub> , D) = {"{G"}<sub>1</sub> ,G <sub>6</sub> ,G <sub>10</sub>{" }"}</i> and <i>RF<sub>g</sub>(S<sub>1</sub>,{' '}D{' '}) = |Cset({' '}S<sub>1</sub>){' '}|/{' '}D = 3/10 = 0.3</i>.
+ Similarly RF values of <i>S<sub>2</sub></i>,
+{' '}<i>S<sub>3</sub></i> are 0.3 and 0.2 respectively.</p>
                 </div>
 
     
     </>
     }
     {show_terms[4]==0 ?
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(4)}>
     <div className="box_heading">Coverage Support</div>
    <div className="box2_icon">
      <FaIcons.FaPlus onClick={()=>go_to_set(4)}/>
@@ -390,7 +390,7 @@ S<sub>3</sub> are 0.3 and 0.2 respectively</p>
  
  </Box>:
     <>
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(4)}>
     <div className="box_heading">
       Coverage Support
     </div>
@@ -400,16 +400,16 @@ S<sub>3</sub> are 0.3 and 0.2 respectively</p>
     </Box>
     <div className="terms_definition">
       <div>
-    <p className="para">Given Graph Transactional Dataset D and a subgraph pattern SP, the coverage support of SP (CS<sub>g</sub> (SP, D)) is the percentage of graph
-transactions in D covered by at least one subgraph in
-SP .</p>
-    <p className="para">Here, 0 ≤ CS<sub>g</sub> (SP, D) ≤ 1</p>
-    <p className="para">CS<sub>g</sub> (SP, D) = 1
-when all of the graph transactions in D are covered
-by SP . Conversely, CS<sub>g</sub> (SP, D) = 0 when none of the
-graph transactions are covered by SP.A pattern SP is interesting with respect to coverage point of view
-if CS<sub>g</sub> (SP, D) ≥ minCS<sub>g</sub> , where minCS g is a userdefined minimum Coverage Support threshold for graph
-transactions</p>
+    <p className="para">Given Graph Transactional Dataset <i>D</i> and a subgraph pattern <i>SP</i>,{' '}the coverage support of <i>SP{' '}({' '}CS<sub>g</sub> (SP,{' '}D){' '})</i> is the percentage of graph
+transactions in <i>D</i> covered by at least one subgraph in
+<i>SP</i>.</p>
+    <p className="para">Here,{' '}<i>0 ≤ CS<sub>g</sub> (SP,{' '}D) ≤ 1</i></p>
+    <p className="para"><i>CS<sub>g</sub> ({' '}SP,{' '}D) = 1{' '}</i>
+when all of the graph transactions in <i>D</i> are covered
+by SP.{' '}Conversely,{' '}<i>CS<sub>g</sub>({' '}SP,{' '}D) = 0</i> when none of the
+graph transactions are covered by <i>SP</i>.{' '}A pattern <i>SP</i> is interesting with respect to coverage point of view
+if <i>CS<sub>g</sub>{' '}({' '}SP,{' '}D{' '}) ≥ minCS<sub>g</sub></i>{' '},{' '}where <i>minCS<sub>g</sub></i> is a userdefined minimum Coverage Support threshold for graph
+transactions.</p>
           <div className="scp_definition_heading" id="example">
               Example
           </div>
@@ -428,19 +428,19 @@ Moreover, |CSet(SP , D)| / |D| = |{"{"}G<sub>1</sub> ,G <sub>6</sub> ,G <sub>10<
         </div>
         <div className="scp_definition">
         <img className="terms_example_image" src={Image6}></img>
-        <div className="terms_image_name">Fig. 1: Formula for Coverage Support of a Subgraph Pattern SP in D </div>
+        <div className="terms_image_name">Fig. 1: Formula for Coverage Support of a Subgraph Pattern <i>SP</i> in <i>D</i> </div>
         </div>
       </div>
       <div className="terms_example_definition">
                     <img src={Image} className="example_image"></img>
-                    <div className="image_name">Fig. 2: (a) Sample of 10 graph transactions, (b) Candidate subgraphs with minRF g =0.2</div>
-                    <p className="para_down_example">Consider graph transactional dataset D comprising of 10 graph transactions G<sub>1</sub> to
-G<sub>10</sub> , shown in Figure 2(a). Three subgraphs S<sub>1</sub> , S<sub>2</sub> and
-S<sub>3</sub> are shown in Figure 2(b). Let Subgraph Pattern SP = {"{"} S<sub>1</sub>,S<sub>2</sub>,<sub>3</sub> {"}"} .Here, S<sub>1</sub> is a subgraph of
-G<sub>1</sub>, G<sub>6</sub> and G<sub>10</sub> ; S<sub>2</sub> is a subgraph of G<sub>5</sub> , G<sub>7</sub> and G<sub>8</sub> ; and
-S<sub>3</sub> is a subgraph of G<sub>4</sub> and G<sub>7</sub> . The subgraph S<sub>1</sub> is said
-to cover G<sub>1</sub> since S<sub>1</sub> ⊆ G<sub>1</sub> . Hence, cover(S<sub>1</sub> , G<sub>1</sub> )=1.
-Moreover, |CSet(SP , D)| / |D| = |{"{"}G<sub>1</sub> ,G <sub>6</sub> ,G <sub>10</sub>{"}"} ∪ {"{"}G<sub>5</sub> ,G<sub>7</sub>,G <sub>8</sub> {"}"} ∪ {"{"}G<sub>4</sub> ,G <sub>7</sub>{"}"} | = 8 /10 = 0.8.
+                    <div className="image_name">Fig. 2: (a) Sample of 10 graph transactions, (b) Candidate subgraphs with <i>minRF<sub>g</sub>{' '}={' '}0.2</i></div>
+                    <p className="para_down_example">Consider graph transactional dataset <i>D</i> comprising of 10 graph transactions <i>G<sub>1</sub></i> to
+<i>G<sub>10</sub></i>{' '},{' '}shown in Figure 2(a).{' '}Three subgraphs <i>S<sub>1</sub></i>,{' '}<i>S<sub>2</sub></i> and
+<i>S<sub>3</sub></i> are shown in Figure 2(b).{' '}Let Subgraph Pattern SP{' '}={' '}<i>{"{"} S<sub>1</sub>,{' '}S<sub>2</sub>,{' '}S<sub>3</sub> {"}"}</i>.{' '}Here,{' '}<i>S<sub>1</sub></i> is a subgraph of
+{' '}<i>G<sub>1</sub></i>,{' '}<i>G<sub>6</sub></i> and <i>G<sub>10</sub></i>;{' '}<i>S<sub>2</sub></i> is a subgraph of <i>G<sub>5</sub></i>{' '},{' '}<i>G<sub>7</sub></i> and <i>G<sub>8</sub></i>{' '};{' '}and
+<i>S<sub>3</sub></i> is a subgraph of <i>G<sub>4</sub></i> and <i>G<sub>7</sub></i>{' '}.{' '}The subgraph <i>S<sub>1</sub></i> is said
+to cover <i>G<sub>1</sub></i> since <i>S<sub>1</sub> ⊆ G<sub>1</sub> </i>.{' '}Hence,{' '}<i>cover({' '}S<sub>1</sub>{' '},{' '}G<sub>1</sub>{' '}){' '}={' '}1</i>.
+Moreover,<i>{' '}|{' '}CSet({' '}SP,{' '}D){' '}| / |{' '}D{' '}| = |{' '}{"{"}G<sub>1</sub>,{' '}G<sub>6</sub>,{' '}G<sub>10</sub>{"}"} ∪ {"{"}G<sub>5</sub>,{' '}G<sub>7</sub>,{' '}G <sub>8</sub> {"}"} ∪ {"{"}G<sub>4</sub>,{' '}G <sub>7</sub>{"}"}{' '}|</i> = 8 /10 = 0.8.
  </p>
     </div>
       
@@ -448,7 +448,7 @@ Moreover, |CSet(SP , D)| / |D| = |{"{"}G<sub>1</sub> ,G <sub>6</sub> ,G <sub>10<
     </>
     }
     {show_terms[5]==0 ?
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(5)}>
     <div className="box_heading">Overlap Ratio of a Pattern X</div>
    <div className="box2_icon">
      <FaIcons.FaPlus onClick={()=>go_to_set(5)}/>
@@ -456,7 +456,7 @@ Moreover, |CSet(SP , D)| / |D| = |{"{"}G<sub>1</sub> ,G <sub>6</sub> ,G <sub>10<
  
  </Box>:
     <>
-    <Box className="box2">
+    <Box className="box2" onClick={()=>go_to_set(5)}>
     <div className="box_heading">
       Overlap Ratio of a Pattern X
     </div>
@@ -466,15 +466,15 @@ Moreover, |CSet(SP , D)| / |D| = |{"{"}G<sub>1</sub> ,G <sub>6</sub> ,G <sub>10<
     </Box>
     <div className="terms_definition">
       <div>
-    <p className="para">Let X = {"{"}O<sub>p</sub> , O<sub>q</sub> ,. . . , O<sub>r</sub> , O<sub>s</sub> {"}"} be a pattern such that
-RF (O<sub>p</sub> ) ≥ RF (O<sub>q</sub>) ≥ · · · ≥ RF (O<sub>r</sub> ) ≥ RF (O<sub>s</sub>). (Here,
-the notations O<sub>p</sub> , O<sub>q</sub> , O<sub>r</sub>, and O<sub>s</sub> represent Subgraph IDs.) The
-overlap ratio of a pattern X is defined as the ratio of
-the number of transactions common in CSet(X −{"{"}O<sub>s</sub>{"}"})
-and CSet(O<sub>s</sub>) to CSet(O<sub>s</sub>).It is defined as shown in figure 1.</p>
-    <p className="para">For a pattern X, 0 ≤ OR(X) ≤ 1</p>
+    <p className="para">Let <i>X = {"{ "}O<sub>p</sub>{' '},{' '}O<sub>q</sub>{' '},. . . , O<sub>r</sub>{' '},{' '}O<sub>s</sub> {" }"}</i>{' '}be a pattern such that
+<i>RF{' '}({' '}O<sub>p</sub>{' '}){' '}≥{' '}RF{' '}({' '}O<sub>q</sub>{' '}) ≥ · · · ≥ RF{' '}({' '}O<sub>r</sub>{' '}){' '}≥{' '}RF{' '}({' '}O<sub>s</sub>{' '})</i>.{' '}({' '}Here,{' '}
+the notations <i>O<sub>p</sub></i>{' '},{' '}<i>O<sub>q</sub></i>{' '},{' '}<i>O<sub>r</sub></i>{' '},{' '}and{' '}<i>O<sub>s</sub></i> represent Subgraph IDs{' '}).{' '}The
+overlap ratio of a pattern <i>X</i> is defined as the ratio of
+the number of transactions common in CSet({' '}X −{' '}{"{"}O<sub>s</sub>{"}"}{' '})
+and CSet{' '}(O<sub>s</sub>) to CSet{' '}(O<sub>s</sub>).{' '}It is defined as shown in figure 1.</p>
+    <p className="para">For a pattern X,{' '}0 ≤ OR(X) ≤ 1</p>
     <p className="para">A pattern X
-is interesting if OR(X) ≤ maxOR, where maxOR is
+is interesting if OR(X) ≤ maxOR,{' '}where maxOR is
 a user-defined maximum OR threshold.</p>
           <div className="scp_definition_heading" id="example">
               Example
@@ -494,19 +494,19 @@ Moreover, |CSet(SP , D)| / |D| = |{"{"}G<sub>1</sub> ,G <sub>6</sub> ,G <sub>10<
         </div>
         <div className="scp_definition">
         <img className="terms_example_image" src={Image7}></img>
-        <div className="terms_image_name">Fig. 1: Formula for Overlap Ratio of a pattern X.</div>
+        <div className="terms_image_name">Fig. 1: Formula for Overlap Ratio of a pattern <i>X</i>.</div>
         </div>
       </div>
       <div className="terms_example_definition">
                     <img src={Image} className="example_image"></img>
-                    <div className="image_name">Fig. 2: (a) Sample of 10 graph transactions, (b) Candidate subgraphs with minRF g =0.2</div>
-                    <p className="para_down_example">Consider graph transactional dataset D comprising of 10 graph transactions G<sub>1</sub> to
-G<sub>10</sub> , shown in Figure 2(a). Three subgraphs S<sub>1</sub> , S<sub>2</sub> and
-S<sub>3</sub> are shown in Figure 2(b). Let Subgraph Pattern SP = {"{"} S<sub>1</sub>,S<sub>2</sub>,<sub>3</sub> {"}"} .Here, S<sub>1</sub> is a subgraph of
-G<sub>1</sub>, G<sub>6</sub> and G<sub>10</sub> ; S<sub>2</sub> is a subgraph of G<sub>5</sub> , G<sub>7</sub> and G<sub>8</sub> ; and
-S<sub>3</sub> is a subgraph of G<sub>4</sub> and G<sub>7</sub> . The subgraph S<sub>1</sub> is said
-to cover G<sub>1</sub> since S<sub>1</sub> ⊆ G<sub>1</sub> . Hence, cover(S<sub>1</sub> , G<sub>1</sub> )=1.
-Moreover, |CSet(SP , D)| / |D| = |{"{"}G<sub>1</sub> ,G <sub>6</sub> ,G <sub>10</sub>{"}"} ∪ {"{"}G<sub>5</sub> ,G<sub>7</sub>,G <sub>8</sub> {"}"} ∪ {"{"}G<sub>4</sub> ,G <sub>7</sub>{"}"} | = 8 /10 = 0.8.
+                    <div className="image_name">Fig. 2: (a) Sample of 10 graph transactions, (b) Candidate subgraphs with <i>minRF<sub>g</sub></i>{' '}={' '}0.2</div>
+                    <p className="para_down_example">Consider graph transactional dataset <i>D</i> comprising of 10 graph transactions <i>G<sub>1</sub></i> to
+<i>G<sub>10</sub></i>,{' '}shown in Figure 2(a).{' '}Three subgraphs <i>S<sub>1</sub></i>,{' '}<i>S<sub>2</sub></i> and
+<i>S<sub>3</sub></i> are shown in Figure 2(b).{' '}Let Subgraph Pattern <i>SP{' '}={' '}{"{"} S<sub>1</sub>,{' '}S<sub>2</sub>,{' '}S<sub>3</sub> {"}"}{' '}</i>.{' '}Here,{' '}<i>S<sub>1</sub></i> is a subgraph of
+<i>G<sub>1</sub>,{' '}G<sub>6</sub> and G<sub>10</sub>;{' '}S<sub>2</sub></i> is a subgraph of <i>G<sub>5</sub>,{' '}G<sub>7</sub> and G<sub>8</sub>{' '}</i>; and
+<i>S<sub>3</sub></i> is a subgraph of <i>G<sub>4</sub></i> and <i>G<sub>7</sub></i>.{' '}The subgraph <i>S<sub>1</sub></i> is said
+to cover <i>G<sub>1</sub></i> since <i>S<sub>1</sub> ⊆ G<sub>1</sub></i>.{' '}Hence,{' '}<i>cover({' '}S<sub>1</sub>,{' '}G<sub>1</sub>{' '}){' '}={' '}1</i>.
+Moreover, <i>|CSet({' '}SP,{' '}D{' '})| / |D| = |{"{ "}G<sub>1</sub>,{' '}G<sub>6</sub>,{' '}G<sub>10</sub>{" }"} ∪ {"{ "}G<sub>5</sub>,{' '}G<sub>7</sub>,{' '}G<sub>8</sub>{" }"} ∪ {"{ "}G<sub>4</sub>,{' '}G<sub>7</sub>{" }"} |</i> = 8 /10 = 0.8.
  </p>
 </div>
       

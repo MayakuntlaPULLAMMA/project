@@ -342,21 +342,43 @@ const downloadfiles=(e)=>{
     }
 }
 const selected_file_all=()=>{
-    setselectedall(!selected_all);
-    console.log("sele",selected_all);
-    var p=[...selected_patterns];
-    for(var i=0;i<scp_images.length;i++)
+    if(selected_all==true){
+        setselectedall(false);
+        var p=[...selected_patterns];
+        for(var i=0;i<scp_images.length;i++)
         {
-            for(var j=0;j<scp_images[i].image_info.length;j++){
-              if(selected_all){
-                  p[i][j]=1;
-              }
-              else{
-                  p[i][j]=0;
-              }
+            for(var j=0;j<scp_images[i].image_info.length;j++)
+            {
+                
+                    p[i][j]=0;
+                    setselectedpatterns(p);
+                    p=[...selected_patterns];
+
+                
             }
         }
-    setselectedpatterns(p);
+        
+    }
+    else{
+        setselectedall(true);
+        var p=[...selected_patterns];
+        for(var i=0;i<scp_images.length;i++)
+        {
+            for(var j=0;j<scp_images[i].image_info.length;j++){
+             
+                  p[i][j]=1;
+                  setselectedpatterns(p);
+                  p=[...selected_patterns];
+              
+            }
+        }
+    }
+    console.log("sele",selected_all);
+    
+   
+    
+    console.log("hi");
+    console.log("hi");
     setdownloadtype(downloadtype);
 }
 const downloadset=()=>{
@@ -364,6 +386,12 @@ const downloadset=()=>{
     setdownloadtype(!downloadtype);
 }
 const select_specific=(ind,ind1)=>{
+    if(selected_all==true){
+    setselectedall(false);
+    var d=document.getElementById("all_checked");
+    if(d.checked== true){
+        d.checked=false;
+    }}
     var p=[...selected_patterns];
     p[ind][ind1]=!p[ind][ind1];
     setselectedpatterns(p);
@@ -626,7 +654,7 @@ const select_specific=(ind,ind1)=>{
                             <thead>
                                 <tr role="row">
                                     <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='150px' className="table_head">Support</th>
-                                    <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='1094px' className="table_head">Frequent Subgraphs <h6 className="downloadtext" onClick={downloadfiles}>Download</h6><div className="dropdown"><li>Select all</li><li>Select Specific</li></div>
+                                    <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='1094px' className="table_head">Frequent Subgraphs 
 </th>
 
                                 </tr>
@@ -808,8 +836,27 @@ const select_specific=(ind,ind1)=>{
                                     <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='150px' className="table_head">Coverage</th>
                                     <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='1094px' className="table_head">Coverage Patterns <h6 className="downloadtext" onClick={downloadfiles}>Download</h6></th>
                                     */}
-                                    <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='150px'className="table_head">SCP Details</th>
-                                    <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='150px' className="table_head">{downloadtype==0 ? <div className="table_head">Subgraph Coverage Pattern</div> : <label className="table_head"><input type="checkbox" onChange={selected_file_all}></input>Subgraph Coverage Pattern</label>} {downloadtype==0 ? <h6 className="downloadtext" /*onClick={downloadfiles} */onClick={downloadset}>Download</h6> : <h6 className="downloadtext" onClick={downloadfiles}><FaIcons.FaDownload className="download_icon"/></h6>}</th>
+                                    <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='150px' height='2px' className="table_head">SCP Details</th>
+                                    <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='150px' height='2px' className="table_head">
+                                        {downloadtype==0 ? 
+                                        <div >
+                                            Subgraph Coverage Pattern
+                                            <div className="downloadtext" /*onClick={downloadfiles} */onClick={downloadset}>
+                                            Download
+                                        </div>
+                                        </div>:
+                                        <label className="table_head">
+                                            <input id="all_checked" type="checkbox"  onChange={selected_file_all}>
+
+                                            </input>
+                                                Subgraph Coverage Pattern
+                                                <h6 className="downloadtext" onClick={downloadfiles}>
+                                            <FaIcons.FaDownload className="download_icon"/>
+                                        </h6>
+                                        </label>
+                                        } 
+                                       
+                                    </th>
                                 </tr>
                                 
                             </thead>
