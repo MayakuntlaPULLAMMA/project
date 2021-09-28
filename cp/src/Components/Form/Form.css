@@ -169,8 +169,8 @@
 }
 
 .table1{
-   /* overflow: scroll;*/
-    height: 450px;
+   overflow: scroll;
+    height: 350px;
     position:absolute;
     background-color:white;
     width: 100%;
@@ -289,6 +289,13 @@ tr{
      border: 1px solid #888;
      width: 80%;
    }
+   .modal-content_structure_of_interest{
+    background-color: #fefefe;
+    margin: auto;
+    padding: 1ch;
+    border: 1px solid #888;
+    width: 80%;
+   }
    .close{
      color: #aaaaaa;
      float: right;
@@ -311,6 +318,7 @@ tr{
        font-variant: small-caps;
        font-size: 2ch;
        background-color:navy;
+       
  
    }
 
@@ -406,6 +414,11 @@ tr{
 }
 .table2{
     overflow: scroll;
+    
+         height: 330px;
+         position:absolute;
+         background-color:white;
+         width: 100%;
 }
 
 .filters_coverage{
@@ -501,3 +514,85 @@ tr{
 .checkkbox{
     
 }
+.links line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+  }
+
+  .nodes circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+  }
+
+  div.tooltip {
+        position: absolute;
+        width: auto;
+        height: auto;
+        padding: 2px;
+        background: #ffff99;
+        border: solid 1px #aaa;
+        border-radius: 8px;
+    }
+   
+    .vl{
+        height:10px;
+        background-color:navy;
+    }
+    .display_item_flex{
+       display: grid;
+       grid-template-columns: repeat(6,minmax(150px,1fr));
+       grid-gap: 3px;
+       margin: 1ch;
+       border-style: solid;
+        border-width: 0.1ch;
+        border-color: black;
+
+       
+        
+    }
+    .box_si{
+        border-width: 4px;
+        margin:1ch;
+    }
+   
+    .si_image_and_heading1{
+        margin:1ch;
+        width:auto;
+        align-items: center;
+        text-align: center;
+        border-style: solid;
+        border-width: 0.1ch;
+        border-color: black;
+        
+    }
+    
+    .si_heading{
+        background-color:rgb(182, 230, 222);
+        padding:0.5ch;
+        color:navy;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    .si_main_heading{
+        text-align: center;
+        padding-left:1ch;
+        padding-right:1ch;
+        padding-top: 10ch;
+        background-color: lightblue;
+        align-items: center;
+        color: navy;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    .si_image{
+        width:100%;
+        height:100%;
+       
+    }
+    .modal_head_si{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color:oldlace;
+        font-variant: small-caps;
+        font-size: 2ch;
+        background-color:navy;
+        margin-top:5ch;
+        text-align: center;
+    }

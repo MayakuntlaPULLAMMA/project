@@ -14,11 +14,18 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import * as d3 from 'd3';
+import one_path from '../../Images/1_path.png';
+import two_path from '../../Images/2_path.png';
+import three_path from '../../Images/3_path.png';
+import three_ring from '../../Images/3_ring.png';
+import four_ring from '../../Images/4_ring.png';
+import five_ring from '../../Images/5_ring.png';
 
 const Form=()=>{
     const myContext = useContext(AppContext);
    
-    const [formData, setFormData] = React.useState({mincs:'',minrf:'',maxor:'',analysistype:'1'});
+    const [formData, setFormData] = React.useState({mincs:'',minrf:'',maxor:'',analysistype:'1',structure_of_interest:'none'});
     const [frequent_subgraphs,setfrequentsubgraphs]=React.useState(false);
     const [coverage_patterns,setcoveragepatterns]=React.useState(false);
     const [fsg_info,setfsginfo]=React.useState([]);
@@ -47,7 +54,7 @@ const Form=()=>{
     const [downloadtype,setdownloadtype]=React.useState(0);
     const [selected_patterns,setselectedpatterns]=React.useState([]);
     const [selected_all,setselectedall]=React.useState(false);
-    
+    const structures_of_interest=["Ring","Star","Path"];
     const handlechange=(event)=>{
         let nam=event.target.name;
         let val=event.target.value;
@@ -106,6 +113,7 @@ const Form=()=>{
             setgotdatafrombackend(false);
             setloader(true);
             const data = new FormData();
+            formData.analysistype='1'
             if(formData.analysistype=='0'){
                 data.append("data",parseInt(0));
                 data.append("mincs",formData.mincs);
@@ -115,6 +123,7 @@ const Form=()=>{
                 data.append("selected_data",myContext.dataset);
                 data.append("selected_dataset",selected_file);
                 data.append("file_content",file_content);
+                data.append("structure_of_interest",formData.structure_of_interest);
                 console.log(myContext.dataset);
                 axios.post('http://localhost:5000/',data,{headers: {'content-type': 'multipart/form-data'}})
                 .then(resData=>resData.data)
@@ -151,6 +160,7 @@ const Form=()=>{
                 data.append("selected_data",myContext.dataset);
                 data.append("selected_dataset",selected_file);
                 data.append("file_content",file_content);
+                data.append("structure_of_interest",formData.structure_of_interest);
                 axios.post('http://localhost:5000/',data,{headers: {'content-type': 'multipart/form-data'}})
                 .then(resData=>resData.data)
                 .then(res=>{
@@ -292,6 +302,10 @@ const Form=()=>{
         setselectedimagenameformodal("Graph-id : "+name);
 
     }
+    const show_modal_structure_of_interest=()=>{
+        setshow(true);
+        
+    }
 
     const handleClose=()=>{
         setshow(false);
@@ -342,8 +356,13 @@ const downloadfiles=(e)=>{
     }
 }
 const selected_file_all=()=>{
-    if(selected_all==true){
+    var c=selected_all
+    if(c==true){
         setselectedall(false);
+        var d=document.getElementById("all_checked");
+        if(d.checked==true){
+            d.checked=false
+        }
         var p=[...selected_patterns];
         for(var i=0;i<scp_images.length;i++)
         {
@@ -361,6 +380,8 @@ const selected_file_all=()=>{
     }
     else{
         setselectedall(true);
+        var d=document.getElementById("all_checked");
+        d.checked=true
         var p=[...selected_patterns];
         for(var i=0;i<scp_images.length;i++)
         {
@@ -398,6 +419,7 @@ const select_specific=(ind,ind1)=>{
     console.log(selected_patterns);
 }
 
+
     return(
         <div className={myContext.side ? "main_div_shrink" : "main_div"}>
             <IconContext.Provider value={{ color: 'white' }}>
@@ -434,6 +456,72 @@ const select_specific=(ind,ind1)=>{
                             </div>
                         </Container>
                     </div>
+                    <div>
+                        <Container className="Container">
+                            <div className="entries_description">
+                                <h6 className="entries_name" onClick={show_modal_structure_of_interest}>Structure of Interest</h6>
+                                <select className="support" name="structure_of_interest" onChange={handlechange}>
+                                    <option value="none" name="structure_of_interest" >All</option>
+                                {structures_of_interest.map((item1, index1) => {
+                                            return (
+                                                <option  name="supprt" value={item1} >{item1}</option>
+                                            );
+                                        })}
+                                </select>
+                            </div>
+                        </Container>
+                    </div>
+                    <div className={show ? "modal" : "display_none"}>
+                                                    <div className="modal-content_structure_of_interest">
+                                                    <span className="close" onClick={handleClose}>&times;</span>
+
+                                                        <div className="modal_head_si">Structures of Interest</div>
+                                                           <div className="display_item_flex">
+                                                                    <div className="si_main_heading">Path Structures</div>
+    
+                                                               <div className="si_image_and_heading1">
+                                                                    <div className="si_heading">One Path</div>
+                                                                    <div className="box_si">
+                                                                        <img classsName="si_image" src={one_path}></img>
+                                                                    </div>
+                                                               </div>
+                                                               <div className="si_image_and_heading1">
+                                                                    <div className="si_heading">Two Path</div>
+                                                                    <div className="box_si">
+                                                                        <img className="si_image" src={two_path}></img>
+                                                                    </div>
+                                                               </div>
+                                                               <div className="si_image_and_heading1">
+                                                                    <div className="si_heading">Three Path</div>
+                                                                    <div className="box_si">
+                                                                        <img className="si_image" src={three_path}></img>
+                                                                    </div>
+                                                               </div>
+                                                            </div>
+                                                            <div className="display_item_flex">
+                                                            <div className="si_main_heading">Ring Structures</div>
+
+                                                               <div className="si_image_and_heading1">
+                                                                    <div className="si_heading">Three Ring Structure</div>
+                                                                    <div className="box_si">
+                                                                        <img className="si_image" src={three_ring}></img>
+                                                                    </div>
+                                                               </div>
+                                                               <div className="si_image_and_heading1">
+                                                                    <div className="si_heading">Four Ring Structure</div>
+                                                                    <div className="box_si">
+                                                                        <img className="si_image" src={four_ring}></img>
+                                                                    </div>
+                                                               </div>
+                                                               <div className="si_image_and_heading1">
+                                                                    <div className="si_heading">Five Ring Structure</div>
+                                                                    <div className="box_si">
+                                                                        <img className="si_image" src={five_ring}></img>
+                                                                    </div>
+                                                               </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
                     <div className="form_body_main_div">
                         <Container className="Container">
                             <div className="entries_description">
@@ -443,6 +531,7 @@ const select_specific=(ind,ind1)=>{
                             </div>
                         </Container>
                     </div>
+                   
                     
                     {/*<div className="form_body_main_div">
                         <Container className="Container">
@@ -649,7 +738,7 @@ const select_specific=(ind,ind1)=>{
         width={350}
     
         className="loader">Data Loading</Loader> :<> <div className={gotdatafrombackend & frequent_subgraphs  ? "table" : "display_none"}>
-                    <div className="table1">
+                    <div className="table2">
                         <table className="images_in_table" cellSpacing="0" role="grid">
                             <thead>
                                 <tr role="row">
@@ -679,6 +768,10 @@ const select_specific=(ind,ind1)=>{
                                                                     <div>
                                                                     {/*<div className="image_support_heading">Support {item}</div>*/}
                                                                     <img src={`data:image/png;base64,${item1.image_src}`} className="image1"></img>
+                                                                  
+                                                                   
+                                                                            
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             );
@@ -826,7 +919,7 @@ const select_specific=(ind,ind1)=>{
                 </div>
                 
                 <div className={gotdatafrombackend & coverage_patterns ? "table" : "display_none"}>
-                    <div className="table1">
+                    <div className="table2">
                         <table className="images_in_table" cellSpacing="0" role="grid">
                             <thead>
                                 <tr role="row">
@@ -849,7 +942,7 @@ const select_specific=(ind,ind1)=>{
                                             <input id="all_checked" type="checkbox"  onChange={selected_file_all}>
 
                                             </input>
-                                                Subgraph Coverage Pattern
+                                                {' '}Subgraph Coverage Pattern
                                                 <h6 className="downloadtext" onClick={downloadfiles}>
                                             <FaIcons.FaDownload className="download_icon"/>
                                         </h6>
