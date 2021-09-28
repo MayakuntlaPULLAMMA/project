@@ -256,3 +256,39 @@
   .display_flex{
       display: flex;
   }
+  .sample_datasets{
+      margin-top:5ch;
+      margin-left: 2ch;
+      margin-right: 1ch;
+      margin-bottom: 1ch;
+      width:1000px;
+      align-content: center;
+      align-items: center;
+      text-align: center;
+  }
+  .table_sample_datasets{
+      margin-left: 15ch;
+  }
+  .table_caption{
+      background-color: rgb(230, 233, 243);
+      font-size: 18px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      height: 40px;
+      text-align: center;
+      padding-top: 1ch;
+      color: darkblue;
+  }
+  .sample_dataset_head{
+      height:25px;
+      font-size: 13px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      background-color:navy;
+      color: white;
+      text-align: center;
+  }
+  .sample_dataset_data{
+      height:25px;
+      font-size: 13px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      background-color: white;
+  }

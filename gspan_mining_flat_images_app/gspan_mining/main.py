@@ -77,7 +77,7 @@ def main(FLAGS=None):
     # print(sum_all/graph_cnt)
     avg=sum_all/graph_cnt
     fg=open("gSpan_FSM_"+str(s)+"_stats.txt",'w')
-    fg.write(" minsup : "+str(min_sup)+'\n')
+    fg.write(" minrf : "+str(min_sup)+'\n')
     fg.write(" no_of_subgraphs : "+str(arr)+'\n')
     fg.write(" total execution time : "+str(total_time)+'\n')
     fg.write(" Avg size of flat_trans : "+str(avg)+"\n")

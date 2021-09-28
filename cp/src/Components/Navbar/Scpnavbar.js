@@ -5,7 +5,7 @@ import { CpData } from './Cp_Data';
 import { MainsidebarData} from './Mainsidebardata';
 import styled from "styled-components";
 import Scp_home from '../Pages/Scp_home';
-
+import { useHistory} from "react-router-dom";  
 import './Scpnavbar.css';
 import * as FaIcons from 'react-icons/fa';
 import { IconContext } from 'react-icons';
@@ -66,7 +66,7 @@ function Scpnavbar() {
   const [expand_icon,setexpandicon]=useState(false);
   const [scp_patterns,setscppatterns]=useState(0);
   const [coverage_patterns,setcoveragepatterns]=useState(0);
-
+  const currentRoute = useHistory().location.pathname.toLowerCase();
   const showSidebar = () =>
   {
     setSidebar(!sidebar);
@@ -86,6 +86,7 @@ function Scpnavbar() {
   
   const setpatterns=(value)=>
   {
+    console.log("came_to_set_patterns");
     if(value==1 || value=='1')
     {
       setcoveragepatterns(0);
@@ -103,16 +104,24 @@ function Scpnavbar() {
     setcoveragepatterns(0);
     setscppatterns(0);
   }
+  console.log("patterns",scp_patterns,coverage_patterns);
   return (
     <>
       <IconContext.Provider value={{ color: '#fff'}}>
         <div className="div_with_logo1">
-            <img className="logo1" src={Image}></img>
-            <div className="headingdiv">
-              <h1 className="heading1">Data Science And Analytics Center</h1>
-              
+            <div>
+            <img className="logo_one" src={Image} onClick={()=>window.open('http://dsac.iiit.ac.in/',"_blank")}></img>
+            <div className="name_below_logo" onClick={()=>window.open('https://kcis.iiit.ac.in/')}>Kohli Center on Intelligent Systems</div>
             </div>
-            <img className="logo3" src={Image_iiith}></img>
+            <div className="headingdiv">
+              <h1 className="heading1" onClick={()=>window.open('http://dsac.iiit.ac.in/',"_blank")}>Data Science And Analytics Center</h1>
+              <h1 className="heading1" onClick={()=>window.open('http://iiit.ac.in/',"_blank")}>IIIT Hyderabad</h1>
+            </div>
+            <div onClick={()=>window.open('http://iiit.ac.in',"_blank")}>
+            <img className="logo_two" src={Image_iiith}></img>
+            <div className="name_below_logo_two">IIIT Hyderabad</div>
+
+            </div>
         </div>
         <div>
           <div className={sidebar ? "short_side_bar_disable" : 'short_side_bar'}>
@@ -151,7 +160,7 @@ function Scpnavbar() {
                 MainsidebarData.map((item, index) => 
                 {
                   return(
-                    <li key={index} className="icons_in_sidebar" onClick={()=>setpatterns(item.value)}>
+                    <li key={index} className="icons_in_sidebar" >
                       <Link to={item.path}>
                         {item.icon}
                       </Link>
@@ -190,12 +199,22 @@ function Scpnavbar() {
           </div>
         </div>
         <div className={sidebar ? 'nav_on_active' : 'nav_normal'}>
-          <MainSidebarLink to={'/'} className="menu-bars" >
+          {/*<MainSidebarLink to={'/'} className="menu-bars" >
             <FaIcons.FaHome className="icon" onClick={()=>{setscppatterns(0);setcoveragepatterns(0)}}/>
+              </MainSidebarLink>*/}
+          <MainSidebarLink to={'/'} className="menu-bars" >
           </MainSidebarLink>
           <nav className={sidebar ? 'nav-menu1 active' : 'nav-menu1'}>
             <ul className='nav-menu-items'>
-              {scp_patterns==0 && coverage_patterns==0 ? MainsidebarData.map((item, index) => 
+            {MainsidebarData.map((item, index) => 
+              {
+                return(
+                  <>
+                     <SubMenu item={item} sidebar={sidebar}  key={index}  />
+                  </>
+                );
+              })}
+              {/*scp_patterns==0 && coverage_patterns==0 ? MainsidebarData.map((item, index) => 
               {
                 return(
                   <>
@@ -233,7 +252,7 @@ function Scpnavbar() {
                 return <SubMenu item={item} sidebar={sidebar} key={index} />;
               }):
               <div></div>
-              } 
+            */} 
     
             </ul>
           </nav>

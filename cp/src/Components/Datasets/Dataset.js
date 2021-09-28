@@ -3,11 +3,18 @@ import './Dataset.css';
 import axios from 'axios';
 import AppContext from '../App_context';
 import Image from '../../Images/Graph_example.png';
+import { Fa500Px, FaDownload } from 'react-icons/fa';
+import { IconContext } from 'react-icons';
 
 const Dataset=()=>{
     const myContext = useContext(AppContext);
+    const download_dataset=()=>{
+
+    }
     return(
         <div className={myContext.side  ? "total_div": "total_div_1"}>
+        <IconContext.Provider value={{ color: 'navy'}}>
+
             <div className="display_flex">
             <div className="datasetandmodelling">
                 <h5 className="heading_datamodelling">Dataset Format and Modelling</h5>
@@ -30,6 +37,27 @@ const Dataset=()=>{
             <img src={Image} className="graph_image"></img>
             </div>
             </div>
+            <div className="sample_datasets">
+                <table className="table_sample_datasets">
+                    <caption className="table_caption">Sample Datasets</caption>
+                <th className="sample_dataset_head">Dataset Name</th>
+                <th className="sample_dataset_head">No of Transactions</th>
+                <th className="sample_dataset_head">Download</th>
+                <tr>
+                <td className="sample_dataset_data">Papertoy Data</td>
+                <td className="sample_dataset_data">10</td>
+                <td className="sample_dataset_data"><a href={`${process.env.PUBLIC_URL}/papertoydata.txt`} target='_blank' download className="filedownload"><FaDownload/></a></td>
+                </tr>
+                <tr>
+                <td className="sample_dataset_data">Simple Graph Data</td>
+                <td className="sample_dataset_data">4</td>
+                <td className="sample_dataset_data"><a href={`${process.env.PUBLIC_URL}/graph_data_simple.txt`} target='_blank' download className="filedownload"><FaDownload/></a></td>
+
+                {/*<td className="sample_dataset_data" onClick={()=>download_dataset}><FaDownload/></td>*/}
+                </tr>
+                </table>
+            </div>
+            </IconContext.Provider>
         </div>
     );
 }

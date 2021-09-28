@@ -29,7 +29,6 @@ const SidebarLink = styled(Link)`
 `;
   
 const SidebarLabel = styled.span`
-
 `;
   
 const DropdownLink = styled(Link)`

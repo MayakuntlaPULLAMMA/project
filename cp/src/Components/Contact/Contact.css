@@ -1,12 +1,12 @@
 .contactdiv{
-    width:650px;
+    width:900px;
     align-self: center;
     background-color: rgb(222, 228, 235);
     border-radius: 0.3;
     margin-top: 2ch;
     border-style:solid;
-    margin-right: 3ch;
     border-color: rgb(25, 25, 73);
+    height: auto;
     
     
 }
@@ -18,29 +18,40 @@
     display: flex;
 }
 .about{
-    margin-left: 2ch;
+    margin:2ch;
 }
 .boldtext{
     font-size: 13px;
     font-weight: bold;
     color:rgb(14, 14, 82);
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .side{
     margin-top: 1ch;
+    font-size: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .allcontacts{
-margin-left: 550px;
+margin-left: 450px;
 align-content: center;
+height:570px;
+overflow-y:auto;
 
 }
 .allcontacts_expand{
     margin-left: 7ch;
+    height: 570px;
+    overflow-y: auto;
 }
 .contactname{
     color: rgb(14, 14, 82);
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .paragraph{
-    font-size: 12px;
+    font-size: 15px;
+    padding:1ch;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .mail{
     margin-top: 1ch;
@@ -52,5 +63,6 @@ align-content: center;
 }
 .allstudents{
     margin-top: 3ch;
+
     
 }

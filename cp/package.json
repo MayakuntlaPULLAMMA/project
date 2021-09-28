@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.4",
     "bootstrap": "^5.0.2",
-    "d3": "^3.0.0",
+    "d3": "^3.5.17",
     "history": "^5.0.1",
     "js-file-download": "^0.4.12",
     "jszip": "^3.7.1",

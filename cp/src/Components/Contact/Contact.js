@@ -11,34 +11,33 @@ const Contact=()=>{
     const myContext = useContext(AppContext);
 
     return(
-        <div className={myContext.side?"allcontacts":"allcontacts_expand"}>
+    <div className={myContext.side?"allcontacts":"allcontacts_expand"}>
                     <IconContext.Provider value={{ color: 'navy' }}>
 
         <div className="contactdiv">
             <div className="prof">
-            {/*<img src={Image} className="cardimage"></img>*/}
+            <img src={Image} className="cardimage"></img>
             <div className="about">
-                <h3 className="contactname">P.{' '}Krishna Reddy</h3>
+                <h3 className="contactname">Prof P.{' '}Krishna Reddy</h3>
                 <div>
-                <div className="boldtext">Professor</div>
-                <div className="boldtext">Ph.D ({' '}JNU{' '},{' '}New Delhi)</div>
+                
                 </div>
                 <div className="side">
                     <div className="boldtext">Research Areas</div>
-                    <p className="paragraph">Data mining,{' '}data management,{' '}transaction models,{' '}distributed computing,{' '}performance evaluation,{' '}and information technology for agriculture</p>
+                    <p className="paragraph">Data mining,{'  '}Data management,{'  '}Transaction models,{'  '}Distributed computing,{'  '}Performance evaluation,{'  '}and Information technology for agriculture.</p>
                 </div>
                 <div className="mail">
-
+                    <div className="paragraph">
                     <IoIcons.IoIosMail/>
-                    <div className="boldtext">Email:</div>
+                    </div>
                     <p className="paragraph">{' '}pkreddy@iiit.ac.in </p>
                 </div>
                 <div className="side">
                     <div className="boldtext">Address:</div>
-                    <p className="paragraph">International Institute of Information Technology</p>
-                    <p className="paragraph">Gachibowli</p>
+                    <p className="paragraph">International Institute of Information Technology,{' '}Gachibowli,{' '}Hyderabad{' '}-{' '}500 032</p>
+                    {/*<p className="paragraph">Gachibowli</p>
                     <p className="paragraph">Hyderabad - 500 032</p>
-                    <p className="paragraph">India </p>
+    <p className="paragraph">India </p>*/}
                     <p></p>
                 </div>
                 <div className="side">
@@ -55,50 +54,37 @@ const Contact=()=>{
         </div>
         <div className="contactdiv">
             <div className="allstudents" style={{marginTop:"0ch"}}>
-            <div className="prof">
-                <div className="about">
-                    <h4 className="contactname">
-                        A.{' '}Srinivas Reddy
-                    </h4>
-                    <div>
-                        <div className="boldtext">Ph.D Student</div>
-                        <div className="mail">
-                            <IoIcons.IoIosMail/>
-                            <div className="boldtext">Email:</div>
-                            <p className="paragraph">{' '}srinivas.annappalli@research.iiit.ac.in </p>
+                <div className="prof">
+                    <div className="about">
+                        <h4 className="contactname">
+                            A.{' '}Srinivas Reddy
+                        </h4>
+                        <div className="side">
+                            <div className="boldtext">Ph.D Student</div>
+                                <div className="mail">
+                                    <div className="paragraph">
+                                    <IoIcons.IoIosMail/>
+                                </div>
+                            <p className="paragraph">{' '}srinivas.annappalli@iiit.ac.in </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-            <div className="allstudents" >
-            <div className="prof">
-                <div className="about">
-                    <h4 className="contactname">
-                        Yashwanth Balivada
-                    </h4>
-                    <div>
-                        <div className="boldtext">B-tech CSE (IIIT Hyderabad)</div>
-                        <div className="mail">
-                            <IoIcons.IoIosMail/>
-                            <div className="boldtext">Email:</div>
-                            <p className="paragraph">{' '}yashwanth.balivada@students.iiit.ac.in </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div className="allstudents" >
-            <div className="prof">
-                <div className="about">
-                    <h4 className="contactname">
-                        Pullamma Mayakuntla
-                    </h4>
-                    <div>
-                        <div className="boldtext">B-tech CSE (IIIT Hyderabad)</div>
-                        <div className="mail">
-                            <IoIcons.IoIosMail/>
-                            <div className="boldtext">Email:</div>
+        </div>
+        <div className="contactdiv">
+            <div className="allstudents" style={{marginTop:"0ch"}}>
+                <div className="prof">
+                    <div className="about">
+                        <h4 className="contactname">
+                            Pullamma Mayakuntla
+                        </h4>
+                        <div className="side">
+                            <div className="boldtext">BTech CSE ({' '}IIIT Hyderabad{' '})</div>
+                            <div className="mail">
+                            <div className="paragraph">
+                                <IoIcons.IoIosMail/>
+                            </div>
                             <p className="paragraph">{' '}pullamma.mayakuntla@students.iiit.ac.in</p>
                         </div>
                     </div>
@@ -106,9 +92,31 @@ const Contact=()=>{
             </div>
             </div>
         </div>
+        <div className="contactdiv">
+            <div className="allstudents" style={{marginTop:"0ch"}} >
+                <div className="prof">
+                    <div className="about">
+                        <h4 className="contactname">
+                            Yaswanth Balivada
+                        </h4>
+                        <div className="side">
+                            <div className="boldtext">BTech CSE ({' '}IIIT Hyderabad{' '})</div>
+                            <div className="mail">
+                                <div className="paragraph">
+                                    <IoIcons.IoIosMail/>
+                                </div>
+                                <p className="paragraph">{' '}yaswanth.balivada@students.iiit.ac.in </p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
         </IconContext.Provider>
 
-        </div>
+    </div>
     )
 }
 export default Contact;

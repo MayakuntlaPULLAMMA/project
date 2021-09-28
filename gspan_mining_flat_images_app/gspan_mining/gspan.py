@@ -402,7 +402,7 @@ class gSpan(object):
         # fp.write(str(list_of_gids))
         fl.write("\n")
         fl.write("\n")
-        dir=str(min_no_vertices)+"_"+str(min_sup)+"_"+str(s)+'_dst'
+        '''dir=str(min_no_vertices)+"_"+str(min_sup)+"_"+str(s)+'_dst'
         if not os.path.exists(dir):
             os.mkdir(dir)
 
@@ -419,9 +419,7 @@ class gSpan(object):
                 # print(j,kp[2])
                 if(int(kp[2]) ==int(j)):
                     # print(j,kp[2])
-                    shutil.copy(path.join(src,i),dirname)
-
-
+                    shutil.copy(path.join(src,i),dirname)'''
 
         # Add some report info to pandas dataframe "self._report_df".
         self._report_df = self._report_df.append(

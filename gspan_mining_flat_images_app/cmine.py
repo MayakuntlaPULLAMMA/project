@@ -3,7 +3,6 @@ import sys
 import os
 import copy
 import shutil
-import cv2
 from PIL import Image
 from werkzeug import datastructures
 import numpy as np
@@ -31,48 +30,47 @@ class cmine():
         self.noofSCP=0
         [self.items, self.database] = self.dbscan(inpfile)
         sorteditems = sorted(self.items.items(), key = lambda a: (-a[1],a[0]))
-        '''print("sorted")
-        print(sorteditems)'''
+        
         mintracs = float(self.minRF) * 1.0 * float(self.nots)
-        print("self.nots")
-        print(self.nots)
-        freqitems=[]
+        freqitems = filter(lambda x: (x[1] >= mintracs), sorteditems)
+        print("freq_items")
+        print(freqitems)
+        for i in freqitems:
+            print(i[1],self.minCS*self.nots)
+            print((i[1]==self.minCS*self.nots))
+        one_size_coverage = filter(lambda x: (x[1] >= self.minCS*self.nots),freqitems)
+        print(one_size_coverage)
         f=open("./"+datasetname+"_"+str(self.minCS1)+"_"+str(self.minRF)+"_"+str(self.maxOR),'w')
         f.write("Coverage"+" "+"1"+'\n')
         f.write('\n')
 
-        for i in sorteditems:
-            '''print(i)
-            print(i[1]>=mintracs)'''
+        '''for i in sorteditems:
+            print(i)
+            print(i[1]>=mintracs)
             if(i[1]>=mintracs):
                 
                 freqitems.append(i)
         
-        '''freqitems = filter(lambda x: (x[1] >= mintracs), sorteditems)'''
-        '''one_size_coverage = filter(lambda x: (x[1] >= minCS*self.nots),freqitems)'''
+        freqitems = filter(lambda x: (x[1] >= mintracs), sorteditems)
+        print(freqitems)
+        one_size_coverage = filter(lambda x: (x[1] >= minCS*self.nots),freqitems)
         one_size_coverage=[]
-        c=[]
-        count=0
-        scp=0
-        for i in freqitems:
-            '''print(i)
-            print(i[1],float(self.minCS))'''
-            print(i[1],float(minCS)*float(self.nots))
-            if(i[1]>=float(minCS)*float(self.nots)):
-                scp=scp+1
-                one_size_coverage.append(i[0])
-                count=count+1
-                f.write("i"+" "+str(scp)+'\n')
-                f.write("cs"+" "+str(float(i[1])/self.nots)+'\n')
-                f.write("or"+" "+str(0)+'\n')
-                f.write('\n')
-                c.append(i[0])
-        self.frequencies.append(c)
+        c=[]'''
+        count=1
+        print("one")
+        for i in range(0,len(one_size_coverage)):
+            self.noofSCP=self.noofSCP+1
+            one_size_coverage.append(one_size_coverage[i][0])
+            f.write("i"+" "+str(self.noofSCP)+'\n')
+            f.write("cs"+" "+str(float(one_size_coverage[i][1])/float(self.nots))+'\n')
+            f.write("or"+" "+str(self.maxOR)+'\n')
+            count=count+1
+            f.write('\n')
         f.write('\n')
         f.write('\n')
         '''print("one_size_coverage")'''
-
-        print(one_size_coverage)
+        self.source_dir="./"+datasetname+"data_2_"+str(float(self.minRF))
+        self.dest_dir="./scp_images_"+datasetname+"_"+str(self.minCS1)
         self.freqitems = map(lambda x: x[0], freqitems)  
         #self.noofFreqItems=copy.copy(len(list(self.freqitems)))
         
@@ -84,18 +82,17 @@ class cmine():
         if(os.path.exists(outputfile)):
             shutil.rmtree(outputfile)
         os.mkdir(outputfile)
-        if(os.path.exists(outputfile+"/Coverage_1")):
-            shutil.rmtree(outputfile+"/Coverage_1")
-        os.mkdir(outputfile+"/Coverage_1")
+        if(len(one_size_coverage)!=0):
+            if(os.path.exists(outputfile+"/Coverage_1")):
+                shutil.rmtree(outputfile+"/Coverage_1")
+            os.mkdir(outputfile+"/Coverage_1")
         
+        print("jhjjhj")
         
-        self.source_dir="./"+datasetname+"data_2_"+str(self.minCS1)
-        self.dest_dir="./scp_images_"+datasetname+"_"+str(self.minCS1)
-        for i in one_size_coverage:
+        for i in range(0,len(one_size_coverage)):
             '''print("hi")'''
-            self.noofSCP=self.noofSCP+1
             '''print("k")'''
-            shutil.copy(self.source_dir+"/"+str(i)+".png",self.dest_dir+"/Coverage_1/")
+            shutil.copy(self.source_dir+"/"+str(one_size_coverage[i][0])+".png",self.dest_dir+"/Coverage_1/")
 
             #self.fout.write("['"+str(i[0])+"']\n")
        
@@ -122,8 +119,11 @@ class cmine():
         cnt1 = 0
         length = 1
         coverage=2
+        self.source_dir="./"+datasetname+"data_2_"+str(float(minRF))
+        self.dest_dir="./scp_images_"+datasetname+"_"+str(self.minCS1)
         while len(self.NOk)>0:
-            os.mkdir(self.dest_dir+"/Coverage_"+str(coverage))
+            if(os.path.exists(self.dest_dir+"/Coverage_"+str(coverage))):
+                shutil.rmtree(self.dest_dir+"/Coverage_"+str(coverage))
             f.write("Coverage"+" "+str(coverage)+'\n')
             f.write('\n')
             temp_NOk = self.NOk
@@ -138,8 +138,7 @@ class cmine():
                     if temp_NOk[i][:-1] == temp_NOk[j][:-1]:
                         cnt1 += 1
                         newpattern = temp_NOk[i] + [temp_NOk[j][-1]]
-                        '''print("new")
-                        print(newpattern)'''
+                       
                         # print "newpattern",newpattern
                         overlapratio,cs = self.get_overlapratio_cs(newpattern)
                         # print newpattern,overlapratio,cs
@@ -147,12 +146,14 @@ class cmine():
                             self.NOk.append(newpattern)
                            
                             if float(cs) >= float(self.minCS):
-                                scp=scp+1
+                                if(not os.path.exists(self.dest_dir+"/Coverage_"+str(coverage))):
+                                    os.mkdir(self.dest_dir+"/Coverage_"+str(coverage))
+                                self.noofSCP=self.noofSCP+1
                                 print("coverage spport")
                                 print(float(cs))
-                                f.write("i"+" "+str(scp)+'\n')
+                                f.write("i"+" "+str(self.noofSCP)+'\n')
                                 f.write("cs"+" "+str(round(float(cs),2))+'\n')
-                                f.write("or"+" "+str(round(overlapratio,2))+'\n')
+                                f.write("or"+" "+str(overlapratio)+'\n')
                                 f.write('\n')
                                 opened_images=[]
                                 for k in newpattern:
@@ -169,7 +170,6 @@ class cmine():
                                     x_offset=x_offset+k.size[0]
                                 new_image.save(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png")
                                
-                                self.noofSCP=self.noofSCP+1
                                 count=count+1
                                 # print "This is coverage pattern",newpattern,cs,overlapratio
                                 #self.fout.write(str(newpattern)+"\n")
@@ -217,7 +217,7 @@ minRF = float(sys.argv[1])
 minCS =sys.argv[2]
 maxOR = float(sys.argv[3])
 datasetname = sys.argv[4]
-inpfile = "./2_"+str(minCS)+"_"+datasetname+"Flat_tra.txt"
+inpfile = "./2_"+str(minRF)+"_"+datasetname+"Flat_tra.txt"
 #datasetname = "graph5_test2.txt"
 #filepath = "C:\\Users\\user\\Documents\\CoverageGraph\\dataset1\\GraphData\\"
 outfile = "Results.txt"

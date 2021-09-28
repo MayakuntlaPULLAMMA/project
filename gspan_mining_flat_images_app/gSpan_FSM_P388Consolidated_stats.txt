@@ -1,3 +1,0 @@
-2 minsup : 12441 no_of_subgraphs : 7 total execution time : 33.75 Avg size of flat_trans : 5.649522569444445
-
-

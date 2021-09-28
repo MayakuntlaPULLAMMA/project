@@ -8,6 +8,7 @@
   .menu-bars {
     font-size: 2rem;
     background: none;
+    text-align: center;
   
   }
   
@@ -21,14 +22,14 @@
     top:0;
     left: -100%;
     transition: 850ms;
-    margin-top: 5%;
+    margin-top:8.5%;
   }
   
   .nav-menu1.active {
     left: 0;
     transition: 350ms;
     background-color:rgb(16, 19, 43);
-    margin-top:11.7ch;
+    margin-top:8.5%;
   }
   
   .nav-text {
@@ -85,18 +86,20 @@
     margin-left: 1ch;
      
   }
-  .logo1{
-      margin-left: 4ch;
-      margin-top:0.3ch;
+  .logo_one{
+      margin-left: 1ch;
+      margin-top:1ch;
       margin-bottom: 0.3ch;
       height: 50px;
+      cursor: pointer;
   }
-  .logo2{
-    margin-left: 35ch;
-    margin-top:0.3ch;
+  .logo_two{
+    margin-left: 30ch;
+    margin-top:1ch;
     margin-bottom: 0.3ch;
     height: 50px;
-    width:150px;
+    width: 150px;
+    cursor: pointer;
 }
 .logo3{
   margin-left: 30ch;
@@ -104,12 +107,13 @@
   margin-bottom: 0.3ch;
   height: 50px;
   width:150px;
+  cursor: pointer;
 }
   .div_with_logo1{
     display: flex;
     background-color:rgb(105, 91, 233);
-    
-    height:60px;
+    text-align: center;
+    height:85px;
     width: 1800px;
 
   }
@@ -127,7 +131,7 @@
   }
   .heading1{
     /* margin-left: 28ch;*/
-    margin-left: 23.5ch;
+    margin-left: 20.5ch;
      height: 30px;
      margin-top:0.3ch;
      color:white;
@@ -135,6 +139,8 @@
      font-size: 25px;
      margin-bottom: 0.3ch;
      margin-top: 0.5ch;
+     cursor: pointer;
+     text-align: center;
     
  }
   .nav_on_active{
@@ -178,6 +184,7 @@
     position:absolute;
     height:auto;
     width:250px;
+    text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
   .topic_heading{
@@ -223,5 +230,37 @@
    color: darkblue;
    font-family: Georgia, 'Times New Roman', Times, serif;
    font-size: 20px;
+   text-align: center;
    
  }
+ .display_flex{
+   display: flex;
+ }
+.name_below_logo{
+  margin-left: 1ch;
+  font-size: 13px;
+  color:white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.name_below_logo_two{
+  margin-left: 31ch;
+  font-size: 13px;
+  color:white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sidebar_heading{
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+  margin-top: 1ch;
+  padding-left: 2ch;
+  
+}

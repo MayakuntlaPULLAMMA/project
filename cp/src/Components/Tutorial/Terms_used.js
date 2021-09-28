@@ -236,9 +236,17 @@ function Terms_used(props) {
         </div>
     </Box>
     <div className="terms_definition">
+      <div>
     <p className="para">A graph transaction <i>G = ({' '}V, E, L, l{' '})</i> is a labeled,{' '}connected and undirected graph,{' '}where <i>V is a set of
 vertices</i>,{' '}<i>E ⊆ V<sub>2</sub></i> is a set of edges, <i>L</i> is a set of labels and <i>l : V ∪ E → L</i>,{' '}where <i>l</i> is a function for assigning
-labels to vertices and edges.</p>
+labels to vertices and edges.
+</p>
+<p className="para">Consider a sample chemical compound
+shown in Figure 1(a) and its equivalent graph transaction <i>G{' '}={' '}({' '}V,{' '}E,{' '}L,{' '}l{' '})</i> depicted in Figure 1(b). Here, <i>V = {"{ "}v<sub>1</sub>,v<sub>2</sub>, . . . ,v<sub>13</sub>{" }"}</i>,<i>{' '}E{' '}={' '}{"{ "}{'('}v<sub>1</sub>,{' '}v<sub>3</sub>{')'},{' '}{'('}v<sub>2</sub>,{' '}v<sub>3</sub>{')'},........{'('}v<sub>9</sub>,{' '}v<sub>13</sub>{')'}{' '}{"}"}</i>{' '}and <i>L{' '}=
+{' '}{"{ C, F, H, N, O, 1, 2, 3 }"}</i>. A mapping function <i>l</i> maps the
+the vertices <i>v<sub>1</sub>,{' '}v<sub>2</sub>,{' '}v<sub>3</sub>,. . . ,v<sub>13</sub></i> to <i>H,{' '}N,{' '}N,{' '}. . .,{' '}F</i> and the
+edges <i>({' '}v<sub>1</sub>,{' '}v<sub>3</sub>),{' '}({' '}v<sub>2</sub>,v<sub>3</sub>{' '}), . . . ,({' '}v<sub>9</sub>,{' '}v<sub>13</sub>{' '})</i> to <i>1,{' '}3,. . . ,{' '}1</i> respectively.</p>
+</div>
         <div className="scp_definition">
         <img className="terms_example_image" src={Image3}></img>
         <div className="terms_image_name">Fig. 1: (a) Sample chemical compound, (b) Equivalent graph model</div>

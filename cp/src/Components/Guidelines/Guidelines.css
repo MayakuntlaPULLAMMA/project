@@ -1,6 +1,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css");
 
-.hi{
+/*.hi{
     margin-left: 10ch;
 }
 .tooltip{
@@ -39,5 +39,23 @@
     margin-left: 10ch;
     height:150px;
     width:200px;
+
+}*/
+.bulletpoints_content{
+    background-color: rgb(222, 231, 233);
+    height: auto;
+    width: 78%;
+    margin:3ch;
+    padding:1ch;
+    color: darkblue;
+    font-size: 18px;
+}
+.bullets{
+    background-color:rgb(222, 231, 233) ;
+    margin-left: 3ch;
+    margin-top:1ch;
+    margin-bottom: 1ch;
+    margin-right: 1ch;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 
 }
