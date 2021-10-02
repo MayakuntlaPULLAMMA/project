@@ -5,6 +5,8 @@ from flask.wrappers import Response
 from flask_cors import CORS,cross_origin
 from flask import request
 from werkzeug.utils import secure_filename
+import networkx as nx
+import matplotlib.pyplot as plt
 import sys
 import json
 import time
@@ -13,7 +15,7 @@ from os import listdir
 from os.path import isfile, join
 import base64
 import graph
-from graph import AUTO_EDGE_ID
+from graph import AUTO_EDGE_ID, Vertex
 from graph import Graph
 from graph import VACANT_GRAPH_ID
 from graph import VACANT_VERTEX_LABEL
@@ -37,125 +39,70 @@ def check():
     print("CHECK")
     print(request.form['data'])
     if(request.form['data']=='1'):
-        data=[]
-        print("content")
-        if(request.form['content']!=""):
-            r=request.form['content'][23:]
-            r=base64.b64decode(r)
-            r.decode('ascii')
-            f=open('./graphdata/'+request.form['file'],'wb')
-            f.write(r)
-            f.close()
-            dataset_set_name=request.form['file'].split(".")
-            if(os.path.isdir('./Images_'+dataset_set_name[0])):
-                shutil.rmtree('./Images_'+dataset_set_name[0])
-            os.makedirs('./Images_'+dataset_set_name[0])
-            f=open('./graphdata/'+request.form['file'],'r')
-            count=0
-            for j in f:
-                count=count+1
-                j=j.strip('\n')
-                k=j.split(" ")
-                if(k[0]=='t'):
-                    if(count==1):
-                        g = Graph(k[2],is_undirected=True,eid_auto_increment=True)
-                        g.vertices = dict()
-                        g.set_of_elb = collections.defaultdict(set)
-                        g.set_of_vlb = collections.defaultdict(set)
-                        g.eid_auto_increment = True
-                    else:
-                        
-                        print(dataset_set_name[0])
-                        g.plot(a=2,dataset_name=dataset_set_name[0])
-                        print(k[2])
-                        g.vertices = dict()
-                        g.set_of_elb = collections.defaultdict(set)
-                        g.set_of_vlb = collections.defaultdict(set)
-                        g.eid_auto_increment = True
-                        g=Graph(k[2],is_undirected=True,eid_auto_increment=True)
-                elif(k[0]=='v'):
-                    g.add_vertex(k[1],k[2])
-                elif(k[0]=='e'):
-                    g.add_edge(AUTO_EDGE_ID,k[1],k[2],k[3])
-            g.plot(a=2,dataset_name=dataset_set_name[0])
-            
-
-            
-            
-        
-        data_file_names = [f for f in listdir('./graphdata') if isfile(join('./graphdata',f))]
-        
-        
-        for i in range(0,len(data_file_names)):
-            '''if(os.path.isdir('./Images_'+dataset_set_name[0])):
-                shutil.rmtree('./Images_'+dataset_set_name[0])
-            os.makedirs('./Images_'+dataset_set_name[0])
-            f=open('./graphdata/'+str(data_file_names[i]),'r')
-            count=0
-            for j in f:
-                count=count+1
-                j=j.strip('\n')
-                k=j.split(" ")
-                if(k[0]=='t'):
-                    if(count==1):
-                        g = Graph(k[2],is_undirected=True,eid_auto_increment=True)
-                        g.vertices = dict()
-                        g.set_of_elb = collections.defaultdict(set)
-                        g.set_of_vlb = collections.defaultdict(set)
-                        g.eid_auto_increment = True
-                    else:
-                        print("yes")
-                        
-                        g.plot(a=2,dataset_name=dataset_set_name[0])
-                        print(k[2])
-                        g.vertices = dict()
-                        g.set_of_elb = collections.defaultdict(set)
-                        g.set_of_vlb = collections.defaultdict(set)
-                        g.eid_auto_increment = True
-                        g=Graph(k[2],is_undirected=True,eid_auto_increment=True)
-                elif(k[0]=='v'):
-                    g.add_vertex(k[1],k[2])
-                elif(k[0]=='e'):
-                    g.add_edge(AUTO_EDGE_ID,k[1],k[2],k[3])
-            g.plot(a=2,dataset_name=dataset_set_name[0])
-            temp={}
-            img_folder_path="./Images_"+dataset_set_name[0]+'/'
-            img_file_names = [f for f in listdir(img_folder_path) if isfile(join(img_folder_path, f))]
-            temp['title']=dataset_set_name[0]
-            temp['images']=[]
-            count=0
-            for i in img_file_names:
-                count=count+1
-                with open(str(img_folder_path+i),"rb") as img:
-                    k=str(base64.b64encode(img.read()))
-                    k=k[2:]
-                    c={}
-                    # print(k[2:])
-                    c["gid"]="Graph "+str(count)
-                    c["image"]=k[:-1]
-                    temp['images'].append(c)
-            data.append(temp)'''
-            temp={}
-            dataset_set_name=data_file_names[i].split(".")
-            img_folder_path="./Images_"+dataset_set_name[0]+'/'
-            img_file_names = [f for f in listdir(img_folder_path) if isfile(join(img_folder_path, f))]
-            temp['title']=dataset_set_name[0]
-            temp['images']=[]
-            count=0
-            for i in img_file_names:
-                count=count+1
-                with open(str(img_folder_path+i),"rb") as img:
-                    k=str(base64.b64encode(img.read()))
-                    k=k[2:]
-                    c={}
-                    # print(k[2:])
-                    c["gid"]="Graph "+str(count)
-                    c["image"]=k[:-1]
-                    temp['images'].append(c)
-            data.append(temp)
-        response=jsonify({"image_file_names":data_file_names,"datasets_data":data}),200
-
-        return response
+        print("cameto structure")
+        if(request.form['submit']!='1'):
+            reading=request.form['inputdata']
+            reading1=request.form['inputdata']
+            reading=reading.split('\n')
+            print(reading)
+            plt.clf()
+            g = nx.Graph()
+            vertexset=set()
+            error_messages=''
+            for line in reading:
+                print(vertexset)
+                print(line)
+                line=line.strip().split()
+                if(len(line)!=0):
+                    if line[0]=='v':
+                        print("went in")
+                        vertexset.add(line[1])
+                    if line[0]=='e':
+                        print("wentinto edge")
+                        if line[1] not in vertexset or line[2] not in vertexset:
+                            print("error line1")
+                            if(line[1] not in vertexset):
+                                error_messages=error_messages+line[1]+" is not a vertex"+" "
+                            if(line[2] not in vertexset):
+                                error_messages=error_messages+line[2]+" is not a vertex"+" "
+                        else:
+                            g.add_edge(int(line[1]),int(line[2]))
+            return_img=''
+            print("erro meessag")
+            print(error_messages)
+            nx.draw_planar(g, with_labels = True)
+            plt.savefig("filename.png")
+            with open("filename.png","rb") as img:
+                k=str(base64.b64encode(img.read()))
+                k=k[2:]
+                return_img=k[:-1]
+            # os.remove("filename.png")
+            print(error_messages)
+            if(request.form['dosave']=='1'):
+                print("went into savw")
+                cnt=request.form['no_of_si']
+                print("cout",type(cnt))
+                if(int(cnt)==1):
+                    print("went into if")
+                    if(os.path.exists('./final.txt')):
+                        os.remove('./final.txt')
+                    f=open('final.txt','w')
+                else:
+                    f=open('final.txt','a')
+                trscn='t # '+str(cnt)+' '
+                f.write(trscn)
+                f.write(reading1)
+                f.write('\n')
+                f.write('\n')
+                f.close()
+            res=jsonify({"return_img":return_img,"error_messages":error_messages}),200
+            return res
+        else:
+            if(os.path.exists('./final.txt')):
+                f=open('./final.txt','a')
+                f.write('t # -1')
+            res=jsonify({"written":True})
+            return res
 
     elif(request.form['data']=='0'):
         maxor=request.form['maxor']

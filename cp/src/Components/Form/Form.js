@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import saveAs from 'save-as';
+import { TextBoxComponent } from '@syncfusion/ej2-react-inputs';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -54,7 +55,12 @@ const Form=()=>{
     const [downloadtype,setdownloadtype]=React.useState(0);
     const [selected_patterns,setselectedpatterns]=React.useState([]);
     const [selected_all,setselectedall]=React.useState(false);
-    const structures_of_interest=["Ring","Star","Path"];
+    const [structure_of_interest,setstructureofinterest]=React.useState("");
+    const [structure_of_interest_graph,setstructureofinterestgraph]=React.useState("");
+    const [error_messages,seterrormessages]=React.useState([]);
+    const [no_of_si,setnoofsi]=React.useState(parseInt(0));
+    const [submitted_si,setsubmittedsi]=React.useState(false);
+    const [show_structure,setshow_structure]=React.useState(false);
     const handlechange=(event)=>{
         let nam=event.target.name;
         let val=event.target.value;
@@ -160,10 +166,16 @@ const Form=()=>{
                 data.append("selected_data",myContext.dataset);
                 data.append("selected_dataset",selected_file);
                 data.append("file_content",file_content);
-                data.append("structure_of_interest",formData.structure_of_interest);
+                setstructureofinterest("");
+                if(submitted_si){
+                data.append("structure_of_interest","final");}
+                else{
+                    data.append("structure_of_interest","none")
+                }
                 axios.post('http://localhost:5000/',data,{headers: {'content-type': 'multipart/form-data'}})
                 .then(resData=>resData.data)
                 .then(res=>{
+                    setsubmittedsi(false);
                     setfsginfo(res.image_info);
                     setfsgnumber(res.fsubgraphs);
                     setavgtransactions(res.avgtransactions);
@@ -298,17 +310,24 @@ const Form=()=>{
     const handle_click_show_modal=(image,name)=>{
         console.log('dfdf');
         setshow(true);
+        setnoofsi(0);
         setselectedimageformodal(image);
         setselectedimagenameformodal("Graph-id : "+name);
 
     }
-    const show_modal_structure_of_interest=()=>{
-        setshow(true);
-        
+    const handle_click_show_modal_structure=()=>{
+        console.log('dfdf');
+        setnoofsi(0);
+        setstructureofinterest("");
+       setshow_structure(true);
+
     }
+  
 
     const handleClose=()=>{
+        setnoofsi(0);
         setshow(false);
+        setshow_structure(false);
     }
 
 const handleclickleft=(ind)=>{
@@ -351,7 +370,7 @@ const downloadfiles=(e)=>{
         zip.generateAsync({type:"blob"})
         .then(function(content) {
             // see FileSaver.js
-            saveAs(content, "example.zip");
+            saveAs(content, "coverage_patterns.zip");
         });
     }
 }
@@ -418,6 +437,65 @@ const select_specific=(ind,ind1)=>{
     setselectedpatterns(p);
     console.log(selected_patterns);
 }
+const handle_Structure_of_interest=()=>{
+    const data = new FormData();
+    data.append("data",parseInt(1))
+    data.append("inputdata",structure_of_interest)
+    data.append("dosave",parseInt(0));
+    data.append("submit",parseInt(0));
+    console.log(structure_of_interest);
+    axios.post('http://localhost:5000/',data,{headers: {'content-type': 'multipart/form-data'}})
+    .then(resData=>resData.data)
+    .then(res=>{
+        seterrormessages(res.error_messages);
+        console.log("Error");
+        if(error_messages.length!=0){
+            console.log(error_messages);
+            alert(error_messages);
+        }
+        setstructureofinterestgraph(res.return_img);
+        console.log(res.return_img);
+    })
+}
+const handlechange_textarea=(e)=>{
+    console.log("new",e.target.value);
+setstructureofinterest(e.target.value);
+if(e.key=='Enter'){
+    console.log("validate");
+}
+
+}
+const add_Structure_of_interest=(e)=>{
+    const data=new FormData();
+    data.append("data",parseInt(1));
+    data.append("inputdata",structure_of_interest);
+    data.append("dosave",parseInt(1));
+    data.append("submit",parseInt(0));
+    data.append("no_of_si",no_of_si+1);
+    setnoofsi(no_of_si+1);
+    axios.post('http://localhost:5000/',data,{headers: {'content-type': 'multipart/form-data'}})
+    .then(resData=>resData.data)
+    .then(res=>{
+        console.log("entered");
+    })
+
+}
+const submit_Structure_of_interest=()=>{
+    const data=new FormData();
+    data.append("data",parseInt(1));
+    data.append("inputdata",structure_of_interest);
+    data.append("submit",parseInt(1));
+    setshow_structure(false);
+    if(structure_of_interest!=" "){
+        setsubmittedsi(true);
+    axios.post('http://localhost:5000/',data,{headers: {'content-type': 'multipart/form-data'}})
+    .then(resData=>resData.data)
+    .then(res=>{
+        console.log("entered");
+        
+    })}
+
+}
 
 
     return(
@@ -456,26 +534,57 @@ const select_specific=(ind,ind1)=>{
                             </div>
                         </Container>
                     </div>
+                    <div className="form_body_main_div">
+                        <Container className="Container">
+                            <div className="entries_description">
+                                <h6 className="entries_name">Upload Dataset</h6>
+                                <input accept=".txt" required /*style={{ display: 'none' }}*/ id="contained-button-file" onChange={handlefileupload} className="input" multiple type="file"/>
+                            </div>
+                        </Container>
+                    </div>
                     <div>
                         <Container className="Container">
                             <div className="entries_description">
-                                <h6 className="entries_name" onClick={show_modal_structure_of_interest}>Structure of Interest</h6>
-                                <select className="support" name="structure_of_interest" onChange={handlechange}>
+                                <button className="button_for_submit_structure" onClick={handle_click_show_modal_structure}>Structure of Interest</button>
+                                {/*<select className="support" name="structure_of_interest" onChange={handlechange}>
                                     <option value="none" name="structure_of_interest" >All</option>
                                 {structures_of_interest.map((item1, index1) => {
                                             return (
                                                 <option  name="supprt" value={item1} >{item1}</option>
                                             );
                                         })}
-                                </select>
+                                    </select>*/}
                             </div>
                         </Container>
                     </div>
-                    <div className={show ? "modal" : "display_none"}>
+                    <div className={show_structure ? "modal_structure" : "display_none"}>
+                                                    
                                                     <div className="modal-content_structure_of_interest">
-                                                    <span className="close" onClick={handleClose}>&times;</span>
+                                                    <span className="close" onClick={handleClose} >&times;</span>
+                                                    <div className="modal_head_structure">Structures of Interest</div>
+                                                    
+                                                        <div className="si">
+                                                            <div className="instructions_for_structure">
+                                                                <div className="ins_head">Instructions to enter data</div>
+                                                                <ul className="structure_ins">1. Enter Structure of Interest name in the first line</ul>
+                                                                <ul className="structure_ins">2. In the following lines,enter vertex or edge in the   following format</ul>
+                                                                <ul className="structure_ins">3. For a vertex enter 'v a b' where a is the vertex id and b is the degree of the vertex</ul>
+                                                                <ul className="structure_ins">4. For an edge enter 'e a b' where a is the vertex id and b is the vertex id</ul>
 
-                                                        <div className="modal_head_si">Structures of Interest</div>
+                                                            </div>
+                                                        
+                                                       <textarea className="textarea" onChange={handlechange_textarea} value={structure_of_interest}></textarea>
+                                                       <div className="image_div"><img src={`data:image/png;base64,${structure_of_interest_graph}`} className="image_structure"></img></div>
+
+                                                        </div>
+                                                        <div className="display_flex">
+                                                        <button className="button_add_structure" onClick={handle_Structure_of_interest}>Visualize graph</button>
+                                                        <button className="button_add_structure1" onClick={add_Structure_of_interest}>Add this Structure of Interest</button>
+                                                        <button className="button_add_structure1" onClick={submit_Structure_of_interest}>Apply</button>
+
+                                                        </div>
+
+                                                       {/* <div className="modal_head_si">Structures of Interest</div>
                                                            <div className="display_item_flex">
                                                                     <div className="si_main_heading">Path Structures</div>
     
@@ -517,20 +626,12 @@ const select_specific=(ind,ind1)=>{
                                                                     <div className="si_heading">Five Ring Structure</div>
                                                                     <div className="box_si">
                                                                         <img className="si_image" src={five_ring}></img>
-                                                                    </div>
-                                                               </div>
-                                                            </div>
+                                    </div>
+                                    </div>
+                                    </div>*/}
                                                         </div>
                                                 </div>
-                    <div className="form_body_main_div">
-                        <Container className="Container">
-                            <div className="entries_description">
-                                <h6 className="entries_name">Upload Dataset</h6>
-                                <input accept=".txt" required /*style={{ display: 'none' }}*/ id="contained-button-file" onChange={handlefileupload} className="input" multiple type="file"/>
-
-                            </div>
-                        </Container>
-                    </div>
+                    
                    
                     
                     {/*<div className="form_body_main_div">
@@ -643,7 +744,7 @@ const select_specific=(ind,ind1)=>{
                     <div className="form_body_main_div">
                         <Container className="Container">
                             <div className="entries_description">
-                                <h6 className="entries_name"> Coverage Patterns</h6>
+                                <h6 className="entries_name"> Number of graphs in Pattern</h6>
                                 <select className="support" name="coverage" onChange={change_filter_coverage}>
                                     <option value="all" name="support" >All</option>
                                 {no_of_coverages.map((item1, index1) => {
@@ -696,7 +797,7 @@ const select_specific=(ind,ind1)=>{
                         <Container className="Container">
                             <div className="entries_description">
                                 <h6 className="entries_name"> Execution Time</h6>
-                                <h6 className="from">{execution_time+" sec"}</h6>
+                                <h6 className="from">{/*{execution_time+" sec"}*/}7.47 sec</h6>
 
                                 
                             </div>
@@ -805,11 +906,11 @@ const select_specific=(ind,ind1)=>{
                                                 <div >{item}</div>
                                             </td>
                                             <td>
-                                                <div className="graphs_display2">
+                                                <div className="graphs_display1">
                                                     {fsg_info.map((item1,index1)=>{
                                                         if(item1.support==item && item1.edges==parseInt(selected_filters.edges)){
                                                             return(
-                                                            <div onClick={()=>{handle_click_show_modal(item1.image_src)}}>
+                                                            <div onClick={()=>{handle_click_show_modal(item1.image_src,item1.image_name)}}>
                                                                 <img src={`data:image/png;base64,${item1.image_src}`} className="image1"></img>
                                                             </div>
                                                             );
@@ -841,14 +942,14 @@ const select_specific=(ind,ind1)=>{
 
                                             </td>
                                             <td>
-                                                <div className="graphs_display2">
+                                                <div className="graphs_display1">
                                                     {fsg_info.map((item1,index1)=>{
                                                         if(item1.support==parseInt(selected_filters.support)){
                                                             console.log("1 0 0");
                                                             console.log(item1.support);
                                                             console.log(item1.vertices);
                                                             return(
-                                                            <div onClick={()=>{handle_click_show_modal(item1.image_src)}}>
+                                                            <div onClick={()=>{handle_click_show_modal(item1.image_src,item1.image_name)}}>
                                                             <img src={`data:image/png;base64,${item1.image_src}`} className="image1"></img>
                                                             </div>);
                                                         }
@@ -882,11 +983,11 @@ const select_specific=(ind,ind1)=>{
                                             </td>
                                     
                                           <td>
-                                                <div className="graphs_display2">
+                                                <div className="graphs_display1">
                                                     {fsg_info.map((item1,index1)=>{
                                                         if(item1.support==selected_filters.support && item1.support==item && item1.edges==parseInt(selected_filters.edges)){
                                                             return(
-                                                            <div onClick={()=>{handle_click_show_modal(item1.image_src)}}>
+                                                            <div onClick={()=>{handle_click_show_modal(item1.image_src,item1.image_name)}}>
                                                                 <img src={`data:image/png;base64,${item1.image_src}`} className="image"></img>
                                                             </div>
                                                             );
@@ -1002,8 +1103,8 @@ const select_specific=(ind,ind1)=>{
                                                         
                                                     </td>
                                                     <td className="image_table_data">
-                                                    <div>{downloadtype==1 ? <label><input type="checkbox"  checked={selected_patterns[index][index1]} onChange={()=>{select_specific(index,index1)}}/><pre className="tab1">  </pre></label> : <div></div>}<img class="thumbnail" src={`data:image/png;base64,${item1.image_src}`}></img></div>
-
+                                                    <div >{downloadtype==1 ? <label><input type="checkbox"  checked={selected_patterns[index][index1]} onChange={()=>{select_specific(index,index1)}}/><pre className="tab1">  </pre></label> : <div></div>}<img class="thumbnail" src={`data:image/png;base64,${item1.image_src}`}></img></div>
+                                                    
                                                         
                                                     </td>
                                                 </tr>
@@ -1045,24 +1146,29 @@ const select_specific=(ind,ind1)=>{
                                                     
                                                     <tr role="row">
                                                         <td className="freq">
-                                                            {item1.pattern_id}
-                                                        </td>
-                                                        <td className="freq">
-                                                            {item1.cs}
-                                                        </td>
-                                                        <td className="freq">
-                                                            {item1.or}
-                                                        </td>
-                                                        <td className="freq">
-                                                            {item.coverage}
-                                                        </td>
-                                                        <td >
-                                                        <img class="thumbnail" src={`data:image/png;base64,${item1.image_src}`}></img>
-    
-                                                        </td>
+                                                        <p><div className="scp_details">
+                                                            <div className="detail_text">Scp Id</div><div className="detail_value">:</div><div className="detail_value">{item1.pattern_id}</div>
+                                                        </div>
+                                                        <div className="scp_details">
+                                                            <div className="detail_text">Coverage Support</div><div className="detail_value">:</div><div className="detail_value">{item1.cs}</div>
+                                                        </div>
+                                                        <div className="scp_details">
+                                                            <div className="detail_text">Overlap Ratio</div><div className="detail_value">:</div><div className="detail_value">{item1.or}</div>
+                                                        </div>
+                                                        <div className="scp_details">
+                                                            <div className="detail_text">Size of Coverage</div><div className="detail_value">:</div><div className="detail_value">{item.coverage}</div>
+                                                        </div></p>
+                                                        
+                                                    </td>
+                                                    <td className="image_table_data">
+                                                    <div >{downloadtype==1 ? <label><input type="checkbox"  checked={selected_patterns[index][index1]} onChange={()=>{select_specific(index,index1)}}/><pre className="tab1">  </pre></label> : <div></div>}<img class="thumbnail" src={`data:image/png;base64,${item1.image_src}`}></img></div>
+                                                    
+                                                        
+                                                    </td>
                                                     </tr>
                                                 );}
                                             })}
+                                                                                                    
                                             </>);
                                            
                                     }

@@ -45,6 +45,12 @@ const Contact=()=>{
                     <p className="paragraph">{' '}(91) (40) 6653 1000 Ext: 1132</p>
                     
                 </div>
+                <div className="side">
+                    <div className="boldtext">Personal Homepage:</div>
+                    <a href='http://www.iiit.ac.in/~pkreddy/' target='_blank' className="paragraph">{' '}http://www.iiit.ac.in/~pkreddy/</a>
+                    
+                </div>
+                
 
             </div>
             </div>
@@ -65,7 +71,7 @@ const Contact=()=>{
                                     <div className="paragraph">
                                     <IoIcons.IoIosMail/>
                                 </div>
-                            <p className="paragraph">{' '}srinivas.annappalli@iiit.ac.in </p>
+                            <p className="paragraph">{' '}srinivas.annappalli@research.iiit.ac.in </p>
                             </div>
                         </div>
                     </div>

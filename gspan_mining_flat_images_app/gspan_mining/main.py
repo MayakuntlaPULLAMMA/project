@@ -25,7 +25,6 @@ def read_graphs(FLAGS=None):
         FLAGS, _ = parser.parse_known_args(args=sys.argv[1:])
 
     database_file_name=FLAGS.database_file_name
-    print(database_file_name)
     with codecs.open(database_file_name, 'r', 'utf-8') as f:
         lines = [line.strip() for line in f.readlines()]
         for i, line in enumerate(lines):
@@ -33,7 +32,6 @@ def read_graphs(FLAGS=None):
             if cols[0] == 't':
                 graph_cnt += 1
                 print(graph_cnt)
-    print("databse_bame",graph_cnt)
     return graph_cnt
 
 def main(FLAGS=None):

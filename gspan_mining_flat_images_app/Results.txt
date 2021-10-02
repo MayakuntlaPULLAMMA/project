@@ -1,0 +1,3 @@
+execution_time:0.0015549659729
+Number of Candidate Patterns:84
+Number of Coverage Patterns:0

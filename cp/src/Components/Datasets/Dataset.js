@@ -46,12 +46,12 @@ const Dataset=()=>{
                 <tr>
                 <td className="sample_dataset_data">Papertoy Data</td>
                 <td className="sample_dataset_data">10</td>
-                <td className="sample_dataset_data"><a href={`${process.env.PUBLIC_URL}/papertoydata.txt`} target='_blank' download className="filedownload"><FaDownload/></a></td>
+                <td className="sample_dataset_data"><a href={`${process.env.PUBLIC_URL}/papertoydata.txt`} target='_blank' download ><FaDownload/></a></td>
                 </tr>
                 <tr>
                 <td className="sample_dataset_data">Simple Graph Data</td>
                 <td className="sample_dataset_data">4</td>
-                <td className="sample_dataset_data"><a href={`${process.env.PUBLIC_URL}/graph_data_simple.txt`} target='_blank' download className="filedownload"><FaDownload/></a></td>
+                <td className="sample_dataset_data"><a href={`${process.env.PUBLIC_URL}/graph_data_simple.txt`} target='_blank' download ><FaDownload/></a></td>
 
                 {/*<td className="sample_dataset_data" onClick={()=>download_dataset}><FaDownload/></td>*/}
                 </tr>

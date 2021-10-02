@@ -5,6 +5,8 @@ from flask.wrappers import Response
 from flask_cors import CORS,cross_origin
 from flask import request
 from werkzeug.utils import secure_filename
+import networkx as nx
+import matplotlib.pyplot as plt
 import sys
 import json
 import time
@@ -34,139 +36,79 @@ PORT = 5000
 @cross_origin()
 
 def check():
-    print("CHECK")
-    print(request.form['data'])
+    print("check")
     if(request.form['data']=='1'):
-        data=[]
-        print("content")
-        if(request.form['content']!=""):
-            r=request.form['content'][23:]
-            r=base64.b64decode(r)
-            r.decode('ascii')
-            f=open('./graphdata/'+request.form['file'],'wb')
-            f.write(r)
-            f.close()
-            dataset_set_name=request.form['file'].split(".")
-            if(os.path.isdir('./Images_'+dataset_set_name[0])):
-                shutil.rmtree('./Images_'+dataset_set_name[0])
-            os.makedirs('./Images_'+dataset_set_name[0])
-            f=open('./graphdata/'+request.form['file'],'r')
-            count=0
-            for j in f:
-                count=count+1
-                j=j.strip('\n')
-                k=j.split(" ")
-                if(k[0]=='t'):
-                    if(count==1):
-                        g = Graph(k[2],is_undirected=True,eid_auto_increment=True)
-                        g.vertices = dict()
-                        g.set_of_elb = collections.defaultdict(set)
-                        g.set_of_vlb = collections.defaultdict(set)
-                        g.eid_auto_increment = True
-                    else:
-                        
-                        print(dataset_set_name[0])
-                        g.plot(a=2,dataset_name=dataset_set_name[0])
-                        print(k[2])
-                        g.vertices = dict()
-                        g.set_of_elb = collections.defaultdict(set)
-                        g.set_of_vlb = collections.defaultdict(set)
-                        g.eid_auto_increment = True
-                        g=Graph(k[2],is_undirected=True,eid_auto_increment=True)
-                elif(k[0]=='v'):
-                    g.add_vertex(k[1],k[2])
-                elif(k[0]=='e'):
-                    g.add_edge(AUTO_EDGE_ID,k[1],k[2],k[3])
-            g.plot(a=2,dataset_name=dataset_set_name[0])
-            
-
-            
-            
-        
-        data_file_names = [f for f in listdir('./graphdata') if isfile(join('./graphdata',f))]
-        
-        
-        for i in range(0,len(data_file_names)):
-            '''if(os.path.isdir('./Images_'+dataset_set_name[0])):
-                shutil.rmtree('./Images_'+dataset_set_name[0])
-            os.makedirs('./Images_'+dataset_set_name[0])
-            f=open('./graphdata/'+str(data_file_names[i]),'r')
-            count=0
-            for j in f:
-                count=count+1
-                j=j.strip('\n')
-                k=j.split(" ")
-                if(k[0]=='t'):
-                    if(count==1):
-                        g = Graph(k[2],is_undirected=True,eid_auto_increment=True)
-                        g.vertices = dict()
-                        g.set_of_elb = collections.defaultdict(set)
-                        g.set_of_vlb = collections.defaultdict(set)
-                        g.eid_auto_increment = True
-                    else:
-                        print("yes")
-                        
-                        g.plot(a=2,dataset_name=dataset_set_name[0])
-                        print(k[2])
-                        g.vertices = dict()
-                        g.set_of_elb = collections.defaultdict(set)
-                        g.set_of_vlb = collections.defaultdict(set)
-                        g.eid_auto_increment = True
-                        g=Graph(k[2],is_undirected=True,eid_auto_increment=True)
-                elif(k[0]=='v'):
-                    g.add_vertex(k[1],k[2])
-                elif(k[0]=='e'):
-                    g.add_edge(AUTO_EDGE_ID,k[1],k[2],k[3])
-            g.plot(a=2,dataset_name=dataset_set_name[0])
-            temp={}
-            img_folder_path="./Images_"+dataset_set_name[0]+'/'
-            img_file_names = [f for f in listdir(img_folder_path) if isfile(join(img_folder_path, f))]
-            temp['title']=dataset_set_name[0]
-            temp['images']=[]
-            count=0
-            for i in img_file_names:
-                count=count+1
-                with open(str(img_folder_path+i),"rb") as img:
-                    k=str(base64.b64encode(img.read()))
-                    k=k[2:]
-                    c={}
-                    # print(k[2:])
-                    c["gid"]="Graph "+str(count)
-                    c["image"]=k[:-1]
-                    temp['images'].append(c)
-            data.append(temp)'''
-            temp={}
-            dataset_set_name=data_file_names[i].split(".")
-            img_folder_path="./Images_"+dataset_set_name[0]+'/'
-            img_file_names = [f for f in listdir(img_folder_path) if isfile(join(img_folder_path, f))]
-            temp['title']=dataset_set_name[0]
-            temp['images']=[]
-            count=0
-            for i in img_file_names:
-                count=count+1
-                with open(str(img_folder_path+i),"rb") as img:
-                    k=str(base64.b64encode(img.read()))
-                    k=k[2:]
-                    c={}
-                    # print(k[2:])
-                    c["gid"]="Graph "+str(count)
-                    c["image"]=k[:-1]
-                    temp['images'].append(c)
-            data.append(temp)
-        response=jsonify({"image_file_names":data_file_names,"datasets_data":data}),200
-
-        return response
-
+        if(request.form['submit']!='1'):
+            reading=request.form['inputdata']
+            reading1=request.form['inputdata']
+            reading=reading.split('\n')
+            print(reading)
+            plt.clf()
+            g = nx.Graph()
+            vertexset=set()
+            error_messages=''
+            for line in reading:
+                print(vertexset)
+                print(line)
+                line=line.strip().split()
+                if(len(line)!=0):
+                    if line[0]=='v':
+                        print("went in")
+                        vertexset.add(line[1])
+                    if line[0]=='e':
+                        print("wentinto edge")
+                        if line[1] not in vertexset or line[2] not in vertexset:
+                            print("error line1")
+                            if(line[1] not in vertexset):
+                                error_messages=error_messages+line[1]+" is not a vertex"+" "
+                            if(line[2] not in vertexset):
+                                error_messages=error_messages+line[2]+" is not a vertex"+" "
+                        else:
+                            g.add_edge(int(line[1]),int(line[2]))
+            return_img=''
+            print("erro meessag")
+            print(error_messages)
+            nx.draw_planar(g, with_labels = True)
+            plt.savefig("filename.png")
+            with open("filename.png","rb") as img:
+                k=str(base64.b64encode(img.read()))
+                k=k[2:]
+                return_img=k[:-1]
+            # os.remove("filename.png")
+            print(error_messages)
+            if(request.form['dosave']=='1'):
+                print("went into savw")
+                cnt=request.form['no_of_si']
+                print("cout",type(cnt))
+                if(int(cnt)==1):
+                    print("went into if")
+                    if(os.path.exists('./final.txt')):
+                        os.remove('./final.txt')
+                    f=open('final.txt','w')
+                else:
+                    f=open('final.txt','a')
+                trscn='t # '+str(cnt)+' '
+                f.write(trscn)
+                f.write(reading1)
+                f.write('\n')
+                f.write('\n')
+                f.close()
+            res=jsonify({"return_img":return_img,"error_messages":error_messages}),200
+            return res
+        else:
+            if(os.path.exists('./final.txt')):
+                f=open('./final.txt','a')
+                f.write('t # -1')
+            res=jsonify({"written":True})
+            return res
     elif(request.form['data']=='0'):
         maxor=request.form['maxor']
         mincs=request.form['mincs']
         minrf=request.form['minrf']
         analysis_type=request.form['analysistype']
-        print("i")
-        print("j")
         data_set_name=request.form['selected_data']
         structure_of_interest=request.form['structure_of_interest'].lower()
-        print(1)
+       
         data_set_file=data_set_name+".txt"
 
         r=request.form['file_content'][23:]
@@ -178,15 +120,14 @@ def check():
         data_set_file=request.form['selected_dataset']
         data_set_name=data_set_file.split(".")[0]
        
-        print(2)
-        print("analysis",analysis_type)
+        
         if(analysis_type=='1'):
 
             if(structure_of_interest=="none"):
                 s='python -m gspan_mining -s '+str(minrf)+" ./graphdata/"+data_set_file
             else:
                 print("hi")
-                s='python -m gspan_mining_struct -s '+str(minrf)+" ./graphdata/"+data_set_file+" ./si_"+structure_of_interest+".data"
+                s='python -m gspan_mining_struct -s '+str(minrf)+" ./graphdata/"+data_set_file+" "+"final.txt"
 
 
             os.system(s)
@@ -292,16 +233,17 @@ def check():
             if(structure_of_interest=="none"):
                 s='python cmine.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+data_set_name
             else:
-                s='python cmine_struct.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+structure_of_interest+" "+data_set_name
+                s='python cmine_struct1.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+structure_of_interest+" "+data_set_name
  
             os.system(s)
-            print("hiiiiii")
             no_of_coverage=0
             img_folder = "./scp_images_"+data_set_name+"_"+mincs
             img_folder_path = str(img_folder+"/")
             img_folder_names = [f for f in listdir(img_folder_path) if (os.path.isdir(join(img_folder_path,f)) and len(os.listdir(join(img_folder_path,f)))!=0)]
-            print("imagefolder")
             img_folder_names=sorted(img_folder_names)
+            coverages=0
+            if(len(img_folder_names)!=0):
+                coverages=img_folder_names[-1].split("_")[-1]
             coverage_patterns=[]
             f=open("./"+data_set_name+"_"+str(mincs)+"_"+str(minrf)+"_"+str(maxor))
             temp={}
@@ -329,7 +271,6 @@ def check():
                     pass
                 else:
                     coverage_patterns.append(i)
-            print(coverage_patterns)
             for i in img_folder_names:
                 '''no_of_coverage=no_of_coverage+1'''
                 print(i)
@@ -343,7 +284,6 @@ def check():
                 count=0
                 for j in img_file_names: 
 
-                    print(i,j)
                     with open(str(img_folder_path+i+"/"+j),"rb") as img:
                         k = str(base64.b64encode(img.read()))
                         k = k[2:]
@@ -360,7 +300,7 @@ def check():
                 i=i.split(":")
                 li2.append(i[1])
                 
-            response= jsonify({"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":coverage_patterns,"no_of_coverages":no_of_coverage,"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(li2[0]),2))}),200
+            response= jsonify({"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":coverage_patterns,"no_of_coverages":int(coverages),"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(li2[0]),2))}),200
             return response
 
 

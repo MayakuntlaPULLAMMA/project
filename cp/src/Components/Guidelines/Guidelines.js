@@ -1,3 +1,23 @@
+/*import {React,Component} from 'react';
+import Barchart  from './g';
+class Guidelines extends Component {
+  
+  state = {
+    data: [12, 5, 6, 6, 9, 10],
+    width: 700,
+    height: 500,
+    id: 1
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Barchart data={this.state.data} width={this.state.width} height={this.state.height} />
+      </div>
+    );
+  }
+}
+export default Guidelines;*/
 import React, {useState,useContext} from 'react';
 import './Form1.css';
 import AppContext from '../App_context';
@@ -33,7 +53,10 @@ of <i>maxOR<sub>g</sub></i> until a desired number of <i>SCPs</i> can be ob-
 tained.</li></div></p>
 
         </div>
-        </div>
+    </div>
+    
     );
+
+
 }
 export default Guidelines;

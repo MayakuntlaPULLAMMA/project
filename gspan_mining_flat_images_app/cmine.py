@@ -6,6 +6,7 @@ import shutil
 from PIL import Image
 from werkzeug import datastructures
 import numpy as np
+import cv2
 global One_freqItems
 global f
 global scp
@@ -33,13 +34,11 @@ class cmine():
         
         mintracs = float(self.minRF) * 1.0 * float(self.nots)
         freqitems = filter(lambda x: (x[1] >= mintracs), sorteditems)
-        print("freq_items")
-        print(freqitems)
+       
         for i in freqitems:
             print(i[1],self.minCS*self.nots)
             print((i[1]==self.minCS*self.nots))
         one_size_coverage = filter(lambda x: (x[1] >= self.minCS*self.nots),freqitems)
-        print(one_size_coverage)
         f=open("./"+datasetname+"_"+str(self.minCS1)+"_"+str(self.minRF)+"_"+str(self.maxOR),'w')
         f.write("Coverage"+" "+"1"+'\n')
         f.write('\n')
@@ -57,7 +56,6 @@ class cmine():
         one_size_coverage=[]
         c=[]'''
         count=1
-        print("one")
         for i in range(0,len(one_size_coverage)):
             self.noofSCP=self.noofSCP+1
             one_size_coverage.append(one_size_coverage[i][0])
@@ -87,7 +85,6 @@ class cmine():
                 shutil.rmtree(outputfile+"/Coverage_1")
             os.mkdir(outputfile+"/Coverage_1")
         
-        print("jhjjhj")
         
         for i in range(0,len(one_size_coverage)):
             '''print("hi")'''
@@ -149,8 +146,7 @@ class cmine():
                                 if(not os.path.exists(self.dest_dir+"/Coverage_"+str(coverage))):
                                     os.mkdir(self.dest_dir+"/Coverage_"+str(coverage))
                                 self.noofSCP=self.noofSCP+1
-                                print("coverage spport")
-                                print(float(cs))
+                                
                                 f.write("i"+" "+str(self.noofSCP)+'\n')
                                 f.write("cs"+" "+str(round(float(cs),2))+'\n')
                                 f.write("or"+" "+str(overlapratio)+'\n')
@@ -158,8 +154,9 @@ class cmine():
                                 opened_images=[]
                                 for k in newpattern:
                                     '''print("true")'''
-                                    opened_images.append(Image.open(self.source_dir+"/"+str(k)+".png"))
-                                widths,heights=zip(*(k.size for k in opened_images))
+                                    opened_images.append(cv2.imread(self.source_dir+"/"+str(k)+".png"))
+                                h_min = min(img.shape[0] for img in opened_images)
+                                '''widths,heights=zip(*(k.size for k in opened_images))
                                 total_width=sum(widths)
                                 max_height=max(heights)
                                 new_img = np.zeros(shape=(max_height, total_width, 3))
@@ -167,8 +164,11 @@ class cmine():
                                 x_offset=0
                                 for k in opened_images:
                                     new_image.paste(k,(x_offset,0))
-                                    x_offset=x_offset+k.size[0]
-                                new_image.save(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png")
+                                    x_offset=x_offset+k.size[0]'''
+                                im_list_resize = [cv2.resize(img,(int(img.shape[1] * h_min / img.shape[0]),h_min), interpolation=cv2.INTER_CUBIC) for img in opened_images]
+                                new_image=cv2.hconcat(im_list_resize)
+                                cv2.imwrite(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png",new_image)
+                                '''new_image.save(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png")'''
                                
                                 count=count+1
                                 # print "This is coverage pattern",newpattern,cs,overlapratio

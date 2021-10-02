@@ -65,7 +65,7 @@ export const MainsidebarData = [
     ]
     
   },
-  {
+  /*{
     title: 'Coverage Patterns',
     cName: 'nav-text',
     path:'/coverage_patterns_home',
@@ -90,7 +90,7 @@ export const MainsidebarData = [
     ]
     
     
-  },
+  },*/
   
   
  /* {
