@@ -7,13 +7,16 @@ from PIL import Image
 from werkzeug import datastructures
 import numpy as np
 import cv2
+import pickle
 global One_freqItems
 global f
 global scp
+global cp_data
 class cmine():
-    def __init__(self, minRF, minCS, maxOR, inpfile, outfile,datasetname):
+    def __init__(self, minRF, minCS, maxOR, inpfile, outfile,datasetname,fsubgraphs_data):
         global f
         global scp
+        global cp_data
         self.minRF = float(minRF)
         self.minCS = float(minCS)
         self.minCS1=minCS
@@ -25,6 +28,7 @@ class cmine():
         print(self.minCS)
         print(self.minCS1)'''
         self.dataset=datasetname
+        self.fsubgraphs_data=fsubgraphs_data
         #self.fout = open(outfile,'w')
         self.NOk = []
         self.frequencies=[]
@@ -85,10 +89,11 @@ class cmine():
                 shutil.rmtree(outputfile+"/Coverage_1")
             os.mkdir(outputfile+"/Coverage_1")
         
-        
+        cp_data=[]
+        print("frequent")
         for i in range(0,len(one_size_coverage)):
-            '''print("hi")'''
-            '''print("k")'''
+            print(one_size_coverage[i][0])
+
             shutil.copy(self.source_dir+"/"+str(one_size_coverage[i][0])+".png",self.dest_dir+"/Coverage_1/")
 
             #self.fout.write("['"+str(i[0])+"']\n")
@@ -112,6 +117,7 @@ class cmine():
     def expand(self):
         global f
         global scp
+        global cp_data
         cnt = 0
         cnt1 = 0
         length = 1
@@ -127,7 +133,8 @@ class cmine():
             
             self.NOk = []
             count=1
-           
+            if(len(temp_NOk)!=0):
+                coverage_n={"coverage":coverage,"graphs":[]}
             for i in range(len(temp_NOk)):
                 c=[]
                 for j in range(i+1, len(temp_NOk)):
@@ -152,10 +159,15 @@ class cmine():
                                 f.write("or"+" "+str(overlapratio)+'\n')
                                 f.write('\n')
                                 opened_images=[]
+                                h={"or":str(overlapratio),"cs":str(round(float(cs),2)),"size":len(newpattern),"graphs":[]}
+                                print("pj")
                                 for k in newpattern:
                                     '''print("true")'''
+                                    print(k)
+                                    h["graphs"].append(fsubgraphs_data[int(k)-1])
                                     opened_images.append(cv2.imread(self.source_dir+"/"+str(k)+".png"))
                                 h_min = min(img.shape[0] for img in opened_images)
+                                cp_data.append(h)
                                 '''widths,heights=zip(*(k.size for k in opened_images))
                                 total_width=sum(widths)
                                 max_height=max(heights)
@@ -177,6 +189,7 @@ class cmine():
                         break
                 self.frequencies.append(c)
             length += 1
+            
             f.write('\n')
             f.write('\n')
             coverage=coverage+1
@@ -217,16 +230,24 @@ minRF = float(sys.argv[1])
 minCS =sys.argv[2]
 maxOR = float(sys.argv[3])
 datasetname = sys.argv[4]
+with open('result.txt','rb') as fp:
+    fsubgraphs_data=pickle.load(fp)
+    print(type(fsubgraphs_data))
 inpfile = "./2_"+str(minRF)+"_"+datasetname+"Flat_tra.txt"
 #datasetname = "graph5_test2.txt"
 #filepath = "C:\\Users\\user\\Documents\\CoverageGraph\\dataset1\\GraphData\\"
 outfile = "Results.txt"
 '''print(outfile)'''
-obj=cmine(minRF, minCS, maxOR, inpfile, outfile,datasetname)
+obj=cmine(minRF, minCS, maxOR, inpfile, outfile,datasetname,fsubgraphs_data)
+print(fsubgraphs_data)
 t3=time.time()
 print( "data read",str(t3-t1))
 candidate_patterns,SCPs = obj.expand()
 t2 = time.time()
+print(cp_data)
+with open("cp_result.txt","wb") as f:
+    pickle.dump(cp_data,f)
+f.close()
 print( "process done",str(t2-t1))
 f = open("./Results.txt",'w')
 f.write("execution_time:"+str(t2-t1)+'\n')

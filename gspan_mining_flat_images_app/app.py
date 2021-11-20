@@ -20,6 +20,7 @@ from graph import Graph
 from graph import VACANT_GRAPH_ID
 from graph import VACANT_VERTEX_LABEL
 from graph import min_no_vertices
+import subprocess
 import collections
 import shutil
 

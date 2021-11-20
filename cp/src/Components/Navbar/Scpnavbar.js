@@ -38,16 +38,10 @@ const SidebarLink = styled(Link)`
 `;
 
 const MainSidebarLink = styled(Link)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   list-style: none;
   text-decoration: none;
   font-size: 16px;
-  color:#080808;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  margin-botton:1ch;
-  
   
   
   
@@ -107,7 +101,7 @@ function Scpnavbar() {
   console.log("patterns",scp_patterns,coverage_patterns);
   return (
     <>
-      <IconContext.Provider value={{ color: '#fff'}}>
+      <IconContext.Provider value={{ color: 'green'}}>
         <div className="div_with_logo1">
             <div>
             <img className="logo_one" src={Image} onClick={()=>window.open('http://dsac.iiit.ac.in/',"_blank")}></img>
@@ -124,8 +118,8 @@ function Scpnavbar() {
             </div>
         </div>
         <div>
-          <div className={sidebar ? "short_side_bar_disable" : 'short_side_bar'}>
-            <div className={sidebar ? "div_on_top_in_sidebar_expand" : "div_on_top_in_sidebar"} ><div className={sidebar ? "topic_heading" : "topic_heading_disable"}>
+          <div className={sidebar ? "short_side_bar_disable1" : 'short_side_bar1'}>
+            <div className={sidebar ? "div_on_top_in_sidebar_expand1" : "div_on_top_in_sidebar"} ><div className={sidebar ? "topic_heading" : "topic_heading_disable"}>
               {
                 scp_patterns==0 && coverage_patterns==0 ? 
                 <div>
@@ -198,12 +192,11 @@ function Scpnavbar() {
             </div>
           </div>
         </div>
-        <div className={sidebar ? 'nav_on_active' : 'nav_normal'}>
+        <div className={sidebar ? 'nav_on_active1' : 'nav_normal'}>
           {/*<MainSidebarLink to={'/'} className="menu-bars" >
             <FaIcons.FaHome className="icon" onClick={()=>{setscppatterns(0);setcoveragepatterns(0)}}/>
               </MainSidebarLink>*/}
-          <MainSidebarLink to={'/'} className="menu-bars" >
-          </MainSidebarLink>
+        
           <nav className={sidebar ? 'nav-menu1 active' : 'nav-menu1'}>
             <ul className='nav-menu-items'>
             {MainsidebarData.map((item, index) => 

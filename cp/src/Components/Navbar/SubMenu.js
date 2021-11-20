@@ -4,24 +4,21 @@ import styled from "styled-components";
 import AppContext from '../App_context';
 import { useHistory} from "react-router-dom";  
 const SidebarLink = styled(Link)`
-  display: flex;
-  color: #e1e9fc;
+  color: black;
+  background-color:white;
+  display:flex;
   justify-content: space-between;
   align-items: center;
-  list-style: none;
-  text-decoration: none;
   font-size: 16px;
-  margin-left: 0%;
-  margin-top: 0.5ch;
-  margin-bottom: 1ch;
-  margin-right: 1ch;
   height:35px;
-  background-color: ${(props) => props.backgroundColor}
-  
+  text-decoration:none;
+  border-radius:3px;
+  font-weight:bold;
+  border: 1px solid green;
+  box-shadow:1px 1px 1px 1px green;
   :hover {
-    background: #252831;
-    border-left: 4px solid green;
     cursor: pointer;
+
   }
    
   
@@ -29,15 +26,36 @@ const SidebarLink = styled(Link)`
 `;
   
 const SidebarLabel = styled.span`
+font-family:Georgia, 'Times New Roman', Times, serif;
+
 `;
   
 const DropdownLink = styled(Link)`
-  background: #252831;
+  background-color: white;
   padding-left: 3rem;
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: rgb(160, 161, 179);
+  color: green;
+  font-size: 15px;
+  height:35px;
+  
+  
+  &:hover {
+    cursor: pointer;
+    background-color:green;
+    color:white;
+  }
+  
+`;
+
+const DropdownLink1 = styled(Link)`
+  background: white;
+  padding-left: 5rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color:black;
   font-size: 15px;
   height:35px;
   margin-top:0%;
@@ -47,24 +65,10 @@ const DropdownLink = styled(Link)`
     cursor: pointer;
     color:#fff;
   }
-  
-`;
 
-const DropdownLink1 = styled(Link)`
-  background: #252831;
-  padding-left: 5rem;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: rgb(160, 161, 179);
-  font-size: 15px;
-  height:35px;
-  margin-top:0%;
-  
-  &:hover {
-    background: #252831;
-    cursor: pointer;
-    color:#fff;
+  &:>.active{
+    background-color:green;
+    color:white;
   }
 `;
   
@@ -111,7 +115,7 @@ const SubMenu = ({item}) => {
   return (
     <>
     
-      <SidebarLink   to={item.path} 
+      <SidebarLink to={item.path} 
       
           onClick={()=>{showSubnav(0)}}>
         <div>

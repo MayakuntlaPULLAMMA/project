@@ -499,10 +499,19 @@ tr{
 }
 .image_table_data{
     text-align: center;
+    display: flex;   
+    box-shadow: 1px 1px 1px 1px green;
+    margin: 2ch;
+}
+.cp_data{
+    align-content: center;
+    align-items: center;
+    -ms-flex-align: center;
     
 }
 .download_icon{
     color: white;
+   
 }
 
 .formControl{
@@ -720,4 +729,35 @@ tr{
      overflow: auto; /* Enable scroll if needed */
      background-color: rgb(0,0,0); /* Fallback color */
      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.point_graphs{
+    width:145px;
+    height: 130px;
+    margin-top: 1ch;
+    margin-left: 0.7ch;
+    margin-bottom: 1ch;
+    text-align: center;
+    align-items: center;
+    border: 0.3px solid grey;
+    box-shadow: 0.1ch 0.1ch 0.1ch 0.001ch rgb(173, 173, 235);
+    border-radius: 0.3ch;
+
+}
+.point_graphs_cp{
+    
+    margin-top: 1ch;
+    margin-left: 0.7ch;
+    margin-bottom: 1ch;
+    text-align: center;
+    align-items: center;
+    border: 0.3px solid grey;
+    box-shadow: 0.1ch 0.1ch 0.1ch 0.001ch rgb(173, 173, 235);
+    border-radius: 0.3ch;
+    display: flex;
+
+}
+.box_head{
+    background-color: rgb(144, 211, 144);
+    color:black;
+    font-weight: bold;
 }

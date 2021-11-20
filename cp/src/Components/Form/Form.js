@@ -22,7 +22,9 @@ import three_path from '../../Images/3_path.png';
 import three_ring from '../../Images/3_ring.png';
 import four_ring from '../../Images/4_ring.png';
 import five_ring from '../../Images/5_ring.png';
-
+import Barchart from './g';
+import Barchart1 from './g1';
+import './Guidelines.css';
 const Form=()=>{
     const myContext = useContext(AppContext);
    
@@ -61,6 +63,8 @@ const Form=()=>{
     const [no_of_si,setnoofsi]=React.useState(parseInt(0));
     const [submitted_si,setsubmittedsi]=React.useState(false);
     const [show_structure,setshow_structure]=React.useState(false);
+    const [data,setdata]=React.useState([]);
+    const [cp_data,setcpdata]=React.useState([]);
     const handlechange=(event)=>{
         let nam=event.target.name;
         let val=event.target.value;
@@ -201,6 +205,7 @@ const Form=()=>{
                     setcoverages(s);
                     console.log("scp_images_length");
                     console.log(res.coverage_patterns.length);
+                    setdata(res.data);
                     let v=[];
                     for(var i=0;i<res.coverage_patterns.length;i++)
                     {
@@ -237,7 +242,7 @@ const Form=()=>{
                     setcandidatepatternsnumber(res.number_of_candidate_patterns);
                     setscpnumber(res.number_of_scps);
                     setexecutiontime(res.execution_time);
-                    
+                    setcpdata(res.cp_data)
 
                 })
 
@@ -862,24 +867,24 @@ const submit_Structure_of_interest=()=>{
                                             </td>
                                             <td>
                                                 <div className="graphs_display">
-                                                    {fsg_info.map((item1,index1)=>{
+                                                    {data.map((item1,index1)=>{
                                                         if(item1.support==item){
                                                             return(
-                                                                <div onClick={()=>{handle_click_show_modal(item1.image_src,item1.image_name)}}>
-                                                                    <div>
-                                                                    {/*<div className="image_support_heading">Support {item}</div>*/}
-                                                                    <img src={`data:image/png;base64,${item1.image_src}`} className="image1"></img>
+                                                                <div className="point_graphs">
+                                                                    <div className="box_head">Support - {item}</div>
+                                                                    <Barchart id={item1.gid} graph={item1.graph}/>
+                                                                    
                                                                   
                                                                    
                                                                             
                                                                         
                                                                     </div>
-                                                                </div>
+                                                                
                                                             );
                                                         }
                                                     })}
                                                 </div>
-                                                <div className={show ? "modal" : "display_none"}>
+                                                {/*<div className={show ? "modal" : "display_none"}>
                                                     <div className="modal-content">
                                                     <Button variant="contained" className="downloadoption" href={`data:image/png;base64,${selected_image_for_modal}`} target="_blank" download={selected_image_name_for_modal}>Download</Button>
 
@@ -889,7 +894,7 @@ const submit_Structure_of_interest=()=>{
 
                                                         <img src={`data:image/png;base64,${selected_image_for_modal}`} className="modal_image"></img>
                                                     </div>
-                                                </div>
+                                                </div>*/}
                                             </td>
                                             
                                             
@@ -906,13 +911,20 @@ const submit_Structure_of_interest=()=>{
                                                 <div >{item}</div>
                                             </td>
                                             <td>
-                                                <div className="graphs_display1">
-                                                    {fsg_info.map((item1,index1)=>{
+                                                <div className="graphs_display">
+                                                    {data.map((item1,index1)=>{
+                                                        console.log("edges",item1);
                                                         if(item1.support==item && item1.edges==parseInt(selected_filters.edges)){
                                                             return(
-                                                            <div onClick={()=>{handle_click_show_modal(item1.image_src,item1.image_name)}}>
-                                                                <img src={`data:image/png;base64,${item1.image_src}`} className="image1"></img>
-                                                            </div>
+                                                                <div className="point_graphs">
+                                                                <div className="box_head">Support - {item}</div>
+                                                                <Barchart id={item1.gid} graph={item1.graph}/>
+                                                                
+                                                              
+                                                               
+                                                                        
+                                                                    
+                                                                </div>
                                                             );
                                                         }
                                                     })}
@@ -942,16 +954,21 @@ const submit_Structure_of_interest=()=>{
 
                                             </td>
                                             <td>
-                                                <div className="graphs_display1">
-                                                    {fsg_info.map((item1,index1)=>{
+                                                <div className="graphs_display">
+                                                    {data.map((item1,index1)=>{
                                                         if(item1.support==parseInt(selected_filters.support)){
-                                                            console.log("1 0 0");
-                                                            console.log(item1.support);
-                                                            console.log(item1.vertices);
+                                                            
                                                             return(
-                                                            <div onClick={()=>{handle_click_show_modal(item1.image_src,item1.image_name)}}>
-                                                            <img src={`data:image/png;base64,${item1.image_src}`} className="image1"></img>
-                                                            </div>);
+                                                                <div className="point_graphs">
+                                                                <div className="box_head">Support - {item}</div>
+                                                                <Barchart id={item1.gid} graph={item1.graph}/>
+                                                                
+                                                              
+                                                               
+                                                                        
+                                                                    
+                                                                </div>
+                                                            );
                                                         }
                                                     })}
                                                 </div>
@@ -983,13 +1000,19 @@ const submit_Structure_of_interest=()=>{
                                             </td>
                                     
                                           <td>
-                                                <div className="graphs_display1">
-                                                    {fsg_info.map((item1,index1)=>{
+                                                <div className="graphs_display">
+                                                    {data.map((item1,index1)=>{
                                                         if(item1.support==selected_filters.support && item1.support==item && item1.edges==parseInt(selected_filters.edges)){
                                                             return(
-                                                            <div onClick={()=>{handle_click_show_modal(item1.image_src,item1.image_name)}}>
-                                                                <img src={`data:image/png;base64,${item1.image_src}`} className="image"></img>
-                                                            </div>
+                                                                <div className="point_graphs">
+                                                                <div className="box_head">Support - {item}</div>
+                                                                <Barchart id={item1.gid} graph={item1.graph}/>
+                                                                
+                                                              
+                                                               
+                                                                        
+                                                                    
+                                                                </div>
                                                             );
                                                         }
                                                     })}
@@ -1056,21 +1079,13 @@ const submit_Structure_of_interest=()=>{
                             </thead>
                             <tbody>
                                 
-                                {scp_images.map((item,index)=>{
-                                    console.log("jkjkjkj");
-                                    console.log(selected_filters_coverage.coverage);
-                                    if(selected_filters_coverage.coverage==0){
-                                       console.log("selected_foiteres");
-                                        return(
-                                        <>
+                                {cp_data.map((item,index)=>{
+                                    
+                                    if(selected_filters_coverage.coverage==0 && item.cs>=selected_filters_coverage.csfrom && item.cs<=selected_filters_coverage.csto && item.or>=selected_filters_coverage.orfrom && item.or<=selected_filters_coverage.orto){
+                                       
                                         
-                                        {item.image_info.map((item1,index1)=>{
-                                            console.log("hiiiii");
-                                            console.log(item1.cs>=selected_filters_coverage.csfrom);
-                                            console.log(item1.cs<=selected_filters_coverage.csto);
-                                            console.log(item1.or>=selected_filters_coverage.orfrom);
-                                            console.log(item1.or<=selected_filters_coverage.orto);
-                                            if(item1.cs>=selected_filters_coverage.csfrom && item1.cs<=selected_filters_coverage.csto && item1.or>=selected_filters_coverage.orfrom && item1.or<=selected_filters_coverage.orto){
+                                        
+                                        
                                                 
                                             return(
                                                 
@@ -1089,28 +1104,36 @@ const submit_Structure_of_interest=()=>{
                                                     </td>*/}
                                                     <td className="freq">
                                                         <p><div className="scp_details">
-                                                            <div className="detail_text">Scp Id</div><div className="detail_value">:</div><div className="detail_value">{item1.pattern_id}</div>
+                                                            <div className="detail_text">Scp Id</div><div className="detail_value">:</div><div className="detail_value">{index+1}</div>
                                                         </div>
                                                         <div className="scp_details">
-                                                            <div className="detail_text">Coverage Support</div><div className="detail_value">:</div><div className="detail_value">{item1.cs}</div>
+                                                            <div className="detail_text">Coverage Support</div><div className="detail_value">:</div><div className="detail_value">{item.cs}</div>
                                                         </div>
                                                         <div className="scp_details">
-                                                            <div className="detail_text">Overlap Ratio</div><div className="detail_value">:</div><div className="detail_value">{item1.or}</div>
+                                                            <div className="detail_text">Overlap Ratio</div><div className="detail_value">:</div><div className="detail_value">{item.or}</div>
                                                         </div>
                                                         <div className="scp_details">
-                                                            <div className="detail_text">Size of Coverage</div><div className="detail_value">:</div><div className="detail_value">{item.coverage}</div>
+                                                            <div className="detail_text">Size of Coverage</div><div className="detail_value">:</div><div className="detail_value">{item.size}</div>
                                                         </div></p>
                                                         
                                                     </td>
-                                                    <td className="image_table_data">
-                                                    <div >{downloadtype==1 ? <label><input type="checkbox"  checked={selected_patterns[index][index1]} onChange={()=>{select_specific(index,index1)}}/><pre className="tab1">  </pre></label> : <div></div>}<img class="thumbnail" src={`data:image/png;base64,${item1.image_src}`}></img></div>
-                                                    
-                                                        
+                            
+                                                    <td className="cp_data">
+                                                        <div className="image_table_data">
+                                                        {item.graphs.map((item1,index1)=>{
+                                                            return(
+                                                            <Barchart1 id={item1.gid} graph={item1.graph} coverage={item.length} ind={index}/>
+                                                            )
+
+                                                        })}
+                                                            
+
+                                                         </div>                                                
                                                     </td>
                                                 </tr>
-                                            );}
-                                        })}
-                                        </>);
+                                            );
+                                        
+                                        ;
                                        
                                     }
                                     else {
@@ -1135,41 +1158,45 @@ const submit_Structure_of_interest=()=>{
                                             
                                         );*/
 
-                                        return(
-                                            <>
+                                        
                                             
-                                            {item.image_info.map((item1,index1)=>{
-                                                console.log("inelse");
-                                                console.log(item.coverage==selected_filters_coverage.coverage,(item.coverage));
-                                                if(item.coverage==selected_filters_coverage.coverage && item1.cs>=selected_filters_coverage.csfrom && item1.cs<=selected_filters_coverage.csto && item1.or>=selected_filters_coverage.orfrom && item1.or<=selected_filters_coverage.orto){
+                                           
+                                                if(item.size==selected_filters_coverage.coverage && item.cs>=selected_filters_coverage.csfrom && item.cs<=selected_filters_coverage.csto && item.or>=selected_filters_coverage.orfrom && item.or<=selected_filters_coverage.orto){
                                                 return(
                                                     
                                                     <tr role="row">
                                                         <td className="freq">
                                                         <p><div className="scp_details">
-                                                            <div className="detail_text">Scp Id</div><div className="detail_value">:</div><div className="detail_value">{item1.pattern_id}</div>
+                                                            <div className="detail_text">Scp Id</div><div className="detail_value">:</div><div className="detail_value">{index+1}</div>
                                                         </div>
                                                         <div className="scp_details">
-                                                            <div className="detail_text">Coverage Support</div><div className="detail_value">:</div><div className="detail_value">{item1.cs}</div>
+                                                            <div className="detail_text">Coverage Support</div><div className="detail_value">:</div><div className="detail_value">{item.cs}</div>
                                                         </div>
                                                         <div className="scp_details">
-                                                            <div className="detail_text">Overlap Ratio</div><div className="detail_value">:</div><div className="detail_value">{item1.or}</div>
+                                                            <div className="detail_text">Overlap Ratio</div><div className="detail_value">:</div><div className="detail_value">{item.or}</div>
                                                         </div>
                                                         <div className="scp_details">
-                                                            <div className="detail_text">Size of Coverage</div><div className="detail_value">:</div><div className="detail_value">{item.coverage}</div>
+                                                            <div className="detail_text">Size of Coverage</div><div className="detail_value">:</div><div className="detail_value">{item.size}</div>
                                                         </div></p>
                                                         
                                                     </td>
-                                                    <td className="image_table_data">
-                                                    <div >{downloadtype==1 ? <label><input type="checkbox"  checked={selected_patterns[index][index1]} onChange={()=>{select_specific(index,index1)}}/><pre className="tab1">  </pre></label> : <div></div>}<img class="thumbnail" src={`data:image/png;base64,${item1.image_src}`}></img></div>
-                                                    
-                                                        
+                                                    <td className="cp_data">
+                                                        <div className="image_table_data">
+                                                        {item.graphs.map((item1,index1)=>{
+                                                            return(
+                                                            <Barchart1 id={item1.gid} graph={item1.graph} coverage={item.length} ind={index}/>
+                                                            )
+
+                                                        })}
+                                                            
+
+                                                         </div>                                                
                                                     </td>
                                                     </tr>
                                                 );}
-                                            })}
+                                            
                                                                                                     
-                                            </>);
+                                           
                                            
                                     }
                                 })}

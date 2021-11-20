@@ -15,6 +15,8 @@ from os import listdir
 from os.path import isfile, join
 import base64
 import graph
+import subprocess
+import pickle
 from graph import AUTO_EDGE_ID
 from graph import Graph
 from graph import VACANT_GRAPH_ID
@@ -131,7 +133,14 @@ def check():
 
 
             os.system(s)
-
+            with open('result.txt','rb') as fp:
+                d=pickle.load(fp)
+                print(type(d))
+            for i in range(len(d)):
+                print(d[i])
+                d[i]["vertices"]=len(d[i]["graph"]["nodes"])
+                d[i]["edges"]=len(d[i]["graph"]["links"])
+                
             '''img_folder = 'papertoydatadata_2'+"_"+str(mincs)
             img_folder_path = str(img_folder+"/")
             img_file_names = [f for f in listdir(img_folder_path) if isfile(join(img_folder_path,f))]
@@ -231,7 +240,7 @@ def check():
             
             
             if(structure_of_interest=="none"):
-                s='python cmine.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+data_set_name
+                s='python cmine.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+data_set_name+" "
             else:
                 s='python cmine_struct1.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+structure_of_interest+" "+data_set_name
  
@@ -292,15 +301,17 @@ def check():
                         coverage_patterns[no_of_coverage]["image_info"][count]["image_src"]=k[:-1]
                     count=count+1
                 no_of_coverage=no_of_coverage+1
-            
+            with open('cp_result.txt','rb') as fcp:
+                cp_data=pickle.load(fcp)
+                print(type(cp_data))
             f = open("./Results.txt")
             li2 = []
             for i in f:
                 i=i.strip('\n')
                 i=i.split(":")
                 li2.append(i[1])
-                
-            response= jsonify({"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":coverage_patterns,"no_of_coverages":int(coverages),"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(li2[0]),2))}),200
+            print(len(cp_data),len(cp_data[0])) 
+            response= jsonify({"cp_data":cp_data,"data":d,"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":coverage_patterns,"no_of_coverages":int(coverages),"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(li2[0]),2))}),200
             return response
 
 

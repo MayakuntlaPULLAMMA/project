@@ -13,23 +13,21 @@
   }
   
   .nav-menu1 {
-    background-color:rgb(16, 19, 43);
+    background-color:white;
     width: 250px;
     height: 100vh;
-    display: flex;
     justify-content: center;
     position: fixed;
     top:0;
     left: -100%;
     transition: 850ms;
-    margin-top:8.5%;
+    margin-top:1ch;
   }
   
   .nav-menu1.active {
     left: 0;
-    transition: 350ms;
-    background-color:rgb(16, 19, 43);
-    margin-top:8.5%;
+    background-color:rgb(247, 241, 241);
+    margin-top: 9%;
   }
   
   .nav-text {
@@ -55,11 +53,12 @@
   
   .nav-menu-items {
     width: 100%;
+    background-color: white;
 
   }
   
   .navbar-toggle {
-    background-color: #060b26;
+    background-color:white;
     width: 100%;
     height: 80px;
     display: flex;
@@ -92,6 +91,16 @@
       margin-bottom: 0.3ch;
       height: 50px;
       cursor: pointer;
+      /*changed here*/
+      border-radius: 0.7ch;
+     border:solid 1px green;
+      box-shadow: 3px 3px 3px grey;
+
+  
+     
+  }
+  .logo_one:hover{
+    box-shadow: 4px 4px 4px 4px grey;
   }
   .logo_two{
     margin-left: 30ch;
@@ -100,6 +109,15 @@
     height: 50px;
     width: 150px;
     cursor: pointer;
+    /*changed here*/
+    border-radius: 0.7ch;
+    border:solid 1px green;
+    box-shadow: 3px 3px 3px grey;
+
+    
+}
+.logo_two:hover{
+  box-shadow: 4px 4px 4px 4px grey;
 }
 .logo3{
   margin-left: 30ch;
@@ -111,7 +129,8 @@
 }
   .div_with_logo1{
     display: flex;
-    background-color:rgb(105, 91, 233);
+    /*background-color:rgb(105, 91, 233);*/
+    background-color:white;
     text-align: center;
     height:85px;
     width: 1800px;
@@ -134,40 +153,44 @@
     margin-left: 20.5ch;
      height: 30px;
      margin-top:0.3ch;
-     color:white;
+     color:rgb(14, 119, 14);
      font-family:Georgia, 'Times New Roman', Times, serif;
      font-size: 25px;
      margin-bottom: 0.3ch;
      margin-top: 0.5ch;
      cursor: pointer;
      text-align: center;
+     font-weight:700px;
     
  }
-  .nav_on_active{
+  .nav_on_active1{
       margin-left: 250px;
-      background-color: darkcyan;
-      height: 35px;
+      height: 2px;
+      /*changed here*/
+      margin-top: 1ch;
+      background-color:rgb(14, 119, 14);
 
   }
   .nav_normal{
       margin-left: 35px;
-      background-color: darkcyan;
+      background-color:white;
       height:35px;
     
   }
-  .short_side_bar{
+  .short_side_bar1{
     height: 100%;
-    background-color:rgb(16, 19, 43);
+    background-color:yellow;
     position:absolute;
     width: 35px;
+
   }
   .inactive{
-    background-color:rgb(16, 19, 43); 
+    background-color:white;
   }
   .active{
     background-color:white;
   }
-  .short_side_bar_disable{
+  .short_side_bar_disable1{
     width:0%;
     height:0%;
   }
@@ -179,18 +202,23 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     cursor:pointer;
   }
-  .div_on_top_in_sidebar_expand{
-    background-color: rgb(226, 221, 151);
+  .div_on_top_in_sidebar_expand1{
+    background-color:white;
     position:absolute;
-    height:auto;
+    height:35px;
     width:250px;
-    text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    box-shadow: 2px 2px 2px 2px green;
+    border-radius: 0.7ch;
+    
+
+
   }
   .topic_heading{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: 700;
-    color: #080808;
+    text-align: center;
+    color: green;
     
   
   }
@@ -227,10 +255,12 @@
  }
  .main_heading{
    font-weight: 700;
-   color: darkblue;
+   color:rgb(14, 119, 14);
    font-family: Georgia, 'Times New Roman', Times, serif;
    font-size: 20px;
-   text-align: center;
+   
+
+  
    
  }
  .display_flex{
@@ -242,18 +272,20 @@
   color:white;
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
-  font-weight: 700;
+  font-weight: 700px;
   cursor: pointer;
+  color:rgb(45, 105, 45);
+  font-weight: 900;
 }
 
 .name_below_logo_two{
   margin-left: 31ch;
   font-size: 13px;
-  color:white;
+  color:rgb(45, 105, 45);
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
-  font-weight: 700;
   cursor: pointer;
+  font-weight: 900;
 }
 
 .sidebar_heading{
@@ -263,4 +295,8 @@
   margin-top: 1ch;
   padding-left: 2ch;
   
+}
+.main_section{
+  color:green;
+  text-decoration: none;
 }
