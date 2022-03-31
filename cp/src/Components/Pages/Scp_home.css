@@ -8,18 +8,31 @@
     color:rgb(26, 26, 87);
     font-size: 1.8em;
     font-style: normal;
+    font-family:'Linux Libertine','Georgia','Times',serif;;
+    font-weight: normal;
+    width:83%;
+    margin-left: 19ch;
+    margin-top: 1ch;
+}
+.gtcp_heading{
+    color:rgb(26, 26, 87);
+    font-size: 1.8em;
+    font-style: normal;
     font-family:'Linux Libertine','Georgia','Times',serif;
     font-weight: normal;
-    align-items: center;
-    margin-left: 20ch;
+    text-align: center;
+    width:83%;
+    /*margin-left: 15ch;*/
     margin-top: 1ch;
 }
 .scp_horizontal_line{
     margin-top: 0.5ch;
-    /*margin-right: 25ch;
-    margin-left: 15ch;*/
+    /*margin-right: 25ch;*/
     margin-left: 18ch;
-    width: 80ch;
+    align-content: center;
+    text-align: center;
+    align-self: center;
+    width: 75ch;
     height: 4px;
     background-color: navy;
 }
@@ -60,6 +73,7 @@
     border-style:double;
     border-width: 0.2ch;
     border-color: black;
+    margin-top:1ch;
 }
 .example_image2{
     width:80%;

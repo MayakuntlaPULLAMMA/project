@@ -19,7 +19,21 @@ from .graph import VACANT_GRAPH_ID
 from .graph import VACANT_VERTEX_LABEL
 from .graph import min_no_vertices
 import pandas as pd
+from rdkit import Chem
+from rdkit.Chem import Draw
+periodic_table=Chem.GetPeriodicTable()
+mapping={}
+fs=open("./graphdata/mapping.txt",'r')
 
+mol = Chem.MolFromSmiles("C1CC2=C3C(=CC=C2)C(=CN3C1)[C@H]4[C@@H](C(=O)NC4=O)C5=CNC6=CC=CC=C65")
+# Default
+Draw.MolToFile(mol,"new.png")
+for i in fs:
+    r=i.strip('\n')
+    r=r.split(" ")
+    mapping[r[1]]=r[0]
+#print(mapping)
+report_times=0
 min_sup=sys.argv[2]
 '''print("here2")'''
 s=sys.argv[3]
@@ -32,12 +46,50 @@ fl=open(str(min_no_vertices)+"_"+str(min_sup)+"_"+str(s)+"_output.txt",'a+')
 # fp=open(str(min_no_vertices)+"_"+str(min_sup)+"_"+str(s)+"_out.txt",'a+')
 fl.truncate(0)
 # fp.truncate(0)
+smile_graphs_directory="smiles_graphs_"+str(s)+"_"+str(min_sup)
+if(os.path.exists(smile_graphs_directory)):
+    shutil.rmtree(smile_graphs_directory)
+os.mkdir(smile_graphs_directory)
 arr=0
 total_time=0
 '''print("hiiii")'''
 flat_trans=collections.defaultdict(list)
 list_fs=[]
 
+def MolFromGraphs(node_list,adjacency_matrix,gid):
+        # create empty editable mol object
+        mol = Chem.RWMol(Chem.MolFromSmiles(''))
+        # add atoms to mol and keep track of index
+        node_to_idx = {}
+        for i in range(len(node_list)):
+            a = Chem.Atom(periodic_table.GetAtomicNumber(str(mapping[str(node_list[i])])))
+            #print(type(a))
+            molIdx = mol.AddAtom(a)
+            node_to_idx[i] = molIdx
+
+        # add bonds between adjacent atoms
+        for ix, row in enumerate(adjacency_matrix):
+            for iy, bond in enumerate(row):
+
+                # only traverse half the matrix
+                if iy <= ix:
+                    continue
+
+                # add relevant bond type (there are many more of these)
+                if bond == 0:
+                    continue
+                elif bond == 1:
+                    bond_type = Chem.rdchem.BondType.SINGLE
+                    mol.AddBond(node_to_idx[ix], node_to_idx[iy], bond_type)
+                elif bond == 2:
+                    bond_type = Chem.rdchem.BondType.DOUBLE
+                    mol.AddBond(node_to_idx[ix], node_to_idx[iy], bond_type)
+
+        # Convert RWMol to Mol object
+        mol = mol.GetMol()
+        destination_folder=smile_graphs_directory+"/"+str(gid)+'.png'            
+        Draw.MolToFile(mol,destination_folder)
+        return mol
 def record_timestamp(func):
     """Record timestamp before and after call of `func`."""
     def deco(self):
@@ -219,8 +271,8 @@ class gSpan(object):
         self._max_ngraphs = max_ngraphs
         self._is_undirected = is_undirected
         self._min_support = min_support
-        print("self.minsupport")
-        print(self._min_support)
+        #print("self.minsupportjjjj")
+        #print(self._min_support)
         self._min_num_vertices = min_num_vertices
         self._max_num_vertices = max_num_vertices
         self._DFScode = DFScode()
@@ -253,15 +305,16 @@ class gSpan(object):
         global total_time
         total_time=time_deltas['run']
 
-        print('Read:\t{} s'.format(time_deltas['_read_graphs']))
-        print('Mine:\t{} s'.format(
+        #print('Read:\t{} s'.format(time_deltas['_read_graphs']))
+        '''print('Mine:\t{} s'.format(
             time_deltas['run'] - time_deltas['_read_graphs']))
-        print('Total:\t{} s'.format(time_deltas['run']))
+        print('Total:\t{} s'.format(time_deltas['run']))'''
 
         return self
 
     @record_timestamp
     def _read_graphs(self):
+        #print("_read")
         self.graphs = dict()
         with codecs.open(self._database_file_name, 'r', 'utf-8') as f:
             lines = [line.strip() for line in f.readlines()]
@@ -290,6 +343,7 @@ class gSpan(object):
 
     @record_timestamp
     def _generate_1edge_frequent_subgraphs(self):
+        #print("generate_1edge")
         vlb_counter = collections.Counter()
         vevlb_counter = collections.Counter()
         vlb_counted = set()
@@ -323,6 +377,7 @@ class gSpan(object):
     @record_timestamp
     def run(self):
         """Run the gSpan algorithm."""
+        #print("run")
         self._read_graphs()
         self._generate_1edge_frequent_subgraphs()
         if self._max_num_vertices < 2:
@@ -346,10 +401,14 @@ class gSpan(object):
 
     def _report_size1(self, g, support):
         g.display()
-        print('\nSupport: {}'.format(support))
-        print('\n-----------------\n')
+        #print('\nSupport: {}'.format(support))
+        #print('\n-----------------\n')
 
     def _report(self, projected):
+        global report_times
+        report_times=report_times+1
+        #print("reporting",report_times)
+
         self._frequent_subgraphs.append(copy.copy(self._DFScode))
         if self._DFScode.get_num_vertices() < self._min_num_vertices:
             return
@@ -369,12 +428,22 @@ class gSpan(object):
         t={"gid":str(g.gid),"graph":{"nodes":[],"links":[]},"support":0}
         fl.write("t # "+str(g.gid))
         fl.write("\n")
+        temp_nodes=[]
+        temp_edges=[]
+        temp_node_labels=[]
         for vid in g.vertices:
             # print('v {} {}'.format(vid, mapping[self.vertices[vid].vlb]))
             # display_str += 'v {} {} '.format(vid, mapping[g.vertices[vid].vlb])
             fl.write("v "+str(vid)+" "+str(g.vertices[vid].vlb))
             t["graph"]["nodes"].append({"name":str(vid),"value":str(g.vertices[vid].vlb)})
             fl.write("\n")
+            temp_nodes.append(vid)
+            temp_node_labels.append(g.vertices[vid].vlb)
+        for i in range(len(temp_nodes)):
+            te=[]
+            for j in range(len(temp_nodes)):
+                te.append(0)
+            temp_edges.append(te)
         for frm in g.vertices:
             edges = g.vertices[frm].edges
             for to in edges:
@@ -385,13 +454,26 @@ class gSpan(object):
                         t["graph"]["links"].append({"source":str(frm),"target":str(to)})
                         fl.write("e "+str(frm)+" "+str(to)+" "+str(edges[to].elb))
                         fl.write("\n")
+                        temp_edges[temp_nodes.index(frm)][temp_nodes.index(to)]=int(edges[to].elb)
+                        #temp_edges.append([temp_nodes.index(frm),temp_nodes.index(to),edges[to].elb])
+                        #print(type(temp_nodes.index(frm)),type(temp_nodes.index(to)),type(int(edges[to].elb)))
+
                 else:
                     t["graph"]["links"].append({"source":str(frm),"target":str(to)})
                     fl.write("e "+str(frm)+" "+str(to)+" "+str(edges[to].elb))
                     fl.write("\n")
+                    temp_edges[temp_nodes.index(frm)][temp_nodes.index(to)]=int(edges[to].elb)
+                    #temp_edges.append([temp_nodes.index(frm),temp_nodes.index(to),edges[to].elb])
+                    #print(type(temp_nodes.index(frm)),type(temp_nodes.index(to)),type(int(edges[to].elb)))
                     # print('e {} {} {}'.format(frm, to, edges[to].elb))
                     # display_str += 'e {} {} {}'.format(frm, to, edges[to].elb) 
         t["support"]=str(support)
+        #print("Adjaccency")
+        #print(t["support"])
+        #print(temp_nodes,temp_node_labels,temp_edges)
+        t["string"]=Chem.MolToSmiles(MolFromGraphs(temp_node_labels,temp_edges,g.gid))
+        #print(t["string"])
+
         list_fs.append(t)
         fl.write("\n")                    
         fl.write("Support "+str(support))
@@ -440,8 +522,8 @@ class gSpan(object):
             )
         )
         
-        if self._visualize:
-            g.plot(1)
+        #if self._visualize:
+            #g.plot(1)
         if self._where:
             print('where: {}'.format(list(set([p.gid for p in projected]))))
         # print('\n-----------------\n')
@@ -602,6 +684,7 @@ class gSpan(object):
         return res
 
     def _subgraph_mining(self, projected):
+        #print('subgraph')
         self._support = self._get_support(projected)
         if self._support < self._min_support:
             return

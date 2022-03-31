@@ -8,6 +8,7 @@ from werkzeug import datastructures
 import numpy as np
 import cv2
 import pickle
+import base64
 global One_freqItems
 global f
 global scp
@@ -39,9 +40,10 @@ class cmine():
         mintracs = float(self.minRF) * 1.0 * float(self.nots)
         freqitems = filter(lambda x: (x[1] >= mintracs), sorteditems)
        
-        for i in freqitems:
+        '''for i in freqitems:
             print(i[1],self.minCS*self.nots)
-            print((i[1]==self.minCS*self.nots))
+            print((i[1]==self.minCS*self.nots))'''
+        
         one_size_coverage = filter(lambda x: (x[1] >= self.minCS*self.nots),freqitems)
         f=open("./"+datasetname+"_"+str(self.minCS1)+"_"+str(self.minRF)+"_"+str(self.maxOR),'w')
         f.write("Coverage"+" "+"1"+'\n')
@@ -62,7 +64,6 @@ class cmine():
         count=1
         for i in range(0,len(one_size_coverage)):
             self.noofSCP=self.noofSCP+1
-            one_size_coverage.append(one_size_coverage[i][0])
             f.write("i"+" "+str(self.noofSCP)+'\n')
             f.write("cs"+" "+str(float(one_size_coverage[i][1])/float(self.nots))+'\n')
             f.write("or"+" "+str(self.maxOR)+'\n')
@@ -73,7 +74,12 @@ class cmine():
         '''print("one_size_coverage")'''
         self.source_dir="./"+datasetname+"data_2_"+str(float(self.minRF))
         self.dest_dir="./scp_images_"+datasetname+"_"+str(self.minCS1)
-        self.freqitems = map(lambda x: x[0], freqitems)  
+        self.freqitems = map(lambda x: x[0], freqitems) 
+        self.source_dir_graph_smiles="./smiles_graphs_"+datasetname+"_"+str(self.minRF) 
+        self.dest_dir_graph_smiles="./scp_smiles_graphs_"+datasetname+"_"+str(self.minCS1)
+        if(os.path.exists(self.dest_dir_graph_smiles)):
+            shutil.rmtree(self.dest_dir_graph_smiles)
+        os.mkdir(self.dest_dir_graph_smiles)
         #self.noofFreqItems=copy.copy(len(list(self.freqitems)))
         
         for l in self.freqitems:
@@ -88,13 +94,38 @@ class cmine():
             if(os.path.exists(outputfile+"/Coverage_1")):
                 shutil.rmtree(outputfile+"/Coverage_1")
             os.mkdir(outputfile+"/Coverage_1")
+            if(os.path.exists(self.dest_dir_graph_smiles+"/Coverage_1")):
+                shutil.rmtree(self.dest_dir_graph_smiles+"/Coverage_1")
+            os.mkdir(self.dest_dir_graph_smiles+"/Coverage_1")
         
         cp_data=[]
-        print("frequent")
+        '''print("frequent")'''
+        
         for i in range(0,len(one_size_coverage)):
-            print(one_size_coverage[i][0])
+            h={"or":str(self.maxOR),"cs":str(float(one_size_coverage[i][1])/float(self.nots)),"size":1,"graphs":[],"string":''}
+            h["graphs"].append(fsubgraphs_data[int(one_size_coverage[i][0])-1])
+            h["string"]=h["string"]+fsubgraphs_data[int(one_size_coverage[i][0])-1]["string"]
+            shutil.copy(self.source_dir_graph_smiles+"/"+str(one_size_coverage[i][0])+".png",self.dest_dir_graph_smiles+"/Coverage_1/")
 
-            shutil.copy(self.source_dir+"/"+str(one_size_coverage[i][0])+".png",self.dest_dir+"/Coverage_1/")
+            #print(str(self.source_dir_graph_smiles+"/"+str(one_size_coverage[i][0])+".png"))
+            print(one_size_coverage[i][0])
+            with open(self.source_dir_graph_smiles+"/"+str(one_size_coverage[i][0])+".png","rb") as img:
+                k = str(base64.b64encode(img.read()))
+                k = k[2:]
+                #print(count)
+                #print(no_of_coverage)
+                h["smile_graph_image"]=k[:-1]
+            
+            cp_data.append(h)
+            #shutil.copy(self.source_dir+"/"+str(one_size_coverage[i][0])+".png",self.dest_dir+"/Coverage_1/")
+        with open(self.source_dir_graph_smiles+"/"+"4.png","rb") as img:
+            k= str(base64.b64encode(img.read()))
+            k=k[2:]
+            
+        print(k)
+        c=base64.b64decode(k)
+        image=open("new1.png",'wb')
+        image.write(c)
 
             #self.fout.write("['"+str(i[0])+"']\n")
        
@@ -127,6 +158,8 @@ class cmine():
         while len(self.NOk)>0:
             if(os.path.exists(self.dest_dir+"/Coverage_"+str(coverage))):
                 shutil.rmtree(self.dest_dir+"/Coverage_"+str(coverage))
+            if(os.path.exists(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage))):
+                shutil.rmtree(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage))
             f.write("Coverage"+" "+str(coverage)+'\n')
             f.write('\n')
             temp_NOk = self.NOk
@@ -152,6 +185,8 @@ class cmine():
                             if float(cs) >= float(self.minCS):
                                 if(not os.path.exists(self.dest_dir+"/Coverage_"+str(coverage))):
                                     os.mkdir(self.dest_dir+"/Coverage_"+str(coverage))
+                                if(not os.path.exists(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage))):
+                                    os.mkdir(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage))
                                 self.noofSCP=self.noofSCP+1
                                 
                                 f.write("i"+" "+str(self.noofSCP)+'\n')
@@ -159,15 +194,18 @@ class cmine():
                                 f.write("or"+" "+str(overlapratio)+'\n')
                                 f.write('\n')
                                 opened_images=[]
-                                h={"or":str(overlapratio),"cs":str(round(float(cs),2)),"size":len(newpattern),"graphs":[]}
-                                print("pj")
+                                opened_smiles_images=[]
+                                h={"or":str(overlapratio),"cs":str(round(float(cs),2)),"size":len(newpattern),"graphs":[],"string":''}
+                                '''print("pj")'''
                                 for k in newpattern:
                                     '''print("true")'''
-                                    print(k)
+                                    '''print(k)'''
                                     h["graphs"].append(fsubgraphs_data[int(k)-1])
+                                    h["string"]=h["string"]+fsubgraphs_data[int(k)-1]["string"]
                                     opened_images.append(cv2.imread(self.source_dir+"/"+str(k)+".png"))
+                                    opened_smiles_images.append(cv2.imread(self.source_dir_graph_smiles+"/"+str(k)+".png"))
                                 h_min = min(img.shape[0] for img in opened_images)
-                                cp_data.append(h)
+                                h_min_smiles_images=min(img.shape[0] for img in opened_smiles_images)
                                 '''widths,heights=zip(*(k.size for k in opened_images))
                                 total_width=sum(widths)
                                 max_height=max(heights)
@@ -178,10 +216,21 @@ class cmine():
                                     new_image.paste(k,(x_offset,0))
                                     x_offset=x_offset+k.size[0]'''
                                 im_list_resize = [cv2.resize(img,(int(img.shape[1] * h_min / img.shape[0]),h_min), interpolation=cv2.INTER_CUBIC) for img in opened_images]
+                                im_list_resize_smiles=[cv2.resize(img,(int(img.shape[1] * h_min / img.shape[0]),h_min), interpolation=cv2.INTER_CUBIC) for img in opened_smiles_images]
                                 new_image=cv2.hconcat(im_list_resize)
-                                cv2.imwrite(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png",new_image)
+                                new_image_smiles=cv2.hconcat(im_list_resize_smiles)
+                                #cv2.imwrite(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png",new_image)
+                                cv2.imwrite(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".png",new_image)
+                                
                                 '''new_image.save(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png")'''
-                               
+                                with open(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".png","rb") as img:
+                                    k = str(base64.b64encode(img.read()))
+                                    k = k[2:]
+                                    #print(count)
+                                    #print(no_of_coverage)
+                                    h["smile_graph_image"]=k[:-1]
+                                cp_data.append(h)
+
                                 count=count+1
                                 # print "This is coverage pattern",newpattern,cs,overlapratio
                                 #self.fout.write(str(newpattern)+"\n")
@@ -232,21 +281,24 @@ maxOR = float(sys.argv[3])
 datasetname = sys.argv[4]
 with open('result.txt','rb') as fp:
     fsubgraphs_data=pickle.load(fp)
-    print(type(fsubgraphs_data))
+    #print(type(fsubgraphs_data))
+#print(fsubgraphs_data)
 inpfile = "./2_"+str(minRF)+"_"+datasetname+"Flat_tra.txt"
 #datasetname = "graph5_test2.txt"
 #filepath = "C:\\Users\\user\\Documents\\CoverageGraph\\dataset1\\GraphData\\"
 outfile = "Results.txt"
 '''print(outfile)'''
 obj=cmine(minRF, minCS, maxOR, inpfile, outfile,datasetname,fsubgraphs_data)
-print(fsubgraphs_data)
+#print(fsubgraphs_data)
 t3=time.time()
 print( "data read",str(t3-t1))
 candidate_patterns,SCPs = obj.expand()
 t2 = time.time()
-print(cp_data)
+#print("cjjfjfjf")
+#print(cp_data)
 with open("cp_result.txt","wb") as f:
     pickle.dump(cp_data,f)
+#print(cp_data)
 f.close()
 print( "process done",str(t2-t1))
 f = open("./Results.txt",'w')

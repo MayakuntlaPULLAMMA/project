@@ -3,19 +3,20 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import AppContext from '../App_context';
 import { useHistory} from "react-router-dom";  
+// box-shadow:1px 1px 1px 1px green;
 const SidebarLink = styled(Link)`
   color: black;
-  background-color:white;
+  background-color:#d8C3A5;
   display:flex;
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
   height:35px;
   text-decoration:none;
-  border-radius:3px;
   font-weight:bold;
-  border: 1px solid green;
-  box-shadow:1px 1px 1px 1px green;
+  border: 0.1px solid black;
+
+  
   :hover {
     cursor: pointer;
 
@@ -28,6 +29,7 @@ const SidebarLink = styled(Link)`
 const SidebarLabel = styled.span`
 font-family:Georgia, 'Times New Roman', Times, serif;
 
+
 `;
   
 const DropdownLink = styled(Link)`
@@ -36,14 +38,14 @@ const DropdownLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: green;
+  color: black;
   font-size: 15px;
   height:35px;
   
   
   &:hover {
     cursor: pointer;
-    background-color:green;
+    background-color:#BAB2B5;
     color:white;
   }
   

@@ -55,9 +55,19 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 13px;
     font-style: italic;
-    width: 300px;
+    width: 500px;
     margin-left: 1ch;
     margin-bottom: 1ch;
+}
+.entries_name_gtcp{
+    margin-top: 1ch;
+    color: darkblue;
+    font-family:"Merriweather";
+    font-size: 13px;
+    width: 900px;
+    margin-left: 1ch;
+    margin-bottom: 1ch;
+    
 }
 .from{
     color: darkblue;
@@ -202,6 +212,7 @@ tr{
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: white;
    background-color:navy;
+   align-items: center;
    
 
    
@@ -275,25 +286,38 @@ tr{
      padding-top: 100px; /* Location of the box */
      left: 0;
      top: 0;
-     width: 100%; /* Full width */
-     height: 100%; /* Full height */
+     width: 50%; /* Full width */
+     height: 50%; /* Full height */
      overflow: auto; /* Enable scroll if needed */
-     background-color: rgb(0,0,0); /* Fallback color */
-     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+     
+     
    }
-   .modal-content{
-     background-color: #fefefe;
-     margin: auto;
-     padding: 20px;
-     border: 1px solid #888;
-     width: 80%;
+   .def_modal_content_dataset{
+    background-color: #fefefe;
+    margin-left: 235px;
+    border: 1px solid #888;
+    width: 70%;
    }
+   .def_modal_content_dataset_structure{
+    background-color: #fefefe;
+    margin-left: 235px;
+    border: 1px solid #888;
+    width: 80%;
+   }
+   .modal-content2{
+    background-color: #fefefe;
+    margin-left: 235px;
+    border: 1px solid #888;
+    width: 80%;
+}
+   
    .modal-content_structure_of_interest{
     background-color: #fefefe;
     margin: auto;
     padding: 1ch;
     border: 1px solid #888;
     width: 80%;
+    height: auto;
    
    }
    .close{
@@ -303,9 +327,14 @@ tr{
      font-weight: bold;
      cursor: pointer;
      margin-top: 1ch;
+     margin-bottom: 1ch;
      margin-left: 1ch;
      float: right;
      padding-right: 1ch;
+   }
+   .close_structure{
+    float: right;
+    cursor: pointer;
    }
    .modal_image{
        width: 600px;
@@ -500,13 +529,29 @@ tr{
 .image_table_data{
     text-align: center;
     display: flex;   
-    box-shadow: 1px 1px 1px 1px green;
     margin: 2ch;
+    height: 500px;
+}
+.image_table_data_scp{
+    text-align: center;
+    display: flex;   
+    margin: 2ch;
+}
+.image_table_data_string{
+    margin: 2ch;
+    height: inherit;
+    text-align: left;
+    text-overflow:ellipsis;
+    color: rgb(20, 20, 68);
+    font-size: 18px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
 }
 .cp_data{
     align-content: center;
     align-items: center;
     -ms-flex-align: center;
+    height:auto;
     
 }
 .download_icon{
@@ -727,8 +772,7 @@ tr{
      width: 100%; /* Full width */
      height: 100%; /* Full height */
      overflow: auto; /* Enable scroll if needed */
-     background-color: rgb(0,0,0); /* Fallback color */
-     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    /* Black w/ opacity */
 }
 .point_graphs{
     width:145px;
@@ -760,4 +804,66 @@ tr{
     background-color: rgb(144, 211, 144);
     color:black;
     font-weight: bold;
+}
+.display_flex{
+    display:flex;
+   
+}
+.subparts{
+    margin-left: 1ch;
+}
+.horizontal{
+
+    align-self: center;
+}
+
+.horizontal  *{
+
+    display: inline-block;
+    margin-left: 10px;
+}
+.subparts{
+    margin-bottom: 0.6ch;
+}
+.smile_graph{
+    height: 250px;
+    width: 250px;
+    cursor: pointer;
+}
+.gtcps_display{
+    margin-bottom: 2ch;
+    margin-top: 2ch;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.card{
+    width:500px;
+    height:500px;
+    display: flex;
+    margin-bottom: 1ch;
+
+}
+.interact_graph{
+    width:500px;
+    height: 500px;
+    border-radius: 0.3ch;
+    border-color:white;
+    border-style: solid;
+    margin-top: 1ch;
+    margin-left: 1ch;
+    margin-right: 1ch;
+    background-color: rgb(172, 209, 172);
+    
+}
+.heading_structure_of_interest{
+    align-self: center;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: navy;
+    color: #FFF;
+    margin-top: 1ch;
+    margin-left: 1ch;
+    margin-right: 1ch;
+    font-size: 25px;
 }

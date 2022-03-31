@@ -11,6 +11,9 @@ import collections
 import copy
 import itertools
 import time
+# print(sys.argv[2])
+# print(sys.argv[3])
+# print(sys.argv[4])
 s=sys.argv[3]
 s=s.split('/')
 p=sys.argv[2]
@@ -74,7 +77,6 @@ def read_si():
     
 def main(FLAGS=None):
     """Run gSpan."""
-    print(sys.argv[0],sys.argv[1])
     if FLAGS is None:
         FLAGS, _ = parser.parse_known_args(args=sys.argv[1:])
 
@@ -149,9 +151,7 @@ def main(FLAGS=None):
     fk.write("\n")
     fg=open("gSpan_FSM_"+str(s)+"_stats.txt",'w')
     print("came_intp+si")
-    fg.write(" minsup : "+str(min_sup)+'\n')
-    fg.write(" no_of_subgraphs : "+str(arr)+'\n')
-    fg.write(" total execution time : "+str(total_time)+'\n')
+    fg.write(" minsup : "+str(p)+'\n')
     fg.write(" Avg size of flat_trans : "+str(avg)+"\n")
     fg.close()
 

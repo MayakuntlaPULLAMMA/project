@@ -19,8 +19,10 @@ import time
 import pickle
 global min_sup
 graph_cnt=0
+mins=sys.argv[2]
 # print(min_no_vertices)
 def read_graphs(FLAGS=None):
+    #print("main read graphs")
     global graph_cnt
     if FLAGS is None:
         FLAGS, _ = parser.parse_known_args(args=sys.argv[1:])
@@ -32,22 +34,22 @@ def read_graphs(FLAGS=None):
             cols = line.split(' ')
             if cols[0] == 't':
                 graph_cnt += 1
-                print(graph_cnt)
+                #print(graph_cnt)
     return graph_cnt
 
 def main(FLAGS=None):
     """Run gSpan."""
-    global graph_cnt
+    graph_cnt=read_graphs()
+    min_sup=int(graph_cnt)*float(mins)
     if FLAGS is None:
         FLAGS, _ = parser.parse_known_args(args=sys.argv[1:])
 
     if not os.path.exists(FLAGS.database_file_name):
         print('{} does not exist.'.format(FLAGS.database_file_name))
         sys.exit()
-    read_graphs()
     gs = gSpan(
         database_file_name=FLAGS.database_file_name,
-        min_support=3,
+        min_support=int(min_sup),
         min_num_vertices=2,
         max_num_vertices=FLAGS.upper_bound_of_num_vertices,
         max_ngraphs=FLAGS.num_graphs,
@@ -95,6 +97,7 @@ def main(FLAGS=None):
         outstr=str(" ".join(sarr))+"\n"
         f.write(outstr)
     f.close()
+    #print(list_fs)
     with open('result.txt','wb') as fp:
         pickle.dump(list_fs,fp)
     

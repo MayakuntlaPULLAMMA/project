@@ -132,6 +132,7 @@ class Graph(object):
         return display_str
 
     def plot(self,gid):
+        print("came to plot")
         min_sup=sys.argv[2]
             
         s=sys.argv[3]

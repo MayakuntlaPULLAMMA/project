@@ -20,19 +20,19 @@ export const MainsidebarData = [
         subNav: [
           {
             title: 'Terms Used',
-            path: '/terms_used',
+            path: '/scp_terms_used',
             icon: <IoIcons.IoIosPaper />
           },
           {
             title: 'Guidelines',
-            path: '/guidelines',
+            path: '/scp_guidelines',
             icon: <IoIcons.IoIosPaper />
           }
         ]
       },
       {
         title: 'Dataset Format',
-        path: '/datasets',
+        path: '/scp_datasets',
         icon: <FaIcons.FaDatabase />,
         cName: 'nav-text',
         
@@ -40,21 +40,21 @@ export const MainsidebarData = [
       },
       {
         title: 'Extract SCPs',
-        path: '/form',
+        path: '/scp_form',
         icon: <IoIcons.IoIosPaper/>,
         cName: 'nav-text',
         
       },
       {
         title: 'Source Code',
-        path: '/files',
+        path: '/scp_files',
         icon: <IoIcons.IoIosFolder/>,
         cName: 'nav-text',
         
       },
       {
         title: 'Contact',
-        path: '/contact',
+        path: '/scp_contact',
     
         icon: <IoIcons.IoIosContact/>,
     
@@ -65,32 +65,67 @@ export const MainsidebarData = [
     ]
     
   },
-  /*{
-    title: 'Coverage Patterns',
+  {
+    title: 'GTCP Patterns',
     cName: 'nav-text',
-    path:'/coverage_patterns_home',
+    path:'/gtcp_patterns_home',
     value:2,
     key:"item1",
     subNav:[
       {
-        title: 'hi',
-        icon: <AiIcons.AiFillHome />,
+        title: 'Tutorial',
+        path: '#',
+        icon: <FaIcons.FaChalkboardTeacher />,
+        /*icon:<FaIcons.FaInfoCircle/>,*/
         cName: 'nav-text',
-        value:1,
+        subNav: [
+          {
+            title: 'Terms Used',
+            path: '/gtcp_terms_used',
+            icon: <IoIcons.IoIosPaper />
+          },
+          {
+            title: 'Guidelines',
+            path: '/gtcp_guidelines',
+            icon: <IoIcons.IoIosPaper />
+          }
+        ]
+      },
+      {
+        title: 'Dataset Format',
+        path: '/gtcp_datasets',
+        icon: <FaIcons.FaDatabase />,
+        cName: 'nav-text',
+        
         
       },
       {
-        title: 'hello',
-        icon: <FaIcons.FaDatabase />,
+        title: 'Extract GTCPs',
+        path: '/gtcp_form',
+        icon: <IoIcons.IoIosPaper/>,
         cName: 'nav-text',
-        value:2,
         
+      },
+      {
+        title: 'Source Code',
+        path: '/gtcp_files',
+        icon: <IoIcons.IoIosFolder/>,
+        cName: 'nav-text',
         
-      }
+      },
+      {
+        title: 'Contact',
+        path: '/gtcp_contact',
+    
+        icon: <IoIcons.IoIosContact/>,
+    
+        cName: 'nav-text',
+        
+      },
+
     ]
     
-    
-  },*/
+  }
   
   
  /* {

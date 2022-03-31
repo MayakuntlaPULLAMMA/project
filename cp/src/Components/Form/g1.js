@@ -161,7 +161,7 @@ drawChart() {
  // add html content to tooltip
  function loadTooltipContent(node) {
      var htmlContent = "<div>";
-     htmlContent += "<h4>Label " + node.name + "<\/h4>"
+     htmlContent += "<h4>Label " + node.value + "<\/h4>"
      
      htmlContent += "<\/div>"
      tooltip.html(htmlContent);

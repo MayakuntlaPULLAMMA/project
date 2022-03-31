@@ -243,7 +243,7 @@ class gSpan(object):
         self._frequent_subgraphs = list()
         self._counter = itertools.count()
         self._verbose = verbose
-        self._visualize = visualize
+        self._visualize = 1
         self._where = where
         self.timestamps = dict()
         if self._max_num_vertices < self._min_num_vertices:
@@ -317,7 +317,7 @@ class gSpan(object):
                 elif cols[0] == 'v':
                     tgraph.add_vertex(cols[1], cols[2])
                 elif cols[0] == 'e':
-                    tgraph.add_edge(AUTO_EDGE_ID, cols[1], cols[2], cols[3])
+                    tgraph.add_edge(AUTO_EDGE_ID, cols[1], cols[2],0)
             # adapt to input files that do not end with 't # -1'
             if tgraph is not None:
                 self.graphs[graph_cnt] = tgraph
@@ -545,8 +545,8 @@ class gSpan(object):
                     index=[int(repr(self._counter)[6:-1])]
                 )
             )
-            if self._visualize:
-                g.plot(arr)
+            
+            g.plot(arr)
             if self._where:
                 print('where: {}'.format(list(set([p.gid for p in projected]))))
             # print('\n-----------------\n')

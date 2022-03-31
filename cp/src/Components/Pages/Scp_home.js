@@ -39,7 +39,7 @@ function Scp_home() {
             <div className="scp_heading">
                 Subgraph Coverage Patterns
             </div>
-            <hr className="scp_horizontal_line"/>
+            {/* <hr className="scp_horizontal_line"/> */}
         </div>
             <div className={myContext.side ? "scp_content" : "scp_content_expand"}>
                 <div className="first_para">
