@@ -110,16 +110,19 @@ def check():
         minrf=request.form['minrf']
         analysis_type=request.form['analysistype']
         data_set_name=request.form['selected_data']
-        structure_content=request.form["structure_content_file"]
+        print(request.form["structure_of_interest"])
         structure_of_interest=int(request.form["structure_of_interest"])
-        c=structure_content.split(",")
-        print("Structure")
-        
-        structure_file=open("./graphdata/structure.data",'w')
-        for i in c:
-            structure_file.write(i+'\n')
-        structure_file.write("t # -1"+'\n')
-        structure_file.close()
+        if(structure_of_interest):
+            structure_content=request.form["structure_content_file"]
+
+            c=structure_content.split(",")
+            print("Structure")
+            
+            structure_file=open("./structure.data",'w')
+            for i in c:
+                structure_file.write(i+'\n')
+            structure_file.write("t # -1"+'\n')
+            structure_file.close()
         
         data_set_file=data_set_name+".txt"
 
@@ -129,19 +132,21 @@ def check():
         f=open('./graphdata/'+request.form['selected_dataset'],'wb')
         f.write(r)
         f.close()
+        
         data_set_file=request.form['selected_dataset']
         data_set_name=data_set_file.split(".")[0]
         print("structure")
         print(structure_of_interest)
         
         if(analysis_type=='1'):
+            start=time.time()
 
             if(structure_of_interest==0):
                 print("no structure")
                 s='python -m gspan_mining -s '+str(minrf)+" ./graphdata/"+data_set_file
             else:
                 print("hi")
-                s='python -m gspan_mining_struct -s '+str(minrf)+" "+"./graphdata/structure.txt"+" "+"./graphdata/structure.data"
+                s='python -m gspan_mining_struct -s '+str(minrf)+" "+"./graphdata/"+data_set_file+" "+'./structure.data'
 
 
             os.system(s)
@@ -153,51 +158,48 @@ def check():
                 d[i]["vertices"]=len(d[i]["graph"]["nodes"])
                 d[i]["edges"]=len(d[i]["graph"]["links"])
             
-            # img_folder = data_set_name+"data_2"+"_"+str(minrf)
-            # img_folder_path = str(img_folder+"/")
-            # img_file_names = [f for f in listdir(img_folder_path) if isfile(join(img_folder_path,f))]
-            # f=open("2_"+str(minrf)+"_"+data_set_name+"_output.txt",'r')
-            # fsg=[]
-            # supports=[]
-            # img=1
-            # edges=0
-            # vertices=0
-            # for i in f:
-            #     i=i.strip('\n')
-            #     j=i.split(" ")
-            #     if(j[0]=='t'):
-            #         img=int(j[2])
-            #         temp={}
-            #         temp["image_name"]=img
-            #         temp["vertices"]=0
-            #         temp["edges"]=0
-            #         temp["nodes"]=[]
-            #         temp["links"]=[]
-            #         with open(str(img_folder_path+str(img)+".png"),"rb") as img:
-            #             k = str(base64.b64encode(img.read()))
-            #             k = k[2:]
-            #             temp["image_src"]=k[:-1]
+            img_folder = data_set_name+"data_2"+"_"+str(minrf)
+            img_folder_path = str(img_folder+"/")
+            img_file_names = [f for f in listdir(img_folder_path) if isfile(join(img_folder_path,f))]
+            f=open("2_"+str(minrf)+"_"+data_set_name+"_output.txt",'r')
+            fsg=[]
+            supports=[]
+            img=1
+            edges=0
+            vertices=0
+            for i in f:
+                i=i.strip('\n')
+                j=i.split(" ")
+                if(j[0]=='t'):
+                    img=int(j[2])
+                    temp={}
+                    temp["image_name"]=img
+                    temp["vertices"]=0
+                    temp["edges"]=0
+                    temp["nodes"]=[]
+                    temp["links"]=[]
+                    temp["image_src"]=""
 
-            #     if(j[0] == "Support"):
-            #         temp["support"]=j[1]
-            #         if(j[1] not in supports):
-            #             supports.append(j[1])
-            #     if(j[0] == "x"):
-            #         c=j[1].split(",")
-            #         temp["where"]=[]
-            #         for k in c:
-            #             temp["where"].append(k)
-            #         fsg.append(temp)
-            #         if(temp["vertices"]>vertices):
-            #             vertices=temp["vertices"]
-            #         if(temp["edges"]>edges):
-            #             edges=temp["edges"]
-            #     if(j[0]=="v"):
-            #         temp["vertices"]=temp["vertices"]+1
-            #         temp["nodes"].append({"id":j[1],"label":j[2]})
-            #     if(j[0]=="e"):
-            #         temp["edges"]=temp["edges"]+1
-            #         temp["links"].append({"source":j[1],"target":j[2],"label":j[3]})
+                if(j[0] == "Support"):
+                    temp["support"]=j[1]
+                    if(j[1] not in supports):
+                        supports.append(j[1])
+                if(j[0] == "x"):
+                    c=j[1].split(",")
+                    temp["where"]=[]
+                    for k in c:
+                        temp["where"].append(k)
+                    fsg.append(temp)
+                    if(temp["vertices"]>vertices):
+                        vertices=temp["vertices"]
+                    if(temp["edges"]>edges):
+                        edges=temp["edges"]
+                if(j[0]=="v"):
+                    temp["vertices"]=temp["vertices"]+1
+                    temp["nodes"].append({"id":j[1],"label":j[2]})
+                if(j[0]=="e"):
+                    temp["edges"]=temp["edges"]+1
+                    temp["links"].append({"source":j[1],"target":j[2],"label":j[3]})
                 
             f = open("gSpan_FSM_"+data_set_name+"_stats.txt")
             li1 = []
@@ -212,8 +214,8 @@ def check():
             if(structure_of_interest==0):
                 s='python cmine.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+data_set_name+" "
             else:
-                s='python cmine_struct1.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+structure_of_interest+" "+data_set_name
- 
+                s='python cmine_struct1.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+data_set_name
+            end=time.time()
             os.system(s)
             no_of_coverage=0
             img_folder = "./scp_images_"+data_set_name+"_"+mincs
@@ -299,20 +301,20 @@ def check():
                 i=i.strip('\n')
                 i=i.split(":")
                 li2.append(i[1])
-            #print(len(cp_data),len(cp_data[0])) 
-            #print(cp_data)
-            #print(len(cp_data))
-            response= jsonify({"cp_data":cp_data,"data":d,"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":coverage_patterns,"no_of_coverages":int(coverages),"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(li2[0]),2))}),200
+            print(type(cp_data))
+            print(len(cp_data))
+            response= jsonify({"cp_data":cp_data,"data":d,"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":coverage_patterns,"no_of_coverages":len(smiles_graphs_folder_names),"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(li1[3])+float(li2[0]),2))}),200
             return response
         
         elif(analysis_type=='2'):
             print("came to transac")
             os.system("python data_for_images.py ./graphdata/"+data_set_name)
-            if(structure_of_interest=="none"):
+            start=time.time()
+            if(structure_of_interest==0):
                 s='python -m gspan_mining -s '+str(minrf)+" ./graphdata/"+data_set_file
             else:
                 #print("hi")
-                s='python -m gspan_mining_struct -s '+str(minrf)+" ./graphdata/"+data_set_file+" "+"final.txt"
+                s='python -m gspan_mining_struct -s '+str(minrf)+" ./graphdata/"+data_set_file+" "+"./structure.data"
 
 
             os.system(s)
@@ -379,11 +381,11 @@ def check():
 
 
             
-            start=time.time()
-            if(structure_of_interest=="none"):
-                s='python3 SetCoverProblem_gSpan.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+data_set_name+" "+str(1)
+            
+            if(structure_of_interest==0):
+                s='python3 SetCoverProblem_gSpan.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+data_set_name+" "+str(1)+" "+str(0)
             else:
-                s='python cmine_struct1.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+structure_of_interest+" "+data_set_name
+                s='python3 SetCoverProblem_gSpan.py '+str(minrf)+" "+str(mincs)+" "+str(maxor)+" "+data_set_name+" "+str(1)+" "+str(1)
  
             os.system(s)
             end=time.time()
@@ -476,7 +478,10 @@ def check():
             #print(len(cp_data))
             cp_data.sort(key=lambda x:[x["cs"],x["or"]])
             cp_data=cp_data[:21]
-            response= jsonify({"cp_data":cp_data,"data":d,"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":[],"no_of_coverages":0,"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(end-start),2))}),200
+            print(type(cp_data))
+            print(len(cp_data))
+            #print(cp_data)
+            response= jsonify({"cp_data":cp_data,"data":d,"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":[],"no_of_coverages":0,"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(li1[3])+float(li2[0]),2))}),200
             return response
 
 

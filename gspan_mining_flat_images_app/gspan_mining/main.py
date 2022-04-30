@@ -30,6 +30,8 @@ def read_graphs(FLAGS=None):
     database_file_name=FLAGS.database_file_name
     with codecs.open(database_file_name, 'r', 'utf-8') as f:
         lines = [line.strip() for line in f.readlines()]
+        print("numberof_lines")
+        print(len(lines))
         for i, line in enumerate(lines):
             cols = line.split(' ')
             if cols[0] == 't':

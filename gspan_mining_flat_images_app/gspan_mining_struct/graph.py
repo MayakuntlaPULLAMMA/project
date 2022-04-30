@@ -2,12 +2,12 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-from os import listdir
-from os.path import isfile, join
+
 import collections
 import itertools
-import os
 import sys
+import os
+import shutil
 
 VACANT_EDGE_ID = -1
 VACANT_VERTEX_ID = -1
@@ -16,7 +16,6 @@ VACANT_VERTEX_LABEL = -1
 VACANT_GRAPH_ID = -1
 AUTO_EDGE_ID = -1
 
-min_no_vertices=2
 
 
 class Edge(object):
@@ -131,8 +130,8 @@ class Graph(object):
                     display_str += 'e {} {} {}'.format(frm, to, edges[to].elb)
         return display_str
 
-    def plot(self,gid):
-        print("came to plot")
+    def plot(self,id):
+        """Visualize the graph."""
         min_sup=sys.argv[2]
             
         s=sys.argv[3]
@@ -140,14 +139,9 @@ class Graph(object):
 
         s=s[2].split('.')
         s=s[0]
-        #s.append(min_sup)
-        #s.append(min_no_vertices)
-        dirName=str(s)+'data'+'_'+str(min_no_vertices)+'_'+str(min_sup)
-        if not os.path.exists(dirName):
-            os.mkdir(dirName)
-            
+        dirName=str(s)+'data'+'_'+str(2)+'_'+str(min_sup)
+        
 
-        """Visualize the graph."""
         try:
             import networkx as nx
             import matplotlib.pyplot as plt
@@ -156,23 +150,23 @@ class Graph(object):
             return
         gnx = nx.Graph() if self.is_undirected else nx.DiGraph()
         vlbs = {vid: v.vlb for vid, v in self.vertices.items()}
-        # print(vlbs)
         elbs = {}
-        # print(self.vertices.items())
         for vid, v in self.vertices.items():
             gnx.add_node(vid, label=v.vlb)
         for vid, v in self.vertices.items():
             for to, e in v.edges.items():
                 if (not self.is_undirected) or vid < to:
-                    gnx.add_edge(vid, to, label=str(e.elb))
-                    elbs[(vid, to)] = str(e.elb)
-        fsize = (min(16, 6 * len(self.vertices)),
-                min(16, 6 * len(self.vertices)))
-        plt.figure(4, figsize=fsize)
-        pos = nx.spring_layout(gnx)
-        nx.draw_networkx(gnx, pos, arrows=True, with_labels=True, labels=vlbs,node_size=6500,node_shape='s',node_color='#f5fa4a')
+                    gnx.add_edge(vid, to, label=e.elb)
+                    elbs[(vid, to)] = e.elb
+        fsize = (min(16, 1 * len(self.vertices)),
+                 min(16, 1 * len(self.vertices)))
+        plt.clf()
+        plt.figure(3, figsize=fsize)
+        pos = nx.spectral_layout(gnx)
+        nx.draw_networkx(gnx, pos, arrows=True, with_labels=True, labels=vlbs)
         nx.draw_networkx_edge_labels(gnx, pos, edge_labels=elbs)
-
-        plt.savefig(str(dirName)+'/'+str(gid)+'.png')
+        plt.savefig(str(dirName)+'/'+str(id)+'.png')
         plt.close()
         
+        
+

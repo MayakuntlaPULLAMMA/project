@@ -58,7 +58,7 @@ parser.add_argument(
 parser.add_argument(
     '-p', '--plot',
     type=str2bool,
-    default=True,
+    default=False,
     help='bool, whether plot frequent subgraph, default off'
 )
 parser.add_argument(

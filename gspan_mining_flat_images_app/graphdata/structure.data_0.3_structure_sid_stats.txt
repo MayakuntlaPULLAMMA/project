@@ -1,1 +1,0 @@
-avg size of transaction: 0.0

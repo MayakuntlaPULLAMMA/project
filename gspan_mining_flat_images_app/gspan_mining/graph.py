@@ -132,6 +132,7 @@ class Graph(object):
         return display_str
 
     def plot(self,a):
+        print("cameinto plot")
         if(a==1):
             min_sup=sys.argv[2]
             
@@ -143,8 +144,7 @@ class Graph(object):
             #s.append(min_sup)
             #s.append(min_no_vertices)
             dirName=str(s)+'data'+'_'+str(min_no_vertices)+'_'+str(min_sup)
-            if not os.path.exists(dirName):
-                os.mkdir(dirName)
+            
             
 
             """Visualize the graph."""

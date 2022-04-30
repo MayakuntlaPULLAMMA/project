@@ -21,6 +21,7 @@ from .graph import min_no_vertices
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Draw
+import base64
 periodic_table=Chem.GetPeriodicTable()
 mapping={}
 fs=open("./graphdata/mapping.txt",'r')
@@ -33,6 +34,8 @@ for i in fs:
     r=r.split(" ")
     mapping[r[1]]=r[0]
 #print(mapping)
+
+
 report_times=0
 min_sup=sys.argv[2]
 '''print("here2")'''
@@ -49,7 +52,12 @@ fl.truncate(0)
 smile_graphs_directory="smiles_graphs_"+str(s)+"_"+str(min_sup)
 if(os.path.exists(smile_graphs_directory)):
     shutil.rmtree(smile_graphs_directory)
+
 os.mkdir(smile_graphs_directory)
+dirName=str(s)+'data'+'_'+str(min_no_vertices)+'_'+str(min_sup)
+if os.path.exists(dirName):
+    shutil.rmtree(dirName)
+os.mkdir(dirName)
 arr=0
 total_time=0
 '''print("hiiii")'''
@@ -87,7 +95,9 @@ def MolFromGraphs(node_list,adjacency_matrix,gid):
 
         # Convert RWMol to Mol object
         mol = mol.GetMol()
-        destination_folder=smile_graphs_directory+"/"+str(gid)+'.png'            
+        destination_folder=smile_graphs_directory+"/"+str(gid)+'.svg'            
+
+        #destination_folder=smile_graphs_directory+"/"+str(gid)+'.png'            
         Draw.MolToFile(mol,destination_folder)
         return mol
 def record_timestamp(func):
@@ -377,7 +387,7 @@ class gSpan(object):
     @record_timestamp
     def run(self):
         """Run the gSpan algorithm."""
-        #print("run")
+        print("run")
         self._read_graphs()
         self._generate_1edge_frequent_subgraphs()
         if self._max_num_vertices < 2:
@@ -405,6 +415,7 @@ class gSpan(object):
         #print('\n-----------------\n')
 
     def _report(self, projected):
+        #print("came to report")
         global report_times
         report_times=report_times+1
         #print("reporting",report_times)
@@ -472,7 +483,11 @@ class gSpan(object):
         #print(t["support"])
         #print(temp_nodes,temp_node_labels,temp_edges)
         t["string"]=Chem.MolToSmiles(MolFromGraphs(temp_node_labels,temp_edges,g.gid))
-        #print(t["string"])
+        with open(smile_graphs_directory+"/"+str(g.gid)+".svg","rb") as img:
+            k = str(base64.b64encode(img.read()))
+            
+            t["smile_graph_image"]=k
+#print(t["string"])
 
         list_fs.append(t)
         fl.write("\n")                    
@@ -522,8 +537,9 @@ class gSpan(object):
             )
         )
         
-        #if self._visualize:
-            #g.plot(1)
+        # if self._visualize:
+        #     print("Cametoplot")
+        #     g.plot(1)
         if self._where:
             print('where: {}'.format(list(set([p.gid for p in projected]))))
         # print('\n-----------------\n')

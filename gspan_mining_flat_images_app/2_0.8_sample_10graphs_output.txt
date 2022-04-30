@@ -1,0 +1,1534 @@
+t # 1
+v 0 2
+v 1 2
+e 0 1 2
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 2
+v 0 1
+v 1 2
+e 0 1 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 3
+v 0 1
+v 1 2
+v 2 2
+e 0 1 1
+e 1 2 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 4
+v 0 1
+v 1 2
+v 2 2
+v 3 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 5
+v 0 1
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 6
+v 0 1
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 2
+e 4 5 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 7
+v 0 1
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 2
+e 4 5 1
+e 5 6 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 8
+v 0 1
+v 1 2
+v 2 2
+e 0 1 1
+e 1 2 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 9
+v 0 1
+v 1 2
+v 2 2
+v 3 2
+e 0 1 1
+e 1 2 2
+e 2 3 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 10
+v 0 1
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 2
+e 2 3 1
+e 3 4 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 11
+v 0 2
+v 1 2
+e 0 1 1
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 12
+v 0 2
+v 1 2
+v 2 2
+e 0 1 1
+e 1 2 1
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 13
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 14
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 2
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 15
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 5 2
+e 3 4 2
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 16
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 5 2
+e 3 4 2
+e 5 6 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 17
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 2
+e 4 5 1
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 18
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 6 2
+e 3 4 2
+e 4 5 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 19
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 2
+e 4 5 1
+e 5 6 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 20
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 4 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 21
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 22
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 3 5 2
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 23
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 3 5 2
+e 5 6 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 24
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 5 1
+e 3 4 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 25
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 3 5 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 26
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 5 2
+e 3 4 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 27
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 5 2
+e 3 4 1
+e 5 6 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 28
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 29
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 3 6 1
+e 4 5 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 30
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 4 6 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 31
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 32
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 7 1
+e 3 4 1
+e 4 5 1
+e 5 6 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 33
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 1 7 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 34
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 2
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 35
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 2 1
+e 2 8 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 2
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 36
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 2
+e 6 7 1
+e 7 8 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 37
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+v 9 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 9 1
+e 3 4 1
+e 4 5 1
+e 5 6 2
+e 6 7 1
+e 7 8 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 38
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 4 6 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 39
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 4 6 2
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 40
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 41
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 42
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 7 1
+e 7 8 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 43
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+v 9 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 7 1
+e 7 8 2
+e 8 9 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 44
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+v 9 2
+v 10 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 7 1
+e 7 8 2
+e 8 9 1
+e 9 10 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 45
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 8 1
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 46
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 7 1
+e 7 8 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 47
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+v 9 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 9 1
+e 6 7 1
+e 7 8 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 48
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 8 1
+e 5 6 1
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 49
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 4 7 1
+e 5 6 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 50
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 7 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 51
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 2 1
+e 2 8 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 7 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 52
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 7 2
+e 7 8 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 53
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+v 9 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 6 7 2
+e 7 8 1
+e 8 9 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 54
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 1
+e 5 6 1
+e 5 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 55
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 2
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 56
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 3 6 2
+e 4 5 2
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 57
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 3 6 2
+e 4 5 2
+e 6 7 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 58
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 1 6 1
+e 2 3 1
+e 3 4 1
+e 4 5 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 59
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 2
+e 5 6 1
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 60
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 3 7 2
+e 4 5 2
+e 5 6 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 61
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 1 7 1
+e 2 3 1
+e 3 4 1
+e 4 5 2
+e 5 6 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 62
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 2
+e 5 6 1
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 63
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 8 1
+e 1 2 1
+e 2 3 1
+e 3 4 1
+e 4 5 2
+e 5 6 1
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 64
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 4 2
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 65
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 1
+e 2 4 2
+e 4 5 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 66
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+e 0 1 1
+e 1 2 1
+e 1 3 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 67
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+e 0 1 1
+e 1 2 1
+e 2 3 2
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 68
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 0 4 2
+e 1 2 1
+e 2 3 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 69
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 1
+e 2 3 2
+e 3 4 1
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 70
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 0 5 2
+e 1 2 1
+e 2 3 2
+e 3 4 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 71
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 0 5 2
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 5 6 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 72
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 1 5 2
+e 2 3 2
+e 3 4 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 73
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 4 5 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 74
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 4 5 1
+e 5 6 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 75
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 4 5 1
+e 5 6 2
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 76
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+v 8 2
+e 0 1 1
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 4 5 1
+e 5 6 2
+e 6 7 1
+e 7 8 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 77
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 4 5 1
+e 4 6 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 78
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 4 5 2
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 79
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 0 6 2
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 4 5 2
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 80
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+v 7 2
+e 0 1 1
+e 0 6 2
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 4 5 2
+e 6 7 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 81
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+v 6 2
+e 0 1 1
+e 1 2 1
+e 2 3 2
+e 3 4 1
+e 4 5 2
+e 5 6 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+
+t # 82
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 1
+e 1 4 2
+e 2 3 2
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 83
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 1
+e 1 4 2
+e 2 3 2
+e 4 5 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 84
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+e 0 1 1
+e 1 2 1
+e 1 3 2
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 85
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 1
+e 1 3 2
+e 3 4 1
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 86
+v 0 2
+v 1 2
+v 2 2
+e 0 1 1
+e 1 2 2
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 87
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+e 0 1 1
+e 0 3 2
+e 1 2 2
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 88
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+e 0 1 1
+e 1 2 2
+e 2 3 1
+
+Support 10
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8,Graph-9
+
+t # 89
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+e 0 1 1
+e 1 2 2
+e 2 3 1
+e 3 4 2
+
+Support 9
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7,Graph-8
+
+t # 90
+v 0 2
+v 1 2
+v 2 2
+v 3 2
+v 4 2
+v 5 2
+e 0 1 1
+e 1 2 2
+e 2 3 1
+e 3 4 2
+e 4 5 1
+
+Support 8
+x Graph-0,Graph-1,Graph-2,Graph-3,Graph-4,Graph-5,Graph-6,Graph-7
+

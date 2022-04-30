@@ -9,6 +9,7 @@ import numpy as np
 import cv2
 import pickle
 import base64
+import matplotlib.pyplot as plt
 global One_freqItems
 global f
 global scp
@@ -34,6 +35,7 @@ class cmine():
         self.NOk = []
         self.frequencies=[]
         self.noofSCP=0
+        self.total=0
         [self.items, self.database] = self.dbscan(inpfile)
         sorteditems = sorted(self.items.items(), key = lambda a: (-a[1],a[0]))
         
@@ -65,7 +67,7 @@ class cmine():
         for i in range(0,len(one_size_coverage)):
             self.noofSCP=self.noofSCP+1
             f.write("i"+" "+str(self.noofSCP)+'\n')
-            f.write("cs"+" "+str(float(one_size_coverage[i][1])/float(self.nots))+'\n')
+            f.write("cs"+" "+str(round(float(one_size_coverage[i][1])/float(self.nots)))+'\n')
             f.write("or"+" "+str(self.maxOR)+'\n')
             count=count+1
             f.write('\n')
@@ -102,30 +104,25 @@ class cmine():
         '''print("frequent")'''
         
         for i in range(0,len(one_size_coverage)):
-            h={"or":str(self.maxOR),"cs":str(float(one_size_coverage[i][1])/float(self.nots)),"size":1,"graphs":[],"string":''}
+            h={"id":str(self.total),"or":str(self.maxOR),"cs":str(round((float(one_size_coverage[i][1])/float(self.nots)),2)),"size":1,"graphs":[],"string":''}
             h["graphs"].append(fsubgraphs_data[int(one_size_coverage[i][0])-1])
             h["string"]=h["string"]+fsubgraphs_data[int(one_size_coverage[i][0])-1]["string"]
-            shutil.copy(self.source_dir_graph_smiles+"/"+str(one_size_coverage[i][0])+".png",self.dest_dir_graph_smiles+"/Coverage_1/")
-
+            shutil.copy(self.source_dir_graph_smiles+"/"+str(one_size_coverage[i][0])+".svg",self.dest_dir_graph_smiles+"/Coverage_1/")
+            self.total=self.total+1
             #print(str(self.source_dir_graph_smiles+"/"+str(one_size_coverage[i][0])+".png"))
             print(one_size_coverage[i][0])
-            with open(self.source_dir_graph_smiles+"/"+str(one_size_coverage[i][0])+".png","rb") as img:
+            with open(self.source_dir_graph_smiles+"/"+str(one_size_coverage[i][0])+".svg","rb") as img:
                 k = str(base64.b64encode(img.read()))
-                k = k[2:]
+               
+                if(i==0):
+                    print(k)
                 #print(count)
                 #print(no_of_coverage)
-                h["smile_graph_image"]=k[:-1]
+                h["smile_graph_image"]=[k]
             
             cp_data.append(h)
             #shutil.copy(self.source_dir+"/"+str(one_size_coverage[i][0])+".png",self.dest_dir+"/Coverage_1/")
-        with open(self.source_dir_graph_smiles+"/"+"4.png","rb") as img:
-            k= str(base64.b64encode(img.read()))
-            k=k[2:]
-            
-        print(k)
-        c=base64.b64decode(k)
-        image=open("new1.png",'wb')
-        image.write(c)
+        
 
             #self.fout.write("['"+str(i[0])+"']\n")
        
@@ -195,17 +192,28 @@ class cmine():
                                 f.write('\n')
                                 opened_images=[]
                                 opened_smiles_images=[]
-                                h={"or":str(overlapratio),"cs":str(round(float(cs),2)),"size":len(newpattern),"graphs":[],"string":''}
+                                h={"id":str(self.total),"or":str(overlapratio),"cs":str(round(float(cs),2)),"size":len(newpattern),"graphs":[],"string":''}
                                 '''print("pj")'''
+                                h["smile_graph_image"]=[]
+                                self.total=self.total+1
                                 for k in newpattern:
                                     '''print("true")'''
                                     '''print(k)'''
                                     h["graphs"].append(fsubgraphs_data[int(k)-1])
                                     h["string"]=h["string"]+fsubgraphs_data[int(k)-1]["string"]
                                     opened_images.append(cv2.imread(self.source_dir+"/"+str(k)+".png"))
-                                    opened_smiles_images.append(cv2.imread(self.source_dir_graph_smiles+"/"+str(k)+".png"))
-                                h_min = min(img.shape[0] for img in opened_images)
-                                h_min_smiles_images=min(img.shape[0] for img in opened_smiles_images)
+                                    #if(os.path.exists(self.source_dir_graph_smiles+"/"+str(k)+".svg")):
+                                        #print("yes")
+                                    with open(self.source_dir_graph_smiles+"/"+str(k)+".svg","rb") as img:
+                                        g = str(base64.b64encode(img.read()))
+                                        
+                                        h["smile_graph_image"].append(g)
+                                    # c=os.path.join(self.source_dir_graph_smiles,str(k)+".svg")
+                                    # opened_smiles_images.append(Image.open("./smiles_graphs_papertoydata_0.3/1.svg"))
+                                # h_min = min(img.shape[0] for img in opened_images)
+                                # print(k)
+                                # print(opened_smiles_images)
+                                # h_min_smiles_images=min(img.shape[0] for img in opened_smiles_images)
                                 '''widths,heights=zip(*(k.size for k in opened_images))
                                 total_width=sum(widths)
                                 max_height=max(heights)
@@ -215,20 +223,18 @@ class cmine():
                                 for k in opened_images:
                                     new_image.paste(k,(x_offset,0))
                                     x_offset=x_offset+k.size[0]'''
-                                im_list_resize = [cv2.resize(img,(int(img.shape[1] * h_min / img.shape[0]),h_min), interpolation=cv2.INTER_CUBIC) for img in opened_images]
-                                im_list_resize_smiles=[cv2.resize(img,(int(img.shape[1] * h_min / img.shape[0]),h_min), interpolation=cv2.INTER_CUBIC) for img in opened_smiles_images]
-                                new_image=cv2.hconcat(im_list_resize)
-                                new_image_smiles=cv2.hconcat(im_list_resize_smiles)
+                                # im_list_resize = [cv2.resize(img,(int(img.shape[1] * h_min / img.shape[0]),h_min), interpolation=cv2.INTER_CUBIC) for img in opened_images]
+                                # im_list_resize_smiles=[cv2.resize(img,(int(img.shape[1] * h_min_smiles_images / img.shape[0]),h_min_smiles_images), interpolation=cv2.INTER_CUBIC) for img in opened_smiles_images]
+                                # new_image=cv2.hconcat(im_list_resize)
+                                # new_image_smiles=cv2.hconcat(im_list_resize_smiles)
                                 #cv2.imwrite(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png",new_image)
-                                cv2.imwrite(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".png",new_image)
+                                # cv2.imwrite(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".svg",new_image_smiles)
                                 
                                 '''new_image.save(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png")'''
-                                with open(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".png","rb") as img:
-                                    k = str(base64.b64encode(img.read()))
-                                    k = k[2:]
-                                    #print(count)
-                                    #print(no_of_coverage)
-                                    h["smile_graph_image"]=k[:-1]
+                                # with open(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".svg","rb") as img:
+                                #     k = str(base64.b64encode(img.read()))
+                                    
+                                #     h["smile_graph_image"]=k
                                 cp_data.append(h)
 
                                 count=count+1
@@ -296,11 +302,12 @@ candidate_patterns,SCPs = obj.expand()
 t2 = time.time()
 #print("cjjfjfjf")
 #print(cp_data)
+#print(len(cp_data[-1]["smile_graph_image"]))
 with open("cp_result.txt","wb") as f:
     pickle.dump(cp_data,f)
 #print(cp_data)
 f.close()
-print( "process done",str(t2-t1))
+#print( "process done",str(t2-t1))
 f = open("./Results.txt",'w')
 f.write("execution_time:"+str(t2-t1)+'\n')
 f.write("Number of Candidate Patterns:"+str(candidate_patterns)+'\n')

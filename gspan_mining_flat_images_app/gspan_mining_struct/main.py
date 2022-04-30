@@ -11,9 +11,7 @@ import collections
 import copy
 import itertools
 import time
-# print(sys.argv[2])
-# print(sys.argv[3])
-# print(sys.argv[4])
+import pickle
 s=sys.argv[3]
 s=s.split('/')
 p=sys.argv[2]
@@ -43,6 +41,7 @@ def read_graphs(FLAGS=None):
                 graph_cnt += 1
     return graph_cnt
 graph_cnt=read_graphs()
+print(graph_cnt)
 min_sup=int(graph_cnt)*float(mins)
 def read_si():
 
@@ -77,6 +76,7 @@ def read_si():
     
 def main(FLAGS=None):
     """Run gSpan."""
+    print(sys.argv[0],sys.argv[1])
     if FLAGS is None:
         FLAGS, _ = parser.parse_known_args(args=sys.argv[1:])
 
@@ -109,10 +109,7 @@ def main(FLAGS=None):
         )
 
         gs.run()
-        from .gspan import arr
         gs.time_stats()
-        from .gspan import total_time
-
     
     fp=sorted(flis3)
     f1=open(str(si)+"_"+str(p)+"_"+str(s)+"_results.txt",'w')
@@ -121,11 +118,11 @@ def main(FLAGS=None):
     
     for i in fp:
         sum+=len(flis3[i])
-    
+    print("grpah",graph_cnt)
     for i in range(graph_cnt):
         # print(graph_cnt,i,flis3[i])
         if(flis3[i]==[]):
-            f1.write("\n")
+            pass
         for j in range(len(flis3[i])):
             f1.write(str(flis3[i][j]))
             if(j != len(flis3[i])-1):
@@ -133,6 +130,7 @@ def main(FLAGS=None):
         f1.write("\n")
         
     f1.close()
+    from .gspan import list_fs
     # f=open(str(si)+"_"+str(p)+"_"+str(s)+"_stats.txt",'w')
     
     # print(nsg,file=f)
@@ -144,17 +142,19 @@ def main(FLAGS=None):
     #     fg.write(str(flis2[i])[1:-1])
     #     fg.write("\n")
     # fg.close()
-
     avg=sum/graph_cnt
     fk.write("avg size of transaction: ")
     fk.write(str(avg))
     fk.write("\n")
     fg=open("gSpan_FSM_"+str(s)+"_stats.txt",'w')
-    print("came_intp+si")
-    fg.write(" minsup : "+str(p)+'\n')
+    fg.write(" minrf : "+str(min_sup)+'\n')
+    fg.write(" no_of_subgraphs : "+str(sum)+'\n')
+    fg.write(" total execution time : "+str(0)+'\n')
     fg.write(" Avg size of flat_trans : "+str(avg)+"\n")
     fg.close()
-
+    print("result.txt",len(list_fs))
+    with open('result.txt','wb') as fp:
+        pickle.dump(list_fs,fp)
     return gs
 
 

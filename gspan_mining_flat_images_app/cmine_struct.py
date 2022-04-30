@@ -94,7 +94,7 @@ class cmine():
             '''print("hi")'''
             self.noofSCP=self.noofSCP+1
             '''print("k")'''
-            shutil.copy(self.source_dir+"/"+str(i)+".png",self.dest_dir+"/Coverage_1/")
+            shutil.copy(self.source_dir+"/"+str(i)+".svg",self.dest_dir+"/Coverage_1/")
 
             #self.fout.write("['"+str(i[0])+"']\n")
        

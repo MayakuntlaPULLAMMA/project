@@ -1,2 +1,0 @@
- minsup : 0.3
- Avg size of flat_trans : 0.0

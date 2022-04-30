@@ -19,6 +19,7 @@ def MolFromGraphs(node_list,adjacency_matrix,image_name):
         mol = Chem.RWMol(Chem.MolFromSmiles(''))
         # add atoms to mol and keep track of index
         node_to_idx = {}
+        #print(node_list)
         for i in range(len(node_list)):
             a = Chem.Atom(periodic_table.GetAtomicNumber(str(mapping[str(node_list[i])])))
             #print(type(a))
@@ -46,7 +47,7 @@ def MolFromGraphs(node_list,adjacency_matrix,image_name):
         # Convert RWMol to Mol object
         destination=destiny_folder+'/'+image_name+".png"
         mol = mol.GetMol()
-        Draw.MolToFile(mol,destiny_folder+'/'+str(image_name)+".png")
+        Draw.MolToFile(mol,destiny_folder+'/'+str(image_name)+".svg")
         
         return mol
 fs=open("./graphdata/mapping.txt",'r')
@@ -62,6 +63,7 @@ nodes=[]
 edges=[]
 for i in f:
     i=i.strip('\n')
+    i=i.strip('\r')
     i=i.split(" ")
     if(i[0]=='t'):
         #print("t")
@@ -93,5 +95,6 @@ for i in f:
 if(len(t)!=0):
     t["string"]=Chem.MolToSmiles(MolFromGraphs(nodes,edges,t["graph_id"]))
     list_all_graphs.append(t)
+print("data_images",len(list_all_graphs))
 with open("./all_graphs.txt",'wb') as all:
     pickle.dump(list_all_graphs,all)

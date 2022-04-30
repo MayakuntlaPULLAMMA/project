@@ -6,6 +6,7 @@ from __future__ import print_function
 import codecs
 import collections
 import copy
+from glob import glob
 import itertools
 import time
 import os
@@ -16,7 +17,18 @@ from .graph import Graph
 from .graph import VACANT_GRAPH_ID
 from .graph import VACANT_VERTEX_LABEL
 import pandas as pd
+import os
 import shutil
+from rdkit import Chem
+from rdkit.Chem import Draw
+import base64
+periodic_table=Chem.GetPeriodicTable()
+mapping={}
+fs=open("./graphdata/mapping.txt",'r')
+for i in fs:
+    r=i.strip('\n')
+    r=r.split(" ")
+    mapping[r[1]]=r[0]
 si=sys.argv[4]
 arr=0
 s=sys.argv[3]
@@ -24,16 +36,18 @@ s=s.split('/')
 p=sys.argv[2]
 s=s[2].split('.')
 s=s[0]
-min_no_vertices=2
-min_sup=sys.argv[2]
-dirName=str(s)+'data'+'_'+str(min_no_vertices)+'_'+str(min_sup)
-if(os.path.exists(dirName)):
-    shutil.rmtree(dirName)
-fl=open(str(min_no_vertices)+"_"+str(min_sup)+"_"+str(s)+"_output.txt",'a+')
-fl.truncate(0)
-total_time=0
-
+list_fs=[]
 fk=open(str(si)+"_"+str(p)+"_"+str(s)+"_sid_stats.txt",'a+')
+fl=open(str(2)+"_"+str(p)+"_"+str(s)+"_output.txt",'a+')
+smile_graphs_directory="smiles_graphs_"+str(s)+"_"+str(p)
+if(os.path.exists(smile_graphs_directory)):
+    shutil.rmtree(smile_graphs_directory)
+os.mkdir(smile_graphs_directory)
+dirName=str(s)+'data'+'_'+str(2)+'_'+str(p)
+if os.path.exists(dirName):
+    shutil.rmtree(dirName)
+os.mkdir(dirName)
+fl.truncate(0)
 fk.truncate(0)
 flis=collections.defaultdict(list)
 flis1=collections.defaultdict(list)
@@ -41,6 +55,42 @@ flis2=collections.defaultdict(list)
 flis3=collections.defaultdict(list)
 timez=collections.defaultdict(list)
 nsg=collections.Counter()
+
+def MolFromGraphs(node_list,adjacency_matrix,gid):
+    # create empty editable mol object
+    print("came mol")
+    mol = Chem.RWMol(Chem.MolFromSmiles(''))
+    # add atoms to mol and keep track of index
+    node_to_idx = {}
+    for i in range(len(node_list)):
+        a = Chem.Atom(periodic_table.GetAtomicNumber(str(mapping[str(node_list[i])])))
+        #print(type(a))
+        molIdx = mol.AddAtom(a)
+        node_to_idx[i] = molIdx
+
+    # add bonds between adjacent atoms
+    for ix, row in enumerate(adjacency_matrix):
+        for iy, bond in enumerate(row):
+
+            # only traverse half the matrix
+            if iy <= ix:
+                continue
+
+            # add relevant bond type (there are many more of these)
+            if bond == 0:
+                continue
+            elif bond == 1:
+                bond_type = Chem.rdchem.BondType.SINGLE
+                mol.AddBond(node_to_idx[ix], node_to_idx[iy], bond_type)
+            elif bond == 2:
+                bond_type = Chem.rdchem.BondType.DOUBLE
+                mol.AddBond(node_to_idx[ix], node_to_idx[iy], bond_type)
+
+    # Convert RWMol to Mol object
+    mol = mol.GetMol()
+    destination_folder=smile_graphs_directory+"/"+str(gid)+'.svg'            
+    Draw.MolToFile(mol,destination_folder)
+    return mol
 
 def record_timestamp(func):
     """Record timestamp before and after call of `func`."""
@@ -264,8 +314,6 @@ class gSpan(object):
                 self.timestamps[fn + '_out'] - self.timestamps[fn + '_in'],
                 2
             )
-        global total_time
-        total_time=total_time+time_deltas['run']
         global timez
         timez[si_id].append(time_deltas)
         # print("asas",timez)
@@ -317,7 +365,7 @@ class gSpan(object):
                 elif cols[0] == 'v':
                     tgraph.add_vertex(cols[1], cols[2])
                 elif cols[0] == 'e':
-                    tgraph.add_edge(AUTO_EDGE_ID, cols[1], cols[2],0)
+                    tgraph.add_edge(AUTO_EDGE_ID, cols[1], cols[2], cols[3])
             # adapt to input files that do not end with 't # -1'
             if tgraph is not None:
                 self.graphs[graph_cnt] = tgraph
@@ -392,7 +440,7 @@ class gSpan(object):
         si_id=self.si_id
         vert=collections.Counter()
         ne=collections.defaultdict(list)
-       
+        
         vert,ne,noe=self.vert,self.ne,self.noe
 
         # print("....................",self.vert,self.ne)
@@ -403,33 +451,10 @@ class gSpan(object):
         # print("dfscode",self._DFScode)
         no_of_edges=len(self._DFScode)
         # print(no_of_edges)
-        list_of_gids=collections.defaultdict(list)
-        list_of_gids=set([p.gid for p in projected])
         g = self._DFScode.to_graph(gid=next(self._counter),
                                    is_undirected=self._is_undirected)
         # print(dir(g))
-        support=self._support
         degree=collections.Counter()
-       
-        '''dir=str(min_no_vertices)+"_"+str(min_sup)+"_"+str(s)+'_dst'
-        if not os.path.exists(dir):
-            os.mkdir(dir)
-
-        dirname=str(min_no_vertices)+"_"+str(min_sup)+"_"+str(s)+'_dst/'+str(g.gid)
-        if not os.path.exists(dirname):
-            os.mkdir(dirname)
-        src='images/'
-        # dst='dst/'
-        # print(list_of_gids)
-        for i in sorted(os.listdir(src)):
-            kp=i.split('.')
-            # print(kp[2])
-            for j in list_of_gids:
-                # print(j,kp[2])
-                if(int(kp[2]) ==int(j)):
-                    # print(j,kp[2])
-                    shutil.copy(path.join(src,i),dirname)'''
-
         
         vertex_set=collections.defaultdict()
         # neighbor set
@@ -477,6 +502,7 @@ class gSpan(object):
         
         if(flag==len(vert)):
             global arr
+            global list_fs
             arr=arr+1
 
             global nsg
@@ -493,13 +519,26 @@ class gSpan(object):
             global flis3 #has flat transactions of data set
             for i in list_of_gids:
                 flis3[i].append(arr)
-            fl.write("t # "+str(arr))
+            t={"gid":str(arr-1),"graph":{"nodes":[],"links":[]},"support":0}
+            fl.write("t # "+str(arr-1))
             fl.write("\n")
+            temp_nodes=[]
+            temp_edges=[]
+            temp_node_labels=[]
+            support=self._support
             for vid in g.vertices:
                 # print('v {} {}'.format(vid, mapping[self.vertices[vid].vlb]))
                 # display_str += 'v {} {} '.format(vid, mapping[g.vertices[vid].vlb])
                 fl.write("v "+str(vid)+" "+str(g.vertices[vid].vlb))
+                t["graph"]["nodes"].append({"name":str(vid),"value":str(g.vertices[vid].vlb)})
                 fl.write("\n")
+                temp_nodes.append(vid)
+                temp_node_labels.append(g.vertices[vid].vlb)
+            for i in range(len(temp_nodes)):
+                te=[]
+                for j in range(len(temp_nodes)):
+                    te.append(0)
+                temp_edges.append(te)
             for frm in g.vertices:
                 edges = g.vertices[frm].edges
                 for to in edges:
@@ -507,13 +546,32 @@ class gSpan(object):
                         if frm < to:
                             # print('e {} {} {}'.format(frm, to, edges[to].elb))
                             # display_str += 'e {} {} {} '.format(frm, to, edges[to].elb)
+                            t["graph"]["links"].append({"source":str(frm),"target":str(to)})
                             fl.write("e "+str(frm)+" "+str(to)+" "+str(edges[to].elb))
                             fl.write("\n")
+                            temp_edges[temp_nodes.index(frm)][temp_nodes.index(to)]=int(edges[to].elb)
+                            #temp_edges.append([temp_nodes.index(frm),temp_nodes.index(to),edges[to].elb])
+                            #print(type(temp_nodes.index(frm)),type(temp_nodes.index(to)),type(int(edges[to].elb)))
+
                     else:
+                        t["graph"]["links"].append({"source":str(frm),"target":str(to)})
                         fl.write("e "+str(frm)+" "+str(to)+" "+str(edges[to].elb))
                         fl.write("\n")
+                        temp_edges[temp_nodes.index(frm)][temp_nodes.index(to)]=int(edges[to].elb)
+                        #temp_edges.append([temp_nodes.index(frm),temp_nodes.index(to),edges[to].elb])
+                        #print(type(temp_nodes.index(frm)),type(temp_nodes.index(to)),type(int(edges[to].elb)))
                         # print('e {} {} {}'.format(frm, to, edges[to].elb))
                         # display_str += 'e {} {} {}'.format(frm, to, edges[to].elb) 
+            t["support"]=str(support)
+            t["string"]=Chem.MolToSmiles(MolFromGraphs(temp_node_labels,temp_edges,arr-1))
+            with open(smile_graphs_directory+"/"+str(g.gid)+".svg","rb") as img:
+                k = str(base64.b64encode(img.read()))
+                
+                t["smile_graph_image"]=k
+            # print(t["string"])
+            # if(flag==len(vert) ):
+            display_str = g.display()
+            list_fs.append(t)
             fl.write("\n")                    
             fl.write("Support "+str(support))
             fl.write("\n")
@@ -530,8 +588,6 @@ class gSpan(object):
             # fp.write(str(list_of_gids))
             fl.write("\n")
             fl.write("\n")
-            # if(flag==len(vert) ):
-            display_str = g.display()
             #     print('\nSupport: {}'.format(self._support))
 
             # Add some report info to pandas dataframe "self._report_df".
@@ -545,8 +601,8 @@ class gSpan(object):
                     index=[int(repr(self._counter)[6:-1])]
                 )
             )
-            
-            g.plot(arr)
+            if self._visualize:
+                g.plot(arr-1)
             if self._where:
                 print('where: {}'.format(list(set([p.gid for p in projected]))))
             # print('\n-----------------\n')

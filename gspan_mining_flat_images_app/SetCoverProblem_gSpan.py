@@ -17,7 +17,7 @@ import cv2
 tot_CPs=[]
 freqList=[]
 #freqEle=[]
-gtcp_data=[]
+global gtcp_data
 class cmine():
     def __init__(self, minRF, minCS, maxOR, inpfile, outfile,datasetname,fsubgraphs_data):
         global gtcp_data
@@ -34,39 +34,49 @@ class cmine():
         self.Candi_CTP=[]
         self.final_CTPs=[]
         self.nofs,self.bitpattern = self.dbscanSCP(inpfile)
-        #print(self.nofs,self.bitpattern)
+        print("pattern")
+        print(self.nofs,self.bitpattern)
+
         self.source_dir_graph_smiles="./"+"gtcp_smiles_images_"+datasetname
         self.dest_dir_graph_smiles="./gtcp_coverage_smiles_"+datasetname+"_"+str(self.minCS)
         if(os.path.exists(self.dest_dir_graph_smiles)):
             shutil.rmtree(self.dest_dir_graph_smiles)
         os.mkdir(self.dest_dir_graph_smiles)
         #[self.items, self.bitpattern,self.TidKey_Dict] = self.dbscan(inpfile)
-        
+        self.total=0
         "Checking feature coverage of a graph greaterthan minFC or not"
         print("No.of 1 size candidates:",len(self.bitpattern))  
         if(os.path.exists(self.dest_dir_graph_smiles+"/Coverage_1")):
             shutil.rmtree(self.dest_dir_graph_smiles+"/Coverage_1")
         os.mkdir(self.dest_dir_graph_smiles+"/Coverage_1")  
-        print("hi")   
+        print("hi")  
+        gtcp_data=[]
+        print(len(fsubgraphs_data))
         for key, value in self.bitpattern.items():
             self.noof_Candi_CTP=self.noof_Candi_CTP+1
             if (1.0*value.count()/self.nofs) >= minCS:
-                #print(key)
-                h={"or":str(self.maxOR),"cs":str(round(float(self.minCS),2)),"size":str(1),"graphs":[],"string":''}
-                h["graphs"].append(fsubgraphs_data[key])
+                print(key)
+                tt=[[key],1.0*value.count()/self.nofs]
+                print(tt)
+                tt.append(0)
+                print(fsubgraphs_data[key])
+                
+                h={"id":str(self.total),"or":str(self.maxOR),"cs":str(round(float(1.0*value.count()/self.nofs),2)),"size":str(1),"graphs":[],"string":''}
+                h["graphs"].append(fsubgraphs_data[int(key)])
                 #print(fsubgraphs_data[key])
-                #print(key)
+                print(key)
+                self.total=self.total+1
                 h["string"]=h["string"]+fsubgraphs_data[int(key)]["string"]
-                with open(self.source_dir_graph_smiles+"/"+str(key)+".png","rb") as img:
+                with open(self.source_dir_graph_smiles+"/"+str(key)+".svg","rb") as img:
                     k = str(base64.b64encode(img.read()))
                     k = k[2:]
                     #print(count)
                     #print(no_of_coverage)
-                    h["smile_graph_image"]=k[:-1]
-                tt=[[key],1.0*value.count()/self.nofs]
-                tt.append(0)
+                    h["smile_graph_image"]=[k[:-1]]
+                
+                
                 tot_CPs.append(tt)
-                shutil.copy(self.source_dir_graph_smiles+"/"+str(key)+".png",self.dest_dir_graph_smiles+"/Coverage_1")
+                shutil.copy(self.source_dir_graph_smiles+"/"+str(key)+".svg",self.dest_dir_graph_smiles+"/Coverage_1")
                 gtcp_data.append(h)
             elif (1.0*value.count()/self.nofs) >= minRF:
                 temp=[1.0*value.count()/self.nofs,key]
@@ -150,16 +160,18 @@ class cmine():
                                     os.mkdir(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage))
                                 opened_images=[]
                                 opened_smiles_images=[]
-                                h={"or":str(ov_ra),"cs":str(round(float(cs),2)),"size":len(newpattern),"graphs":[],"string":''}
+
+                                h={"id":str(self.total),"or":str(ov_ra),"cs":str(round(float(cs),2)),"size":len(newpattern),"graphs":[],"string":''}
+                                self.total=self.total+1
                                 for k in newpattern:
                                     '''print("true")'''
                                     '''print(k)'''
                                     h["graphs"].append(fsubgraphs_data[int(k)-1])
                                     h["string"]=h["string"]+fsubgraphs_data[int(k)-1]["string"]
                                     #opened_images.append(cv2.imread(self.source_dir+"/"+str(k)+".png"))
-                                    opened_smiles_images.append(cv2.imread(self.source_dir_graph_smiles+"/"+str(k)+".png"))
+                                    opened_smiles_images.append(cv2.imread(self.source_dir_graph_smiles+"/"+str(k)+".svg"))
                                 #h_min = min(img.shape[0] for img in opened_images)
-                                h_min_smiles_images=min(img.shape[0] for img in opened_smiles_images)
+                                #h_min_smiles_images=min(img.shape[0] for img in opened_smiles_images)
                                 '''widths,heights=zip(*(k.size for k in opened_images))
                                 total_width=sum(widths)
                                 max_height=max(heights)
@@ -170,11 +182,11 @@ class cmine():
                                     new_image.paste(k,(x_offset,0))
                                     x_offset=x_offset+k.size[0]'''
                                 #im_list_resize = [cv2.resize(img,(int(img.shape[1] * h_min / img.shape[0]),h_min), interpolation=cv2.INTER_CUBIC) for img in opened_images]
-                                im_list_resize_smiles=[cv2.resize(img,(int(img.shape[1] * h_min_smiles_images / img.shape[0]),h_min_smiles_images), interpolation=cv2.INTER_CUBIC) for img in opened_smiles_images]
+                                #im_list_resize_smiles=[cv2.resize(img,(int(img.shape[1] * h_min_smiles_images / img.shape[0]),h_min_smiles_images), interpolation=cv2.INTER_CUBIC) for img in opened_smiles_images]
                                 #new_image=cv2.hconcat(im_list_resize)
-                                new_image_smiles=cv2.hconcat(im_list_resize_smiles)
+                                #new_image_smiles=cv2.hconcat(im_list_resize_smiles)
                                 #cv2.imwrite(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png",new_image)
-                                cv2.imwrite(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".png",new_image_smiles)
+                                #cv2.imwrite(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".svg",new_image_smiles)
                                 
                                 '''new_image.save(self.dest_dir+"/Coverage_"+str(coverage)+"/"+str(count)+".png")'''
                                 #k = str(base64.b64encode(new_image_smiles.read()))
@@ -182,12 +194,15 @@ class cmine():
                                 #print(count)
                                 #print(no_of_coverage)
                                 #h["smile_graph_image"]="one"
-                                with open(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".png","rb") as img:
+                                h["smile_graph_image"]=[]
+                                with open(self.dest_dir_graph_smiles+"/Coverage_"+str(coverage)+"/"+str(count)+".svg","rb") as img:
                                     k = str(base64.b64encode(img.read()))
                                     k = k[2:]
+                                    if(count==0):
+                                        print(k)
                                     #print(count)
                                     #print(no_of_coverage)
-                                    h["smile_graph_image"]=k[:-1]
+                                    h["smile_graph_image"].append(k[:-1])
                                 gtcp_data.append(h)
 
                                 count=count+1
@@ -256,11 +271,14 @@ minCS = float(sys.argv[2])
 maxOR = float(sys.argv[3])
 datasetname = sys.argv[4]
 writePatterns = sys.argv[5]
-with open('all_graphs.txt','rb') as fp:
+with open('./all_graphs.txt','rb') as fp:
     fsubgraphs_data=pickle.load(fp)
 #print(fsubgraphs_data)
 print(len(fsubgraphs_data))
-inpfile = "./2_"+str(minRF)+"_"+datasetname+"Flat_tra.txt"
+if(int(sys.argv[6])==0):
+    inpfile = "./2_"+str(minRF)+"_"+datasetname+"Flat_tra.txt"
+else:
+    inpfile="./structure.data_"+str(minRF)+"_"+datasetname+"_results.txt"
 outfile = "./GTCP"+str(datasetname)+"SetCover_Results.txt"
 obj=cmine(minRF, minCS, maxOR, inpfile, outfile,datasetname,fsubgraphs_data)
 candidate_patterns,CTPs = obj.expand()
@@ -268,6 +286,7 @@ CTP_time = time.time()
 with open("gtcp_result.txt","wb") as f:
     pickle.dump(gtcp_data,f)
 f.close()
+
 print(str(datasetname)+", TC="+str(minRF)+", TPC="+str(minCS)+",overlap ratio"+str(maxOR)+", Exex Time="+str(CTP_time-start_time)+", No.of Candidate Patterns="+str(candidate_patterns)+",No.of GTCP="+str(len(tot_CPs)))
 outStr=str(datasetname)+", TC="+str(minRF)+", TPC="+str(minCS)+",overlap ratio"+str(maxOR)+", Exex Time="+str(CTP_time-start_time)+", No.of Candidate Patterns="+str(candidate_patterns)+",No.of GTCP="+str(len(tot_CPs))
 #outStr=str(datasetname)+","+str(minRF)+","+str(minCS)+","+str(maxOR)+","+str(len(tot_CPs))+","+str(candidate_patterns)+","+str(CTP_time-start_time)+"\n"
@@ -275,7 +294,7 @@ with open("./Results.txt", 'w') as f:
 	f.write("execution_time:"+str(CTP_time-start_time)+'\n')
 	f.write("Number of Candidate Patterns:"+str(candidate_patterns)+'\n')
 	f.write("Number of Coverage Patterns:"+str(len(tot_CPs))+'\n')     
-
+print(tot_CPs)
 with open("./"+str(datasetname)+"_GTCPs.txt", 'a', newline = '') as q:
     for pat in tot_CPs:
         q.write(str(pat)+"\n")    
