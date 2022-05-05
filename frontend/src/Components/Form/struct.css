@@ -1,0 +1,136 @@
+#svg {
+    
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+  
+  #svg:not(.active):not(.ctrl) {
+    cursor: crosshair;
+  }
+  
+  path.link {
+    fill: none;
+    stroke: #000;
+    stroke-width: 4px;
+    cursor: default;
+  }
+  
+  svg:not(.active):not(.ctrl) path.link {
+    cursor: pointer;
+  }
+  
+  path.link.selected {
+    stroke-dasharray: 10,2;
+  }
+  
+  path.link.dragline {
+    pointer-events: none;
+  }
+  
+  path.link.hidden {
+    stroke-width: 0;
+  }
+  
+  circle.node {
+    stroke-width: 1.5px;
+    cursor: pointer;
+  }
+  
+  circle.node.reflexive {
+    stroke:#fff;
+    stroke-width: 2.5px;
+  }
+  
+  text {
+    font: 12px sans-serif;
+    pointer-events: none;
+  }
+  
+  text.id {
+    text-anchor: middle;
+    font-weight: bold;
+  }
+  .structure{
+    width:500px;
+    height: 500px;
+    border-radius: 0.3ch;
+    border-color:white;
+    border-style: solid;
+    
+    margin-left: 1ch;
+    margin-right: 1ch;
+    background-color: rgb(172, 209, 172);
+  }
+  .drawing_instruction{
+    position: relative;
+    overflow: scroll;
+    background-color: rgb(212, 158, 210);
+    width:700px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 0.5ch;
+    overflow: scroll;
+    height: 175px;
+  }
+  .instruction_heading{
+    color: rgb(12, 12, 56);
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 17px;
+  }
+  .list_of_graphs_added{
+    margin-top: 1ch;
+    background-color:rgb(214, 241, 182);
+    overflow: scroll;
+    height:307px;
+    margin-bottom: 1ch;
+    border: 1px solid;
+    border-radius: 1ch;
+    
+
+  }
+  .display_buttons_box{
+    display: flex;
+    flex-wrap: wrap;
+    margin:1ch;
+
+  }
+
+  .buttons_delete_view{
+    background-color: rgb(199, 210, 231);
+    border: 3px black;
+    border-radius: 1ch;
+    padding:1ch;
+    color: rgb(44, 55, 104);
+    cursor: pointer;
+  }
+  [id^=close_icon]{
+    font-size: 20px;
+  }
+  #download-input{
+    float: right;
+  }
+  #delete-graph{
+    float:right;
+  }
+  .display_flex_buttons{
+    float: right;
+    display: flex;
+  }
+  .transfer_to_file{
+    float: right;
+    margin-bottom: 1ch;
+    border-radius: 1.5ch;
+    width: 100px;
+    height: 30px;
+    width: 90px;
+    background-color: rgb(224, 162, 157);
+    cursor: pointer;
+    
+  }
+  .submit_structure{
+    color:darkblue;
+  }

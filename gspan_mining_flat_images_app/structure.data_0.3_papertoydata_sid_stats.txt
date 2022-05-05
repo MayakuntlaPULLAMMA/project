@@ -1,2 +1,0 @@
-Sid :1 No of subgraphs 8 Exec time:	1.88 s
-avg size of transaction: 2.4

@@ -1,0 +1,68 @@
+.contactdiv{
+    width:900px;
+    align-self: center;
+    background-color: rgb(222, 228, 235);
+    border-radius: 0.3;
+    margin-top: 2ch;
+    border-style:solid;
+    border-color: rgb(25, 25, 73);
+    height: auto;
+    
+    
+}
+
+.cardimage{
+    width: 350px;
+}
+.prof{
+    display: flex;
+}
+.about{
+    margin:2ch;
+}
+.boldtext{
+    font-size: 13px;
+    font-weight: bold;
+    color:rgb(14, 14, 82);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.side{
+    margin-top: 1ch;
+    font-size: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.allcontacts{
+margin-left: 450px;
+align-content: center;
+height:670px;
+overflow-y:auto;
+
+}
+.allcontacts_expand{
+    margin-left: 7ch;
+    height: 570px;
+    overflow-y: auto;
+}
+.contactname{
+    color: rgb(14, 14, 82);
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.paragraph{
+    font-size: 15px;
+    padding:1ch;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.mail{
+    margin-top: 1ch;
+    display: flex;
+}
+.students{
+    margin-top: 3ch;
+    color: rgb(14, 14, 82);
+}
+.allstudents{
+    margin-top: 3ch;
+
+    
+}

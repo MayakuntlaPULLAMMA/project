@@ -1,4 +1,0 @@
- minrf : 0.3
- no_of_subgraphs : 20
- total execution time : 0.12
- Avg size of flat_trans : 6.2
