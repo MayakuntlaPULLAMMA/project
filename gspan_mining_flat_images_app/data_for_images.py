@@ -78,7 +78,7 @@ for i in f:
         edges=[]
     elif(i[0]=='v'):
         #print("vertex")
-        t["graph"]["nodes"].append({"name":str(i[1]),"value":str(i[2])})
+        t["graph"]["nodes"].append({"name":str(i[1]),"value":mapping[str(i[2])]})
         nodes.append(i[2])
         node_ids.append(i[1])
     else:

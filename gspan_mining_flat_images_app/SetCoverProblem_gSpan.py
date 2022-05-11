@@ -221,7 +221,7 @@ class cmine():
             #print(length, "length Candi patterns and GCP=",l_size_Candi_pat,l_size_GCP)
             #print("pattern length=",length,len(self.NOk))
 #        self.fout.close()
-        return self.noof_Candi_CTP,self.noofCTP
+        return self.noof_Candi_CTP,self.noofCTP,length
     
    
     def getlines(self,filename):
@@ -281,7 +281,7 @@ else:
     inpfile="./structure.data_"+str(minRF)+"_"+datasetname+"_results.txt"
 outfile = "./GTCP"+str(datasetname)+"SetCover_Results.txt"
 obj=cmine(minRF, minCS, maxOR, inpfile, outfile,datasetname,fsubgraphs_data)
-candidate_patterns,CTPs = obj.expand()
+candidate_patterns,CTPs,length = obj.expand()
 CTP_time = time.time()
 with open("gtcp_result.txt","wb") as f:
     pickle.dump(gtcp_data,f)
@@ -290,10 +290,14 @@ f.close()
 print(str(datasetname)+", TC="+str(minRF)+", TPC="+str(minCS)+",overlap ratio"+str(maxOR)+", Exex Time="+str(CTP_time-start_time)+", No.of Candidate Patterns="+str(candidate_patterns)+",No.of GTCP="+str(len(tot_CPs)))
 outStr=str(datasetname)+", TC="+str(minRF)+", TPC="+str(minCS)+",overlap ratio"+str(maxOR)+", Exex Time="+str(CTP_time-start_time)+", No.of Candidate Patterns="+str(candidate_patterns)+",No.of GTCP="+str(len(tot_CPs))
 #outStr=str(datasetname)+","+str(minRF)+","+str(minCS)+","+str(maxOR)+","+str(len(tot_CPs))+","+str(candidate_patterns)+","+str(CTP_time-start_time)+"\n"
-with open("./Results.txt", 'w') as f:
-	f.write("execution_time:"+str(CTP_time-start_time)+'\n')
-	f.write("Number of Candidate Patterns:"+str(candidate_patterns)+'\n')
-	f.write("Number of Coverage Patterns:"+str(len(tot_CPs))+'\n')     
+f=open("./Results.txt","w")
+f.write("execution_time:"+str(CTP_time-start_time)+'\n')
+f.write("Number of Candidate Patterns:"+str(candidate_patterns)+'\n')
+f.write("Number of Coverage Patterns:"+str(len(tot_CPs))+'\n')
+f.write("maz size of gtcp:"+str(length)+'\n')
+
+
+
 print(tot_CPs)
 with open("./"+str(datasetname)+"_GTCPs.txt", 'a', newline = '') as q:
     for pat in tot_CPs:

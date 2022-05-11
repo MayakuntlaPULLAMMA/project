@@ -16,6 +16,13 @@ import * as FaIcons from 'react-icons/fa';
 function Gtcp_Terms_used(props) {
   console.log("dfdf");
   const myContext = useContext(AppContext);
+  const [show_term_0,set_show_term_0]=useState(0);
+  const [show_term_1,set_show_term_1]=useState(0);
+  const [show_term_2,set_show_term_2]=useState(0);
+  const [show_term_3,set_show_term_3]=useState(0);
+  const [show_term_4,set_show_term_4]=useState(0);
+  const [show_term_5,set_show_term_5]=useState(0);
+
   const [show_terms,set_show_terms]=useState([0,0,0,0,0,0]);
   const go_to_set=(index)=>{
     let array=[...show_terms];
@@ -212,23 +219,23 @@ function Gtcp_Terms_used(props) {
   </div>
   <div className={myContext.side ? "terms_content" : "terms_content_expand"}>
     
-    {show_terms[0]===0 ?
+    {show_term_0===0 ?
     <div>
-      <Box className="box2" onClick={()=>go_to_set(0)}>
+      <Box className="box2" onClick={()=>set_show_term_0(1)}>
          <div className="box_heading">Graph Transaction</div>
         <div className="box2_icon">
-          <FaIcons.FaPlus onClick={()=>go_to_set(0)}/>
+          <FaIcons.FaPlus onClick={()=>set_show_term_0(1)}/>
         </div>
       
       </Box>
     </div> :
     <>
-    <Box className="box2" onClick={()=>go_to_set(0)}> 
+    <Box className="box2" onClick={()=>set_show_term_0(0)}> 
     <div className="box_heading">
       Graph Transaction
     </div>
     <div className="box2_icon">
-          <FaIcons.FaMinus onClick={()=>go_to_set(0)}/>
+          <FaIcons.FaMinus onClick={()=>set_show_term_0(0)}/>
         </div>
     </Box>
     <div className="terms_definition">
@@ -250,21 +257,21 @@ edges <i>({' '}v<sub>1</sub>,{' '}v<sub>3</sub>),{' '}({' '}v<sub>2</sub>,v<sub>
     </div>
     </>
     }
-    {show_terms[1]===0 ?
-    <Box className="box2" onClick={()=>go_to_set(1)}>
+    {show_term_1===0 ?
+    <Box className="box2" onClick={()=>set_show_term_1(1)}>
     <div className="box_heading">Fragment</div>
    <div className="box2_icon">
-     <FaIcons.FaPlus onClick={()=>go_to_set(1)}/>
+     <FaIcons.FaPlus onClick={()=>set_show_term_1(1)}/>
    </div>
  
  </Box>:
     <>
-    <Box className="box2" onClick={()=>go_to_set(1)}>
+    <Box className="box2" onClick={()=>set_show_term_1(0)}>
     <div className="box_heading">
       Fragment
     </div>
     <div className="box2_icon">
-          <FaIcons.FaMinus onClick={()=>go_to_set(1)}/>
+          <FaIcons.FaMinus onClick={()=>set_show_term_1(0)}/>
         </div>
     </Box>
     <div className="terms_definition">
@@ -275,21 +282,21 @@ E<sub>f</sub> ⊆ E</i>, <i>∀(u, v) ∈ E<sub>f</sub> −→ u, v ∈ V<sub>f<
     </div>
     </>
     }
-    {show_terms[2]===0 ?
-    <Box className="box2" onClick={()=>go_to_set(2)}>
+    {show_term_2===0 ?
+    <Box className="box2" onClick={()=>set_show_term_2(1)}>
     <div className="box_heading">Cover Set of a Subgraph</div>
    <div className="box2_icon">
-     <FaIcons.FaPlus onClick={()=>go_to_set(2)}/>
+     <FaIcons.FaPlus onClick={()=>set_show_term_2(1)}/>
    </div>
  
  </Box>:
     <>
-    <Box className="box2" onClick={()=>go_to_set(2)}>
+    <Box className="box2" onClick={()=>set_show_term_2(0)}>
     <div className="box_heading">
       Cover Set of a Subgraph
     </div>
     <div className="box2_icon">
-          <FaIcons.FaMinus onClick={()=>go_to_set(2)}/>
+          <FaIcons.FaMinus onClick={()=>set_show_term_2(0)}/>
         </div>
     </Box>
     <div className="terms_definition">
@@ -323,21 +330,21 @@ E<sub>f</sub> ⊆ E</i>, <i>∀(u, v) ∈ E<sub>f</sub> −→ u, v ∈ V<sub>f<
     
     </>
     }
-    {show_terms[3]===0 ?
-    <Box className="box2" onClick={()=>go_to_set(3)}>
+    {show_term_3===0?
+    <Box className="box2" onClick={()=>set_show_term_3(1)}>
     <div className="box_heading">Graph Transactional Coverage</div>
    <div className="box2_icon">
-     <FaIcons.FaPlus onClick={()=>go_to_set(3)}/>
+     <FaIcons.FaPlus onClick={()=>set_show_term_3(1)}/>
    </div>
  
  </Box>:
     <>
-    <Box className="box2" onClick={()=>go_to_set(3)}>
+    <Box className="box2" onClick={()=>set_show_term_3(0)}>
     <div className="box_heading">
-      Relative Frequency of a Subgraph
+    Graph Transactional Coverage
     </div>
     <div className="box2_icon">
-          <FaIcons.FaMinus onClick={()=>go_to_set(3)}/>
+          <FaIcons.FaMinus onClick={()=>set_show_term_3(0)}/>
         </div>
     </Box>
     <div className="terms_definition">
@@ -386,21 +393,21 @@ to cover <i>G<sub>1</sub></i> since <i>S<sub>1</sub> ⊆ G<sub>1</sub></i>.{' '}
     
     </>
     }
-    {show_terms[4]===0 ?
-    <Box className="box2" onClick={()=>go_to_set(4)}>
+    {show_term_4===0 ?
+    <Box className="box2" onClick={()=>set_show_term_4(1)}>
     <div className="box_heading">Graph Transactional Pattern Coverage</div>
    <div className="box2_icon">
-     <FaIcons.FaPlus onClick={()=>go_to_set(4)}/>
+     <FaIcons.FaPlus onClick={()=>set_show_term_4(1)}/>
    </div>
  
  </Box>:
     <>
-    <Box className="box2" onClick={()=>go_to_set(4)}>
+    <Box className="box2" onClick={()=>set_show_term_4(0)}>
     <div className="box_heading">
-      Coverage Support
+    Graph Transactional Pattern Coverage
     </div>
     <div className="box2_icon">
-          <FaIcons.FaMinus onClick={()=>go_to_set(4)}/>
+          <FaIcons.FaMinus onClick={()=>set_show_term_4(0)}/>
         </div>
     </Box>
     <div className="terms_definition">
@@ -452,21 +459,21 @@ Moreover,<i>{' '}|{' '}CSet({' '}SP,{' '}D){' '}| / |{' '}D{' '}| = |{' '}{"{"}G
     
     </>
     }
-    {show_terms[5]===0 ?
-    <Box className="box2" onClick={()=>go_to_set(5)}>
+    {show_term_5===0?
+    <Box className="box2" onClick={()=>set_show_term_5(1)}>
     <div className="box_heading">Overlap Ratio of a Pattern X</div>
    <div className="box2_icon">
-     <FaIcons.FaPlus onClick={()=>go_to_set(5)}/>
+     <FaIcons.FaPlus onClick={()=>set_show_term_5(1)}/>
    </div>
  
  </Box>:
     <>
-    <Box className="box2" onClick={()=>go_to_set(5)}>
+    <Box className="box2" onClick={()=>set_show_term_5(0)}>
     <div className="box_heading">
       Overlap Ratio of a Pattern X
     </div>
     <div className="box2_icon">
-          <FaIcons.FaMinus onClick={()=>go_to_set(5)}/>
+          <FaIcons.FaMinus onClick={()=>set_show_term_5(0)}/>
         </div>
     </Box>
     <div className="terms_definition">

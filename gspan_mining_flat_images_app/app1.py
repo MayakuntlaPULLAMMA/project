@@ -480,8 +480,10 @@ def check():
             cp_data=cp_data[:21]
             print(type(cp_data))
             print(len(cp_data))
-            #print(cp_data)
-            response= jsonify({"cp_data":cp_data,"data":d,"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":[],"no_of_coverages":0,"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(li1[3])+float(li2[0]),2))}),200
+            print(li2[1])
+            print("no of coverages")
+            print(li2)
+            response= jsonify({"cp_data":cp_data,"data":d,"fsubgraphs":li1[1],"avgtransactions":round(float(li1[3]),2),"image_info":fsg,"atype":1,"supports":supports,"vertices":vertices,"edges":edges,"coverage_patterns":[],"no_of_coverages":li2[-1],"number_of_candidate_patterns":li2[1],"number_of_scps":li2[2],"execution_time":str(round(float(li1[3])+float(li2[0]),2))}),200
             return response
 
 

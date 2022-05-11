@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import './Guidelines.css';
+import './gtcp_graph.css';
 class Barchart2 extends Component {
   componentDidMount() {
+   
     this.drawChart();
+   
   }
 
 
 drawChart() {
   console.log("title",this.props.title);
   console.log(this.props.graph);
+  var box_length=this.props.graph.nodes.length*15;
+  var box_width=this.props.graph.nodes.length*15;
+  var color_dictionary={'H':'#FFFFFF','C':'#909090','N':'#3050F8','Br':'#A62929','O':"#FF0D0D",'S':'#FFFF30','Cl':'#1FF01F'}
   var svg = d3.select("#graph_"+String(this.props.id)+"_"+String(this.props.coverage)+"_"+String(this.props.ind)).append("svg")
+  .attr("width",this.props.graph.nodes.length*20)
+  .attr("length",this.props.graph.nodes.length*20)
   .attr("preserveAspectRatio", "xMidYMid meet")
-  .attr("viewBox", "0 0 145 130")
-  .style("border","1px solid green")
+  .attr("viewBox", "0 0 "+String(this.props.graph.nodes.length*20)+" "+String(this.props.graph.nodes.length*20))
+  // .style("border","1px solid green")
   .style("margin","2ch")
   .style("align-content","center")
 
@@ -56,7 +63,7 @@ drawChart() {
     )
 
     .force("charge", d3.forceManyBody().strength(-10))
-    .force("center", d3.forceCenter(100 / 2, 100 / 2))
+    .force("center", d3.forceCenter(box_length / 2, box_width / 2))
     .on("tick", ticked);
 
   var link = svg
@@ -78,7 +85,6 @@ drawChart() {
   
   
    
-
   var node = svg
     .append("g")
     .attr("class", "nodes")
@@ -89,7 +95,12 @@ drawChart() {
     
     .attr("r", 6)
     .attr("fill", function(d) {
+      if(d.value in color_dictionary){
+        return color_dictionary[d.value];
+      }
+      else{
       return "green";
+      }
     })
     
   .on("mouseover",mouseover)
@@ -160,6 +171,7 @@ drawChart() {
  
  // add html content to tooltip
  function loadTooltipContent(node) {
+   console.log(node);
      var htmlContent = "<div>";
      htmlContent += "<h4>Label " + node.value + "<\/h4>"
      
@@ -174,8 +186,8 @@ drawChart() {
    .style("position", "realtive")
    .style("padding", "2px")
    .style("z-index", "1")
-   .style("width", "50px")
-   .style("height", "25px")
+   .style("width", "auto")
+   .style("height", "auto")
    .style("background-color", "rgba(0, 0, 0,0.8)")
    .style("border-radius", "5px")
    .style("visibility", "hidden")
@@ -186,23 +198,22 @@ drawChart() {
 
  
 
-  function mousemove(event,d) {
+   function mousemove(d) {
     isTooltipHidden = !isTooltipHidden;
        var visibility = (isTooltipHidden) ? "hidden" : "visible";
 
        // load tooltip content (if it changes based on node)
-       loadTooltipContent(event);
+       loadTooltipContent(d);
        
        if (isTooltipHidden) {
          unPinNode(d);
        }
     
        // place tooltip where cursor was
-       
-       return tooltip.style("top", (event.y) + "px").style("left", (event.x) + "px").style("visibility", "hidden");
+       return tooltip.style("top", (d3.event.pageY -20) + "px").style("left", (d3.event.pageX + 10) + "px").style("visibility", "visible");
 
     
-   console.log();
+  
  /* 
      div      
     .style("opacity",1)
@@ -230,28 +241,28 @@ drawChart() {
     
     
     }
-  function mouseout(event,d){
-    console.log(event,"inmouseout");
+  
+  function mouseout(d){
     isTooltipHidden = !isTooltipHidden;
        var visibility = (isTooltipHidden) ? "hidden" : "visible";
 
        // load tooltip content (if it changes based on node)
-       loadTooltipContent(event);
+       loadTooltipContent(d);
        
        if (isTooltipHidden) {
          unPinNode(d);
        }
     
        // place tooltip where cursor was
-       console.log("hi",event.x,event.y);
-       return tooltip.style("top", (event.y) + "px").style("left", (event.x) + "px").style("visibility","hidden");
+       return tooltip.style("top", (d3.event.pageY -10) + "px").style("left", (d3.event.pageX + 10) + "px").style("visibility", "hidden");
 
     
-   
+   console.log();
   }
   
 }
-render(){
+render(
+){
   return <div id={"graph_"+String(this.props.id)+"_"+String(this.props.coverage)+"_"+String(this.props.ind)}></div>
 }
 

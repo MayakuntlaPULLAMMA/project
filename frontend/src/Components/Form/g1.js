@@ -8,9 +8,8 @@ class Barchart1 extends Component {
 
 
 drawChart() {
-  console.log("title",this.props.title);
-  console.log(this.props.graph);
-  var svg = d3.select("#graph_"+String(this.props.id)+"_"+String(this.props.coverage)+"_"+String(this.props.ind)).append("svg")
+  var color_dictionary={'H':'#FFFFFF','C':'#909090','N':'#3050F8','Br':'#A62929','O':"#FF0D0D",'S':'#FFFF30','Cl':'#1FF01F'}
+  var svg = d3.select("#graph1_"+String(this.props.id)+"_"+String(this.props.coverage)+"_"+String(this.props.ind)).append("svg")
   .attr("preserveAspectRatio", "xMidYMid meet")
   .attr("viewBox", "0 0 145 130")
   .style("border","1px solid green")
@@ -81,15 +80,20 @@ drawChart() {
 
   var node = svg
     .append("g")
-    .append("title").text("hi")
     .attr("class", "nodes")
     .selectAll("circle")
     .data(this.props.graph.nodes)
     .enter()
     .append("circle")
+    
     .attr("r", 6)
     .attr("fill", function(d) {
+      if(d.value in color_dictionary){
+        return color_dictionary[d.value];
+      }
+      else{
       return "green";
+      }
     })
     
   .on("mouseover",mouseover)
@@ -131,19 +135,19 @@ drawChart() {
       });
   }
 
-  function dragstarted(event,d) {
-    if (!event.active) simulation.alphaTarget(0.3).restart();
+  function dragstarted(d) {
+    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;
     d.fy = d.y;
   }
 
-  function dragged(event,d) {
-    d.fx = event.x;
-    d.fy = event.y;
+  function dragged(d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
   }
 
-  function dragended(event,d) {
-    if (!event.active) simulation.alphaTarget(0);
+  function dragended(d) {
+    if (!d3.event.active) simulation.alphaTarget(0);
     d.fx = null;
     d.fy = null;
   }
@@ -161,7 +165,8 @@ drawChart() {
  // add html content to tooltip
  function loadTooltipContent(node) {
      var htmlContent = "<div>";
-     htmlContent += "<h4>Label " + node.name + "<\/h4>"
+    
+     htmlContent += "<h4>" + node.value+ "<\/h4>"
      
      htmlContent += "<\/div>"
      tooltip.html(htmlContent);
@@ -174,8 +179,8 @@ drawChart() {
    .style("position", "absolute")
    .style("padding", "2px")
    .style("z-index", "1")
-   .style("width", "50px")
-   .style("height", "25px")
+   .style("width", "auto")
+   .style("height", "auto")
    .style("background-color", "rgba(0, 0, 0,0.8)")
    .style("border-radius", "5px")
    .style("visibility", "hidden")
@@ -186,7 +191,7 @@ drawChart() {
 
  
 
-  function mousemove(event,d) {
+  function mousemove(d) {
     isTooltipHidden = !isTooltipHidden;
        var visibility = (isTooltipHidden) ? "hidden" : "visible";
 
@@ -196,10 +201,9 @@ drawChart() {
        if (isTooltipHidden) {
          unPinNode(d);
        }
-       console.log(event,d);
     
        // place tooltip where cursor was
-       return tooltip.style("top", (event.y) + "px").style("left", (event.x) + "px").style("visibility", "visible");
+       return tooltip.style("top", (d3.event.pageY -20) + "px").style("left", (d3.event.pageX + 10) + "px").style("visibility", "visible");
 
     
    console.log();
@@ -230,7 +234,7 @@ drawChart() {
     
     
     }
-  function mouseout(d,event){
+  function mouseout(d){
     isTooltipHidden = !isTooltipHidden;
        var visibility = (isTooltipHidden) ? "hidden" : "visible";
 
@@ -242,7 +246,7 @@ drawChart() {
        }
     
        // place tooltip where cursor was
-       return tooltip.style("top", (event.y) + "px").style("left", (event.x) + "px").style("visibility", "hidden");
+       return tooltip.style("top", (d3.event.pageY -10) + "px").style("left", (d3.event.pageX + 10) + "px").style("visibility", "hidden");
 
     
    console.log();
@@ -250,7 +254,7 @@ drawChart() {
   
 }
 render(){
-  return <div id={"graph_"+String(this.props.id)+"_"+String(this.props.coverage)+"_"+String(this.props.ind)}></div>
+  return <div id={"graph1_"+String(this.props.id)+"_"+String(this.props.coverage)+"_"+String(this.props.ind)}></div>
 }
 
 

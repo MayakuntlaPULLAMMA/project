@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chemistry/elements": "^2.9.0",
     "@fontsource/merriweather": "^4.5.6",
     "@material-ui/core": "^4.12.3",
     "@rdkit/rdkit": "^2022.3.1",

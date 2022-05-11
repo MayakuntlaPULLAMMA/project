@@ -1,9 +1,9 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css");
 
 
-div[id^="graph1_"]{
-    width: 145px;
-    height: 130px;
+div[id^="graph_"]{
+    width: auto;
+    height: auto;
    
 }
 .popup {

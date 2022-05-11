@@ -446,7 +446,7 @@ class gSpan(object):
             # print('v {} {}'.format(vid, mapping[self.vertices[vid].vlb]))
             # display_str += 'v {} {} '.format(vid, mapping[g.vertices[vid].vlb])
             fl.write("v "+str(vid)+" "+str(g.vertices[vid].vlb))
-            t["graph"]["nodes"].append({"name":str(vid),"value":str(g.vertices[vid].vlb),"title":"hi"})
+            t["graph"]["nodes"].append({"name":str(vid),"value":str(mapping[g.vertices[vid].vlb]),"title":"h"})
             fl.write("\n")
             temp_nodes.append(vid)
             temp_node_labels.append(g.vertices[vid].vlb)

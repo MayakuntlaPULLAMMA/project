@@ -87,6 +87,10 @@ const SCP_Form=()=>{
     const [downloadornot,set_download_or_not]=React.useState(0);
 
     const [defaultgraphs,setdefaultgraphs]=React.useState(1);
+
+    const [default_for_frequent,setdefault_for_frequent]=React.useState(1);
+    const [smilegraphs_for_frequent,setsmilegraphs_for_frequent]=React.useState(0);
+
     const [selected_def_for_modal,set_selected_def_for_modal]=useState("");
     const [show_modal_def,set_show_modal_def]=React.useState(0);
     const [structure_content_file,set_structure_content_file]=React.useState([]);
@@ -133,6 +137,9 @@ const SCP_Form=()=>{
     var minrfs=[0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
     var mincs_s=[0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
     var overlaps=[0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
+    var filter_minrf=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
+    var filter_mincs=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
+    var filter_overlaps=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
     const handlechange=(event)=>{
         let nam=event.target.name;
         let val=event.target.value;
@@ -429,6 +436,8 @@ const SCP_Form=()=>{
         setnoofsi(0);
         setselectedimageformodal(image);
         setselectedimagenameformodal("Graph-id : "+name);
+        set_show_modal_def(0);
+        setshow_structure(0);
 
     }
     const handle_click_show_modal_structure=()=>{
@@ -439,7 +448,10 @@ const SCP_Form=()=>{
        myContext.struct();
 
     }
-  
+    
+    const handleClose_image=()=>{
+        setshow(false);
+    }
 
     const handleClose=()=>{
         setnoofsi(0);
@@ -576,6 +588,16 @@ const handle_default_graphs=()=>{
     setsmilegraphs(0);
     setsmiles(0);
 }
+
+const handle_default_frequent=()=>{
+    setdefault_for_frequent(1);
+    setsmilegraphs_for_frequent(0);
+}
+const handle_smile_graphs_frequent=()=>{
+    setsmilegraphs_for_frequent(1);
+    setdefault_for_frequent(0);
+}
+
 const handle_download_yes_no=()=>{
     set_download_or_not(!downloadornot);
 }
@@ -826,7 +848,7 @@ const submit_Structure_of_interest=()=>{
                         </Container>
                     </div>
                 
-                    {/* <div className="form_body_main_div">
+                    <div className="form_body_main_div">
                         <Container className="Container">
                             <div className="entries_description">
                                 <h6 className="entries_name"> Edges</h6>
@@ -841,7 +863,7 @@ const submit_Structure_of_interest=()=>{
                                 </select>
                             </div>
                         </Container>
-                    </div> */}
+                    </div>
                 </div>
                 <div className="stats">
                     <div className="filter_heading1">
@@ -884,7 +906,7 @@ const submit_Structure_of_interest=()=>{
                         </div>
                     </div>
                     <div className="form_body_main_div">
-                        {/* <Container className="Container">
+                        <Container className="Container">
                             <div className="entries_description">
                                 <h6 className="entries_name"> Number of graphs in Pattern</h6>
                                 <select className="support" name="coverage" onChange={change_filter_coverage}>
@@ -896,15 +918,32 @@ const submit_Structure_of_interest=()=>{
                                         })}
                                 </select>
                             </div>
-                        </Container> */}
+                        </Container>
                         <Container className="Container">
                             <div className="entries_description">
                                 <h6 className="entries_name"> Coverage Support</h6>
+                               
                                 <div className="support1" name="coverage" onChange={change_filter_coverage}>
                                     <h6 className="from">from</h6>
-                                    <input type="text" placeholder="Enter a number between 0 and 1" name ="csfrom" value={selected_filters_coverage.csfrom} onChange={change_filter_coverage} className="fromto"/>
+                                    {/* <input type="text" placeholder="Enter a number between 0 and 1" name ="csfrom" value={selected_filters_coverage.csfrom} onChange={change_filter_coverage} className="fromto"/> */}
+                                    <select className="fromto" name="csfrom" onChange={change_filter_coverage}>
+                                    <option value={selected_filters_coverage.csfrom} name="csfrom" >{selected_filters_coverage.csfrom}</option>
+                                {filter_mincs.map((item1, index1) => {
+                                            return (
+                                                <option  name="csfrom" value={item1} >{item1}</option>
+                                            );
+                                        })}
+                                </select>
                                     <h6 className="from">to</h6>
-                                    <input type="text" placeholder="Enter a number between 0 and 1" name ="csto" value={selected_filters_coverage.csto} onChange={change_filter_coverage} className="fromto"/>
+                                    <select className="fromto" name="csto" onChange={change_filter_coverage}>
+                                    <option value={selected_filters_coverage.csto} name="csto" >{selected_filters_coverage.csto}</option>
+                                {filter_mincs.map((item1, index1) => {
+                                            return (
+                                                <option  name="csto" value={item1} >{item1}</option>
+                                            );
+                                        })}
+                                </select>
+                                    {/* <input type="text" placeholder="Enter a number between 0 and 1" name ="csto" value={selected_filters_coverage.csto} onChange={change_filter_coverage} className="fromto"/> */}
 
                                 </div>
 
@@ -916,10 +955,25 @@ const submit_Structure_of_interest=()=>{
                                 <h6 className="entries_name"> Overlap Ratio</h6>
                                 <div className="support1" name="coverage" onChange={change_filter}>
                                     <h6 className="from">from</h6>
-                                    <input type="text" placeholder="Enter a number between 0 and 1" name ="orfrom" value={selected_filters_coverage.orfrom} onChange={change_filter_coverage} className="fromto"/>
+                                    {/* <input type="text" placeholder="Enter a number between 0 and 1" name ="orfrom" value={selected_filters_coverage.orfrom} onChange={change_filter_coverage} className="fromto"/> */}
+                                    <select className="fromto" name="csfrom" onChange={change_filter}>
+                                    <option value={selected_filters_coverage.orfrom} name="orfrom" >{selected_filters_coverage.orfrom}</option>
+                                {filter_overlaps.map((item1, index1) => {
+                                            return (
+                                                <option  name="orfrom" value={item1} >{item1}</option>
+                                            );
+                                        })}
+                                </select>
                                     <h6 className="from">to</h6>
-                                    <input type="text" placeholder="Enter a number between 0 and 1" name ="orto" value={selected_filters_coverage.orto} onChange={change_filter_coverage} className="fromto"/>
-
+                                    {/* <input type="text" placeholder="Enter a number between 0 and 1" name ="orto" value={selected_filters_coverage.orto} onChange={change_filter_coverage} className="fromto"/> */}
+                                    <select className="fromto" name="orto" onChange={change_filter}>
+                                    <option value={selected_filters_coverage.orto} name="orto" >1.0</option>
+                                {filter_overlaps.map((item1, index1) => {
+                                            return (
+                                                <option  name="orto" value={item1} >{item1}</option>
+                                            );
+                                        })}
+                                </select>
                                 </div>
 
                                 
@@ -1158,7 +1212,21 @@ const submit_Structure_of_interest=()=>{
                             <thead>
                                 <tr role="row">
                                     <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='150px' className="table_head1">Support</th>
-                                    <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='1094px' className="table_head1">Frequent Subgraphs 
+                                    <th rowSpan="1" colSpan="1" tabIndex="0" aria-controls="groupDetails" width='1094px' className="table_head1">
+                                    <div >
+                                            <div className='table_head1'>
+                                            Frequent Subgraphs
+                                            </div>
+                                            <label className="subparts">
+                                            <input type="checkbox" checked={default_for_frequent} onChange={handle_default_frequent}/>
+                                            Default Graphs{' '}</label>
+                                            <label className="subparts">
+                                            <input type="checkbox" checked={smilegraphs_for_frequent} onChange={handle_smile_graphs_frequent}/>
+                                            Smile Graphs</label>
+                                           
+
+                                            
+                                        </div> 
 </th>
 
                                 </tr>
@@ -1170,46 +1238,66 @@ const submit_Structure_of_interest=()=>{
                                         // console.log("frequent");
                                         return(
                                             
-                                        <tr  role="row">
+                                            <tr  role="row">
                                             <td className="freq">
                                                 <div >{item}</div>
                                             </td>
-                                            <td>
+                                           {default_for_frequent? <td>
                                                 <div className="graphs_display">
                                                     {data.map((item1,index1)=>{
                                                         if(item1.support==item){
                                                             return(
-                                                                // <div className="point_graphs">
-                                                                //     <div className="box_head">Support - {item}</div>
-                                                                //     <Barchart id={item1.gid} graph={item1.graph}/>
-                                                                    
-                                                                  
-                                                                   
-                                                                            
+                                                                
+                                                                <div className="point_graphs">
+                                                                <div className="box_head">Support - {item}</div>
+                                                                <Barchart id={item1.gid} graph={item1.graph}/>
+                                                                
+                                                              
+                                                               
                                                                         
-                                                                //     </div>
-                                                                <div className='image_in_freq'>
-                                                                    <div className="box_head">Support - {item}</div>
-                                                                    <img src={`data:image/svg+xml;base64,${item1.smile_graph_image}`} className="image_freq"></img>
-
+                                                                    
                                                                 </div>
+                                                                // <div className='image_in_freq'>
+                                                                //     <div className="box_head">Support - {item}</div>
+                                                                //     <img src={`data:image/svg+xml;base64,${item1.smile_graph_image}`} className="image_freq"></img>
+
+                                                                // </div>
                                                                 
                                                             );
                                                         }
                                                     })}
                                                 </div>
-                                                {/*<div className={show ? "modal" : "display_none"}>
-                                                    <div className="modal-content">
-                                                    <Button variant="contained" className="downloadoption" href={`data:image/png;base64,${selected_image_for_modal}`} target="_blank" download={selected_image_name_for_modal}>Download</Button>
+                                               
+                                            </td>:
+                                            <td>
+                                            <div className="graphs_display">
+                                                {data.map((item1,index1)=>{
+                                                    if(item1.support==item){
+                                                        return(
+                                                            <div className='image_in_freq' onClick={()=>{handle_click_show_modal(item1.smile_graph_image,index)}}>
+                                                                    <div className="box_head">Support - {item}</div>
+                                                                    <img src={`data:image/svg+xml;base64,${item1.smile_graph_image}`} className="image_freq"></img>
 
-                                                        <span className="close" onClick={handleClose}>&times;</span>
+                                                                </div>
+                                                          
+                                                          
+                                                        );
+                                                    }
+                                                })}
+                                                <div className={show ? "modal" : "display_none"}>
+                                                    <div className="modal-content">
+
+                                                        <span className="close" onClick={handleClose_image}>&times;</span>
                                                         <div className="modal_head">{selected_image_name_for_modal}</div>
 
 
                                                         <img src={`data:image/svg+xml;base64,${selected_image_for_modal}`} className="modal_image"></img>
                                                     </div>
-                                                </div>*/}
-                                            </td>
+                                                </div>
+                                            </div>
+                                           
+                                        </td>
+                                            }
                                             
                                             
                                             
@@ -1218,93 +1306,123 @@ const submit_Structure_of_interest=()=>{
                                         );
                                         
                                     }
-                                    else if(selected_filters.support==0 && selected_filters.vertices==0 && selected_filters.edges!=0){
+                                    else if(selected_filters.support==0 &&selected_filters.edges!=0){
                                         return(
                                             <tr  role="row">
                                             <td className="freq">
                                                 <div >{item}</div>
                                             </td>
-                                            <td>
+                                            {default_for_frequent? <td>
                                                 <div className="graphs_display">
                                                     {data.map((item1,index1)=>{
-                                                        // console.log("edges",item1);
+                                                        console.log("edges",item1);
                                                         if(item1.support==item && item1.edges==parseInt(selected_filters.edges)){
                                                             return(
-                                                                // <div className="point_graphs">
-                                                                // <div className="box_head">Support - {item}</div>
-                                                                // <Barchart id={item1.gid} graph={item1.graph}/>
+                                                                <div className="point_graphs">
+                                                                <div className="box_head">Support - {item}</div>
+                                                                <Barchart id={item1.gid} graph={item1.graph}/>
                                                                 
                                                               
                                                                
                                                                         
                                                                     
-                                                                // </div>
-                                                                <div className='image_in_freq'>
-                                                                    <div className="box_head">Support - {item}</div>
-                                                                    <img src={`data:image/svg+xml;base64,${item1.smile_graph_image}`} className="image_freq"></img>
-
                                                                 </div>
+                                                                // <div className='image_in_freq'>
+                                                                //     <div className="box_head">Support - {item}</div>
+                                                                //     <img src={`data:image/svg+xml;base64,${item1.smile_graph_image}`} className="image_freq"></img>
+
+                                                                // </div>
                                                             );
                                                         }
                                                     })}
                                                 </div>
-                                                {/* <div className={show ? "modal" : "display_none"}>
-                                                    <div className="modal-content">
-                                                    <Button variant="contained" className="downloadoption" href={`data:image/png;base64,${selected_image_for_modal}`} target="_blank" download={selected_image_name_for_modal}>Download</Button>
-
-                                                        <span className="close" onClick={handleClose}>&times;</span>
-                                                        <img src={`data:image/svg+xml;base64,${selected_image_for_modal}`} className="modal_image"></img>
-                                                    </div>
-                                                </div> */}
-                                            </td>
-                                            
-                                            
-
-                                        </tr>
-                                        
-                                        );
-                                    }
-                                    
-                                    else if(selected_filters.support!=0 && selected_filters.vertices==0 && selected_filters.edges==0 && item==selected_filters.support){
-                                        return(
-                                            <tr  role="row">
-                                            <td className="freq">
-                                                <div className={item==parseInt(selected_filters.support) ? "class" : "display_none"}>{item}</div>
-
-                                            </td>
+                                                
+                                            </td>:
+                                            <>
                                             <td>
-                                                <div className="graphs_display">
+                                            <div className="graphs_display">
                                                     {data.map((item1,index1)=>{
-                                                        if(item1.support==parseInt(selected_filters.support)){
-                                                            
+                                                        console.log("edges",item1);
+                                                        if(item1.support==item && item1.edges==parseInt(selected_filters.edges)){
                                                             return(
-                                                                // <div className="point_graphs">
-                                                                // <div className="box_head">Support - {item}</div>
-                                                                // <Barchart id={item1.gid} graph={item1.graph}/>
-                                                                
-                                                              
-                                                               
-                                                                        
-                                                                    
-                                                                // </div>
                                                                 <div className='image_in_freq'>
                                                                     <div className="box_head">Support - {item}</div>
                                                                     <img src={`data:image/svg+xml;base64,${item1.smile_graph_image}`} className="image_freq"></img>
 
                                                                 </div>
                                                             );
-                                                        }
-                                                    })}
-                                                </div>
-                                                {/* <div className={show ? "modal" : "display_none"}>
+                                                             }
+                                                     })}
+                                            </div>
+                                            <div className={show ? "modal" : "display_none"}>
                                                     <div className="modal-content">
                                                     <Button variant="contained" className="downloadoption" href={`data:image/png;base64,${selected_image_for_modal}`} target="_blank" download={selected_image_name_for_modal}>Download</Button>
 
                                                         <span className="close" onClick={handleClose}>&times;</span>
                                                         <img src={`data:image/png;base64,${selected_image_for_modal}`} className="modal_image"></img>
                                                     </div>
-                                                </div> */}
+                                                </div>
                                             </td>
+                                            </>}
+                                            
+                                            
+
+                                        </tr>
+                                        
+                                        
+                                        );
+                                    }
+                                    
+                                    else if(selected_filters.support!=0 && selected_filters.edges==0 && item==selected_filters.support){
+                                        return(
+                                            <tr  role="row">
+                                            <td className="freq">
+                                                <div className={item==parseInt(selected_filters.support) ? "class" : "display_none"}>{item}</div>
+
+                                            </td>
+                                            {default_for_frequent ?<td>
+                                                <div className="graphs_display">
+                                                    {data.map((item1,index1)=>{
+                                                        if(item1.support==parseInt(selected_filters.support)){
+                                                            
+                                                            return(
+                                                                <div className="point_graphs">
+                                                                <div className="box_head">Support - {item}</div>
+                                                                <Barchart id={item1.gid} graph={item1.graph}/>
+                                                                
+                                                              
+                                                               
+                                                                        
+                                                                    
+                                                                </div>
+                                                            );
+                                                        }
+                                                    })}
+                                                </div>
+                                                <div className={show ? "modal" : "display_none"}>
+                                                    <div className="modal-content">
+                                                    <Button variant="contained" className="downloadoption" href={`data:image/png;base64,${selected_image_for_modal}`} target="_blank" download={selected_image_name_for_modal}>Download</Button>
+
+                                                        <span className="close" onClick={handleClose}>&times;</span>
+                                                        <img src={`data:image/png;base64,${selected_image_for_modal}`} className="modal_image"></img>
+                                                    </div>
+                                                </div>
+                                            </td>:
+                                            <td>
+                                                <div className="graphs_display">
+                                                    {data.map((item1,index1)=>{
+                                                        if(item1.support==parseInt(selected_filters.support)){
+                                                            
+                                                            return(
+                                                                <div className='image_in_freq'>
+                                                                <div className="box_head">Support - {item}</div>
+                                                                <img src={`data:image/svg+xml;base64,${item1.smile_graph_image}`} className="image_freq"></img>
+
+                                                            </div>
+                                                            );
+                                                            }})}
+                                                    </div>
+                                            </td>}
                                             
                                             
 
@@ -1312,19 +1430,46 @@ const submit_Structure_of_interest=()=>{
                                         );
                                     }
                                     
-                                    else if(selected_filters.support!=0 && selected_filters.vertices==0 && selected_filters.edges!=0 && item==selected_filters.support){
+                                    else if(selected_filters.support!=0 && selected_filters.edges!=0 && item==selected_filters.support){
                                         
                                         return(
                                         
-                                        <tr  role="row">
+                                            <tr  role="row">
                                             
                                             <td className="freq">
                                                 
                                                 <div className={item==selected_filters.support ? "class" : "display_none"}>{item}</div>
                                             </td>
                                     
-                                          <td>
+                                          {default_for_frequent ?<td>
                                                 <div className="graphs_display">
+                                                    {data.map((item1,index1)=>{
+                                                        if(item1.support==selected_filters.support && item1.support==item && item1.edges==parseInt(selected_filters.edges)){
+                                                            return(
+                                                                <div className="point_graphs">
+                                                                <div className="box_head">Support - {item}</div>
+                                                                 <Barchart id={item1.gid} graph={item1.graph}/>
+                                                                
+                                                              
+                                                               
+                                                                        
+                                                                    
+                                                                </div>
+                                                            );
+                                                        }
+                                                    })}
+                                                </div>
+                                                <div className={show ? "modal" : "display_none"}>
+                                                    <div className="modal-content">
+                                                    <Button variant="contained" className="downloadoption" href={`data:image/png;base64,${selected_image_for_modal}`} target="_blank" download={selected_image_name_for_modal}>Download</Button>
+
+                                                        <span className="close" onClick={handleClose}>&times;</span>
+                                                        <img src={`data:image/png;base64,${selected_image_for_modal}`} className="modal_image"></img>
+                                                    </div>
+                                                </div>
+                                                </td> :
+                                                <td>
+                                                     <div className="graphs_display">
                                                     {data.map((item1,index1)=>{
                                                         if(item1.support==selected_filters.support && item1.support==item && item1.edges==parseInt(selected_filters.edges)){
                                                             return(
@@ -1337,15 +1482,8 @@ const submit_Structure_of_interest=()=>{
                                                         }
                                                     })}
                                                 </div>
-                                                {/* <div className={show ? "modal" : "display_none"}>
-                                                    <div className="modal-content">
-                                                    <Button variant="contained" className="downloadoption" href={`data:image/png;base64,${selected_image_for_modal}`} target="_blank" download={selected_image_name_for_modal}>Download</Button>
 
-                                                        <span className="close" onClick={handleClose}>&times;</span>
-                                                        <img src={`data:image/png;base64,${selected_image_for_modal}`} className="modal_image"></img>
-                                                    </div>
-                                                </div> */}
-                                                </td>
+                                                </td>}
                                             
                                             
 

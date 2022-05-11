@@ -45,7 +45,7 @@ class cmine():
         #     print((i[1]==self.minCS*self.nots))
         one_size_coverage = filter(lambda x: (x[1] >= self.minCS*self.nots),freqitems)
         
-        print("one_error",one_size_coverage)
+        # print("one_error",one_size_coverage)
         f=open("./"+datasetname+"_"+str(self.minCS1)+"_"+str(self.minRF)+"_"+str(self.maxOR),'w')
         f.write("Coverage"+" "+"1"+'\n')
         f.write('\n')
@@ -105,20 +105,20 @@ class cmine():
             '''print("hi")'''
             '''print("k")'''
             shutil.copy(self.source_dir+"/"+str(int(one_size_coverage[i][0])-1)+".png",self.dest_dir+"/Coverage_1/")
-            print(one_size_coverage[i][1])
-            print(str(self.maxOR))
-            print(str(float(int(one_size_coverage[i][1])-1)/float(self.nots)))
+            # print(one_size_coverage[i][1])
+            # print(str(self.maxOR))
+            # print(str(float(int(one_size_coverage[i][1])-1)/float(self.nots)))
             h={"id":str(self.total),"or":str(self.maxOR),"cs":str(float(int(one_size_coverage[i][1]))/float(self.nots)),"size":1,"graphs":[],"string":""}
-            print("After")
-            print(["string"])
+            # print("After")
+            # print(["string"])
             self.total=self.total+1
             h["graphs"].append(fsubgraphs_data[int(one_size_coverage[i][0])-1])
-            print(fsubgraphs_data[int(one_size_coverage[i][0])-1])
+            # print(fsubgraphs_data[int(one_size_coverage[i][0])-1])
             h["string"]=h["string"]+fsubgraphs_data[int(one_size_coverage[i][0])-1]["string"]
             shutil.copy(self.source_dir_graph_smiles+"/"+str(int(one_size_coverage[i][0])-1)+".svg",self.dest_dir_graph_smiles+"/Coverage_1/")
         
             #print(str(self.source_dir_graph_smiles+"/"+str(one_size_coverage[i][0])+".png"))
-            print(one_size_coverage[i][0])
+            # print(one_size_coverage[i][0])
             with open(self.source_dir_graph_smiles+"/"+str(int(one_size_coverage[i][0])-1)+".svg","rb") as img:
                 k = str(base64.b64encode(img.read()))
                 # k = k[2:]
@@ -191,8 +191,8 @@ class cmine():
                                 opened_images=[]
                                 opened_smiles_images=[]
                                 h={"id":str(self.total),"or":str(overlapratio),"cs":str(round(float(cs),2)),"size":len(newpattern),"graphs":[],"string":''}
-                                print("new")
-                                print(newpattern)
+                                # print("new")
+                                # print(newpattern)
                                 h["smile_graph_image"]=[]
                                 self.total=self.total+1
                                 for k in newpattern:
@@ -201,7 +201,7 @@ class cmine():
                                     h["string"]=h["string"]+fsubgraphs_data[int(k)-1]["string"]
                                     opened_smiles_images.append(cv2.imread(self.source_dir_graph_smiles+"/"+str(int(k)-1)+".svg"))
                                     opened_images.append(cv2.imread(self.source_dir+"/"+str(int(k)-1)+".png"))
-                                    with open(self.source_dir_graph_smiles+"/"+str(k)+".svg","rb") as img:
+                                    with open(self.source_dir_graph_smiles+"/"+str(int(k)-1)+".svg","rb") as img:
                                         g = str(base64.b64encode(img.read()))
                                         
                                         h["smile_graph_image"].append(g)

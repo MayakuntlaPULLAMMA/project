@@ -325,6 +325,7 @@ tr{
      width: 50%; /* Full width */
      height: 50%; /* Full height */
      overflow: auto; /* Enable scroll if needed */
+    
      
      
    }
@@ -536,7 +537,7 @@ tr{
     border-right: 1px solid;
 }
 .filters_coverage{
-    height:125px;
+    height:130px;
     width: 85%;
     margin-left: 10ch;
     /* background-color:rgb(183, 185, 209); */
@@ -931,6 +932,7 @@ overflow: scroll;
 }
 .image_in_freq{
     border: 1px solid black;
+    cursor: pointer;
 }
 .display_flex{
     display:flex;

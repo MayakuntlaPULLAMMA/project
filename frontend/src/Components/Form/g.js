@@ -10,6 +10,7 @@ class Barchart extends Component {
 drawChart() {
   console.log("title",this.props.title);
   console.log(this.props.graph);
+  var color_dictionary={'H':'#FFFFFF','C':'#909090','N':'#3050F8','Br':'#A62929','O':"#FF0D0D",'S':'#FFFF30','Cl':'#1FF01F'}
   var svg = d3.select("#graph_"+String(this.props.id)).append("svg")
   .attr("preserveAspectRatio", "xMidYMid meet")
   .attr("viewBox", "0 0 145 130")
@@ -86,7 +87,12 @@ drawChart() {
     
     .attr("r", 6)
     .attr("fill", function(d) {
+      if(d.value in color_dictionary){
+        return color_dictionary[d.value];
+      }
+      else{
       return "green";
+      }
     })
     
   .on("mouseover",mouseover)
@@ -158,7 +164,7 @@ drawChart() {
  // add html content to tooltip
  function loadTooltipContent(node) {
      var htmlContent = "<div>";
-     htmlContent += "<h4>Label " + node.name + "<\/h4>"
+     htmlContent += "<h4>" + node.value + "<\/h4>"
      
      htmlContent += "<\/div>"
      tooltip.html(htmlContent)
@@ -186,7 +192,7 @@ drawChart() {
 
  
 
-  function mousemove(event,d) {
+   function mousemove(d) {
     isTooltipHidden = !isTooltipHidden;
        var visibility = (isTooltipHidden) ? "hidden" : "visible";
 
@@ -198,11 +204,8 @@ drawChart() {
        }
     
        // place tooltip where cursor was
-       return tooltip.style("top", (event.pageY -20) + "px").style("left", (event.pageX + 10) + "px").style("visibility", "visible");
-       //return tooltip.style("visibility","hidden")
+       return tooltip.style("top", (d3.event.pageY -20) + "px").style("left", (d3.event.pageX + 10) + "px").style("visibility", "visible");
 
-    
-   console.log();
  /* 
      div      
     .style("opacity",1)
@@ -230,23 +233,23 @@ drawChart() {
     
     
     }
-  function mouseout(d,event){
-    isTooltipHidden = !isTooltipHidden;
-       var visibility = (isTooltipHidden) ? "hidden" : "visible";
-
-       // load tooltip content (if it changes based on node)
-       loadTooltipContent(d);
-       
-       if (isTooltipHidden) {
-         unPinNode(d);
-       }
-    
-       // place tooltip where cursor was
-       return tooltip.style("top", (event.pageY -10) + "px").style("left", (event.pageX + 10) + "px").style("visibility", "hidden");
-
-    
-   console.log();
-  }
+    function mouseout(d){
+      isTooltipHidden = !isTooltipHidden;
+         var visibility = (isTooltipHidden) ? "hidden" : "visible";
+  
+         // load tooltip content (if it changes based on node)
+         loadTooltipContent(d);
+         
+         if (isTooltipHidden) {
+           unPinNode(d);
+         }
+      
+         // place tooltip where cursor was
+         return tooltip.style("top", (d3.event.pageY -10) + "px").style("left", (d3.event.pageX + 10) + "px").style("visibility", "hidden");
+  
+      
+     console.log();
+    }
   
 }
 render(){
