@@ -32,7 +32,7 @@ import Barchart from './g';
 import Barchart1 from './g1';
 import Box from '@material-ui/core/Box';
 import Image5 from '../../Images/Relative_Frequency_Formula.png';
-import Image6 from '../../Images/Coverage_Support.png';
+import Image6 from '../../Images/Coverage_support.png';
 import Image7 from '../../Images/Overlap_Ratio.png';
 import Struct from './struct.js';
 import './Guidelines.css';
