@@ -7,7 +7,7 @@ import Image from '../../Images/Graph_transaction.jpg';
 import Image1 from '../../Images/SIFT_framework.png';
 import Box from '@material-ui/core/Box';
 import { FaItalic } from "react-icons/fa";
-import Image6 from '../../Images/Coverage_Support.png';
+import Image6 from '../../Images/Coverage_support.png';
 import { useEffect, useRef} from "react";
 import Image2 from '../../Images/gtc.png';
 import Image3 from '../../Images/dataset_gtpc.png';
