@@ -5,7 +5,7 @@ import './Scp_home.css';
 import Image from '../../Images/Graph_transaction.jpg';
 import Image1 from '../../Images/SIFT_framework.png';
 import Box from '@material-ui/core/Box';
-import Image6 from '../../Images/Coverage_Support.png';
+import Image6 from '../../Images/Coverage_support.png';
 import Image5 from '../../Images/Relative_Frequency_Formula.png';
 import Image7 from '../../Images/Overlap_Ratio.png';
 
